@@ -14,14 +14,14 @@ export default function Hero() {
               <span className="block text-xl md:text-2xl font-mono text-accent-dark dark:text-accent-teal font-bold mb-4">
                 Hi, I'm
               </span>
-              <span className="block text-5xl md:text-8xl font-bold text-light-text-primary dark:text-white leading-tight">
+              <span className="block text-5xl md:text-8xl font-extrabold text-light-text-primary dark:text-white leading-tight font-display">
                 Amarnath.
               </span>
             </h1>
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-xl md:text-3xl font-semibold text-slate-600 dark:text-slate-300">
+            <h2 className="text-xl md:text-3xl font-semibold text-slate-600 dark:text-slate-300 font-display">
               <span className="text-gradient">
                 Frontend Developer | Open to Opportunities
               </span>

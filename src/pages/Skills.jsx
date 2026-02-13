@@ -19,7 +19,7 @@ export default function Skills() {
                 <div className="hidden dark:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/12 blur-[120px] rounded-full -z-10"></div>
                 <div className="hidden dark:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-purple-500/8 blur-[80px] rounded-full -z-10"></div>
                 <div className="max-w-4xl mx-auto relative z-10">
-                    <h1 className="text-3xl md:text-4xl font-extrabold leading-tight mb-4 text-gray-900 dark:text-white">
+                    <h1 className="text-3xl md:text-4xl font-extrabold leading-tight mb-4 text-gray-900 dark:text-white font-display">
                         Building <span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-teal-500 dark:from-blue-400 dark:to-purple-500">Digital Experiences</span>
                     </h1>
                     <p className="text-gray-600 dark:text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
@@ -58,7 +58,7 @@ export default function Skills() {
             {/* ===== Learning Journey Timeline ===== */}
             <section className="py-20 md:py-32 px-6 md:px-12 relative bg-gray-50/50 dark:bg-transparent">
                 <div className="max-w-4xl mx-auto text-center mb-20">
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4 font-display">
                         Learning Journey
                     </h2>
                     <p className="text-gray-600 dark:text-slate-400 font-medium text-lg">

@@ -38,6 +38,8 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["Outfit", "Inter", "system-ui", "sans-serif"],
+        mono: ["Fira Code", "ui-monospace", "monospace"],
       },
       borderRadius: {
         md: "0.75rem",

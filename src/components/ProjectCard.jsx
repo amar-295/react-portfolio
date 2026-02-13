@@ -84,7 +84,7 @@ export default function ProjectCard({
       <div className="w-full lg:w-[55%] space-y-4 flex flex-col justify-center">
         {/* Title + Meta */}
         <div>
-          <h3 className="text-3xl lg:text-4xl font-extrabold text-light-text-primary dark:text-white leading-tight">
+          <h3 className="text-3xl lg:text-4xl font-extrabold text-light-text-primary dark:text-white leading-tight font-display">
             {title}
           </h3>
           <div className="flex items-center gap-3 text-sm text-light-text-secondary dark:text-slate-300 mt-2 font-medium tracking-wide flex-wrap">

@@ -17,10 +17,10 @@ export default function Navbar() {
         >
             <div className="container mx-auto px-6 h-full flex items-center justify-between">
                 <a
-                    className="text-2xl font-bold text-accent-dark dark:text-accent-teal tracking-tight"
+                    className="text-2xl font-bold text-accent-dark dark:text-accent-teal tracking-tight font-display"
                     href="#"
                 >
-                    AMARNATH
+                    Amarnath
                     <span className="text-light-text-primary/80 dark:text-lightSlate">
                         .dev
                     </span>

@@ -27,7 +27,7 @@ export default function About() {
 
           {/* Text Column - Left side on desktop */}
           <div className="md:col-span-7 order-1 md:order-1">
-            <h2 className="flex items-center text-3xl md:text-4xl font-bold text-light-text-primary dark:text-white mb-10">
+            <h2 className="flex items-center text-3xl md:text-4xl font-bold text-light-text-primary dark:text-white mb-10 font-display">
               <span className="text-accent-dark dark:text-accent-teal font-mono text-xl mr-4">01.</span>{" "}
               About Me
               <span className="h-px bg-light-border dark:bg-white/10 grow ml-8 max-w-xs hidden md:block"></span>

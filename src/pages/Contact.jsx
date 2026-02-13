@@ -28,7 +28,7 @@ export default function Contact() {
                         </div>
 
                         {/* Heading */}
-                        <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white">
+                        <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white font-display">
                             Let's Work <span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-teal-500 dark:from-blue-400 dark:to-purple-500">Together</span>
                         </h2>
 

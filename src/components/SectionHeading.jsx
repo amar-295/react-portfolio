@@ -15,7 +15,7 @@ export default function SectionHeading({
 }) {
     return (
         <div className={`flex justify-between items-center mb-8 border-l-4 ${borderColor} pl-4`}>
-            <h2 className="text-2xl font-bold text-light-text-primary dark:text-white">{title}</h2>
+            <h2 className="text-2xl font-bold text-light-text-primary dark:text-white font-display">{title}</h2>
             {badge && (
                 <span className="bg-light-surface dark:bg-gray-800 text-light-text-secondary dark:text-gray-400 text-xs px-3 py-1 rounded border border-light-border dark:border-gray-700 ml-auto font-medium">
                     {badge}

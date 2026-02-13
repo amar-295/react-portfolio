@@ -13,7 +13,7 @@ export default function Projects() {
                 <span className="text-xs font-bold tracking-[0.2em] text-light-text-secondary dark:text-slate-400 uppercase">
                     My Learning Journey
                 </span>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-light-text-primary dark:text-white mt-4 tracking-tight">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-light-text-primary dark:text-white mt-4 tracking-tight font-display">
                     Projects - Personal Web Development Work
                 </h2>
                 <div className="flex justify-center pt-6">
