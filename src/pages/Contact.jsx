@@ -1,0 +1,77 @@
+import ContactInfoCard from "../components/ContactInfoCard";
+import ContactForm from "../components/ContactForm";
+import Footer from "../components/Footer";
+import { contactInfo, footerData } from "../data/contact";
+
+/* ------------------------------------------------------------------ */
+/*  Contact Page                                                      */
+/* ------------------------------------------------------------------ */
+
+export default function Contact() {
+    const handleFormSubmit = (formData) => {
+        console.log("Form submitted:", formData);
+        // TODO: Add form submission logic (e.g., email service integration)
+    };
+
+    return (
+        <>
+            {/* ===== Contact Section ===== */}
+            <section className="relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-[#020617]">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                    {/* Left Column: Contact Info */}
+                    <div className="flex flex-col space-y-8">
+                        {/* Badge */}
+                        <div>
+                            <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-gray-100 dark:bg-blue-500/10 text-gray-600 dark:text-blue-400 border border-gray-200 dark:border-blue-500/20 tracking-widest uppercase">
+                                Contact
+                            </span>
+                        </div>
+
+                        {/* Heading */}
+                        <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white">
+                            Let's Work <span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-teal-500 dark:from-blue-400 dark:to-purple-500">Together</span>
+                        </h2>
+
+                        {/* Description */}
+                        <p className="text-gray-600 dark:text-slate-400 text-lg leading-relaxed max-w-md">
+                            Open to frontend roles where I can contribute to user-focused
+                            products. Let's connect and build something great together!
+                        </p>
+
+                        {/* Contact Info Cards */}
+                        <div className="space-y-8 pt-8">
+                            {contactInfo.map((info) => (
+                                <ContactInfoCard key={info.id} {...info} />
+                            ))}
+                        </div>
+
+                        {/* Social Links */}
+                        <div className="pt-8">
+                            <p className="text-gray-600 dark:text-slate-400 text-sm mb-4">Connect with me</p>
+                            <div className="flex space-x-4">
+                                <a
+                                    href="#"
+                                    className="w-10 h-10 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800/50 hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white transition-all duration-200 border border-gray-200 dark:border-slate-700/50 shadow-sm dark:shadow-none"
+                                >
+                                    <i className="fa-brands fa-github text-lg"></i>
+                                </a>
+                                <a
+                                    href="#"
+                                    className="w-10 h-10 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800/50 hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white transition-all duration-200 border border-gray-200 dark:border-slate-700/50 shadow-sm dark:shadow-none"
+                                >
+                                    <i className="fa-brands fa-linkedin text-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Column: Contact Form */}
+                    <ContactForm onSubmit={handleFormSubmit} />
+                </div>
+            </section>
+
+            {/* ===== Footer ===== */}
+            <Footer {...footerData} />
+        </>
+    );
+}

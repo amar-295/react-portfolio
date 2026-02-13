@@ -1,0 +1,119 @@
+import PropTypes from "prop-types";
+import TechTag from "./TechTag";
+
+/**
+ * Small "Code Experiment" card for the bottom grid section.
+ *
+ * Props:
+ *   icon        – Material Symbols icon name
+ *   iconColor   – color theme: "indigo" | "emerald" | "blue"
+ *   title       – experiment name
+ *   type        – e.g. "Tooling"
+ *   status      – e.g. "Learning"
+ *   description – short description
+ *   techStack   – string[] of tech names
+ *   repoLink    – GitHub URL (optional)
+ *   demoLink    – Live demo URL (optional)
+ */
+
+const colorMap = {
+    indigo: {
+        bg: "bg-indigo-900/30",
+        border: "border-indigo-500/20",
+        text: "text-indigo-400",
+    },
+    emerald: {
+        bg: "bg-emerald-900/30",
+        border: "border-emerald-500/20",
+        text: "text-emerald-400",
+    },
+    blue: {
+        bg: "bg-blue-900/30",
+        border: "border-blue-500/20",
+        text: "text-blue-400",
+    },
+};
+
+export default function ExperimentCard({
+    icon,
+    iconColor = "indigo",
+    title,
+    type,
+    status,
+    description,
+    techStack = [],
+    repoLink,
+    demoLink,
+}) {
+    const colors = colorMap[iconColor] || colorMap.indigo;
+
+    return (
+        <article className="bg-card-bg rounded-xl border border-slate-800/50 p-6 flex flex-col h-full hover:border-slate-700 transition-colors shadow-sm dark:shadow-lg dark:shadow-black/20">
+            {/* Header row: icon + links */}
+            <div className="flex items-center justify-between mb-3">
+                <div
+                    className={`w-8 h-8 ${colors.bg} rounded-lg flex items-center justify-center border ${colors.border}`}
+                >
+                    <span className={`material-symbols-outlined ${colors.text} text-lg`}>
+                        {icon}
+                    </span>
+                </div>
+                <div className="flex gap-2">
+                    {repoLink && (
+                        <a
+                            className="text-slate-400 hover:text-white transition-colors"
+                            href={repoLink}
+                            title="GitHub"
+                        >
+                            <span className="material-symbols-outlined text-lg">code</span>
+                        </a>
+                    )}
+                    {demoLink && (
+                        <a
+                            className="text-slate-400 hover:text-white transition-colors"
+                            href={demoLink}
+                            title="Live Demo"
+                        >
+                            <span className="material-symbols-outlined text-lg">arrow_outward</span>
+                        </a>
+                    )}
+                </div>
+            </div>
+
+            {/* Title */}
+            {/* Title */}
+            <h4 className="text-lg font-bold text-white mb-2">{title}</h4>
+
+            {/* Type & Status */}
+            <div className="text-xs text-slate-500 dark:text-slate-400 font-medium mb-2 uppercase tracking-wider">
+                Type: {type} | Status: {status}
+            </div>
+
+            {/* Description */}
+            <p className="text-sm text-slate-400 dark:text-slate-300 mb-3 grow leading-relaxed">
+                {description}
+            </p>
+
+            {/* Tech Stack */}
+            <div className="flex flex-wrap gap-2 mt-auto">
+                {techStack.map((tech) => (
+                    <TechTag key={tech} size="sm">
+                        {tech}
+                    </TechTag>
+                ))}
+            </div>
+        </article>
+    );
+}
+
+ExperimentCard.propTypes = {
+    icon: PropTypes.string.isRequired,
+    iconColor: PropTypes.oneOf(["indigo", "emerald", "blue"]),
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    techStack: PropTypes.arrayOf(PropTypes.string),
+    repoLink: PropTypes.string,
+    demoLink: PropTypes.string,
+};

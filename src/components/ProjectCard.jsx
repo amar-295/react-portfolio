@@ -1,0 +1,150 @@
+import PropTypes from "prop-types";
+import Button from "./Button";
+import TechTag from "./TechTag";
+
+/**
+ * Large featured project card — image + details side-by-side on desktop,
+ * stacked on mobile. Matches the main project article layout from the
+ * Projects section HTML.
+ *
+ * Props:
+ *   image           – project screenshot URL
+ *   imageAlt        – alt text for the image
+ *   title           – project name
+ *   type            – e.g. "Personal Project"
+ *   focus           – e.g. "UI & Architecture"
+ *   status          – e.g. "UI Prototype (No Backend)"
+ *   description     – short description paragraph
+ *   learningOutcome – italic green learning note
+ *   techStack       – string[] of tech names
+ *   liveDemoLink    – URL for live demo button (optional)
+ *   repoLink        – URL for GitHub repo button (optional)
+ *   showBorder      – show bottom border (default: true)
+ */
+export default function ProjectCard({
+  image,
+  imageAlt,
+  title,
+  type,
+  focus,
+  status,
+  description,
+  learningOutcome,
+  techStack = [],
+  liveDemoLink,
+  repoLink,
+  showBorder = true,
+  featured = false, // New prop for featured projects
+}) {
+  return (
+    <article
+      className={`flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12 ${showBorder ? "border-b-2 border-light-border dark:border-slate-800/40 pb-16 lg:pb-24" : "pb-16 lg:pb-0"
+        } ${featured ? "relative" : ""
+        }`}
+    >
+      {/* Featured Badge */}
+      {featured && (
+        <div className="absolute -top-4 left-0 lg:left-4 z-20">
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-emerald-500 to-teal-500 dark:from-blue-500 dark:to-purple-500 text-white text-sm font-bold rounded-full shadow-lg">
+            <span className="text-base">⭐</span>
+            Featured Project
+          </span>
+        </div>
+      )}
+
+      {/* ---- Image Column ---- */}
+      <div className="w-full lg:w-[45%]">
+        <div className={`relative group bg-light-surface dark:bg-card-bg rounded-xl overflow-hidden border-2 ${featured
+          ? "border-emerald-500 dark:border-blue-500 shadow-lg shadow-emerald-500/20 dark:shadow-blue-500/20"
+          : "border-light-border dark:border-slate-800/50"
+          } p-2`}>
+          <img
+            alt={imageAlt || title}
+            className="w-full h-64 lg:h-80 object-contain rounded-lg shadow-md dark:shadow-xl"
+            src={image}
+          />
+        </div>
+
+        {/* Mobile-only buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 pt-6 lg:hidden">
+          {liveDemoLink && (
+            <Button href={liveDemoLink} icon="arrow_outward" fullWidth>
+              Live Demo (UI)
+            </Button>
+          )}
+          {repoLink && (
+            <Button variant="outline" href={repoLink} icon="code" fullWidth>
+              GitHub Repository
+            </Button>
+          )}
+        </div>
+      </div>
+
+      {/* ---- Details Column ---- */}
+      <div className="w-full lg:w-[55%] space-y-4 flex flex-col justify-center">
+        {/* Title + Meta */}
+        <div>
+          <h3 className="text-3xl lg:text-4xl font-extrabold text-light-text-primary dark:text-white leading-tight">
+            {title}
+          </h3>
+          <div className="flex items-center gap-3 text-sm text-light-text-secondary dark:text-slate-300 mt-2 font-medium tracking-wide flex-wrap">
+            <span>Type: {type}</span>
+            <span className="text-slate-400 dark:text-slate-600">|</span>
+            <span>Focus: {focus}</span>
+            <span className="text-slate-400 dark:text-slate-600">|</span>
+            <span className="text-accent-dark dark:text-emerald-400 font-bold">Status: {status}</span>
+          </div>
+        </div>
+
+        {/* Description + Learning Outcome */}
+        <div className="space-y-4">
+          <p className="text-lg text-light-text-secondary dark:text-slate-200 leading-relaxed">
+            {description}
+          </p>
+          {learningOutcome && (
+            <p className="text-base text-accent-dark dark:text-emerald-400/90 font-medium italic border-l-2 border-accent-dark/50 dark:border-emerald-500/30 pl-4 py-1">
+              Learning Outcome: {learningOutcome}
+            </p>
+          )}
+        </div>
+
+        {/* Tech Stack */}
+        <div className="flex flex-wrap gap-2 pt-1">
+          {techStack.map((tech) => (
+            <TechTag key={tech}>{tech}</TechTag>
+          ))}
+        </div>
+
+        {/* Desktop-only buttons */}
+        <div className="hidden lg:flex gap-4 pt-4">
+          {liveDemoLink && (
+            <Button href={liveDemoLink} icon="arrow_outward">
+              Live Demo (UI)
+            </Button>
+          )}
+          {repoLink && (
+            <Button variant="outline" href={repoLink} icon="code">
+              GitHub Repository
+            </Button>
+          )}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+ProjectCard.propTypes = {
+  image: PropTypes.string.isRequired,
+  imageAlt: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  focus: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  learningOutcome: PropTypes.string,
+  techStack: PropTypes.arrayOf(PropTypes.string),
+  liveDemoLink: PropTypes.string,
+  repoLink: PropTypes.string,
+  showBorder: PropTypes.bool,
+  featured: PropTypes.bool, // New prop
+};

@@ -1,0 +1,26 @@
+import PropTypes from "prop-types";
+
+/**
+ * Glass-morphism skill card with a devicon and skill name.
+ *
+ * Props:
+ *   icon      – devicon class string (e.g. "devicon-react-original colored")
+ *   name      – skill display name
+ *   className – extra classes
+ */
+export default function SkillCard({ icon, name, className = "" }) {
+    return (
+        <div
+            className={`bg-gray-50 dark:bg-transparent border border-gray-100 dark:border-white/10 p-6 rounded-xl flex items-center gap-6 hover:border-gray-900 dark:hover:border-primary-blue/50 transition-all shadow-sm dark:shadow-none group cursor-default ${className}`}
+        >
+            <i className={`${icon} text-4xl`}></i>
+            <span className="font-semibold text-gray-900 dark:text-gray-200">{name}</span>
+        </div>
+    );
+}
+
+SkillCard.propTypes = {
+    icon: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    className: PropTypes.string,
+};
