@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Logo } from "./index";
 
 /**
  * Footer component with brand, quick links, and social links.
@@ -25,8 +26,8 @@ export default function Footer({
                     {/* Brand Section */}
                     <div className="space-y-4">
                         <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 bg-gray-900 dark:bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-md dark:shadow-blue-900/20">
-                                {brandInitial}
+                            <div className="w-8 h-8 bg-gray-900 dark:bg-blue-600 rounded-lg flex items-center justify-center text-white shadow-md dark:shadow-blue-900/20">
+                                <Logo className="w-6 h-6 text-white" />
                             </div>
                             <span className="text-lg font-bold tracking-tight text-gray-900 dark:text-white">
                                 {brandName}
@@ -67,6 +68,8 @@ export default function Footer({
                                     <a
                                         className="text-gray-600 dark:text-slate-400 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-colors text-sm flex items-center gap-2 font-medium"
                                         href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                     >
                                         <i className={`${social.icon} w-5 text-center`}></i> {social.platform}
                                     </a>

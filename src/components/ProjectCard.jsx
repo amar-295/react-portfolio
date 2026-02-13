@@ -42,38 +42,28 @@ export default function ProjectCard({
         } ${featured ? "relative" : ""
         }`}
     >
-      {/* Featured Badge */}
-      {featured && (
-        <div className="absolute -top-4 left-0 lg:left-4 z-20">
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-emerald-500 to-teal-500 dark:from-blue-500 dark:to-purple-500 text-white text-sm font-bold rounded-full shadow-lg">
-            <span className="text-base">⭐</span>
-            Featured Project
-          </span>
-        </div>
-      )}
-
       {/* ---- Image Column ---- */}
       <div className="w-full lg:w-5/12">
-        <div className={`relative group bg-light-surface dark:bg-card-bg rounded-xl overflow-hidden border-2 ${featured
-          ? "border-emerald-500 dark:border-blue-500 shadow-lg shadow-emerald-500/20 dark:shadow-blue-500/20"
-          : "border-light-border dark:border-slate-800/50"
-          } p-2`}>
+        <div className="relative group bg-light-surface dark:bg-card-bg rounded-xl overflow-hidden border-2 border-light-border dark:border-slate-800/50 shadow-sm">
           <img
             alt={imageAlt || title}
-            className="w-full h-64 lg:h-80 object-contain rounded-lg shadow-md dark:shadow-xl"
+            className="w-full h-64 lg:h-80 object-cover transform group-hover:scale-105 transition-transform duration-500"
             src={image}
+            onError={(e) => {
+              e.target.src = "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop";
+            }}
           />
         </div>
 
         {/* Mobile-only buttons */}
         <div className="flex flex-col sm:flex-row gap-4 pt-6 lg:hidden">
           {liveDemoLink && (
-            <Button href={liveDemoLink} icon="arrow_outward" fullWidth>
-              Live Demo (UI)
+            <Button href={liveDemoLink} icon="arrow_outward" fullWidth target="_blank" rel="noopener noreferrer">
+              Live Demo
             </Button>
           )}
           {repoLink && (
-            <Button variant="outline" href={repoLink} icon="code" fullWidth>
+            <Button variant="outline" href={repoLink} icon="code" fullWidth target="_blank" rel="noopener noreferrer">
               GitHub Repository
             </Button>
           )}
@@ -118,18 +108,18 @@ export default function ProjectCard({
         {/* Desktop-only buttons */}
         <div className="hidden lg:flex gap-4 pt-4">
           {liveDemoLink && (
-            <Button href={liveDemoLink} icon="arrow_outward">
-              Live Demo (UI)
+            <Button href={liveDemoLink} icon="arrow_outward" target="_blank" rel="noopener noreferrer">
+              Live Demo
             </Button>
           )}
           {repoLink && (
-            <Button variant="outline" href={repoLink} icon="code">
+            <Button variant="outline" href={repoLink} icon="code" target="_blank" rel="noopener noreferrer">
               GitHub Repository
             </Button>
           )}
         </div>
       </div>
-    </article>
+    </article >
   );
 }
 

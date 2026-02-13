@@ -6,12 +6,11 @@
 export const contactInfo = [
     {
         id: "email",
-        icon: "fa-regular fa-envelope",
+        icon: "fa-solid fa-envelope",
         label: "PREFERRED",
         labelColor: "text-gray-600 dark:text-blue-400",
         content: "612amar@gmail.com",
         href: "mailto:612amar@gmail.com",
-        subtitle: "Typical response time: < 24 hours",
         iconBg: "bg-gray-200 dark:bg-blue-500",
         variant: "primary",
     },

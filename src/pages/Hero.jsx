@@ -47,7 +47,7 @@ export default function Hero() {
             <div className="flex lg:hidden w-16 h-px bg-light-border dark:bg-white/10 mx-auto"></div>
             <div className="flex-1 text-center lg:text-left">
               <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
-                5+ Projects
+                3+ Projects
               </span>
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent-dark dark:text-accent-teal/80">
                 Shipped & Deployed

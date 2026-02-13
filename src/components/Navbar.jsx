@@ -1,14 +1,11 @@
+import { useTheme } from "../context/ThemeContext";
 import { useState } from "react";
+import { Logo } from "./index";
 
 export default function Navbar() {
-    const [isDarkMode, setIsDarkMode] = useState(
-        document.documentElement.classList.contains("dark")
-    );
-
-    const toggleTheme = () => {
-        document.documentElement.classList.toggle("dark");
-        setIsDarkMode(!isDarkMode);
-    };
+    const { theme, toggleTheme } = useTheme();
+    const isDarkMode = theme === "dark";
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
         <header
@@ -16,13 +13,11 @@ export default function Navbar() {
             data-purpose="main-navigation"
         >
             <div className="container mx-auto px-6 h-full flex items-center justify-between">
-                <a
-                    className="text-2xl font-bold text-accent-dark dark:text-accent-teal tracking-tight font-display"
-                    href="#"
-                >
-                    Amarnath
-                    <span className="text-light-text-primary/80 dark:text-lightSlate">
-                        .dev
+                {/* Logo */}
+                <a href="#" className="flex items-center gap-2 group transition-all duration-300">
+                    <Logo className="w-9 h-9 text-accent-dark dark:text-accent-teal group-hover:rotate-12 transition-transform duration-300" />
+                    <span className="text-xl font-bold tracking-tight text-light-text-primary dark:text-white font-display">
+                        AMARNATH
                     </span>
                 </a>
 
@@ -59,7 +54,7 @@ export default function Navbar() {
                         onClick={toggleTheme}
                         className="text-slate-700 dark:text-slate-300 hover:text-accent-dark dark:hover:text-accent-teal transition-colors flex items-center"
                     >
-                        <span className="material-symbols-outlined text-[22px]">
+                        <span className="material-symbols-outlined text-[24px]">
                             {isDarkMode ? "light_mode" : "dark_mode"}
                         </span>
                     </button>
@@ -67,6 +62,8 @@ export default function Navbar() {
                     <a
                         className="inline-block px-5 py-2 text-sm font-bold text-white bg-accent-dark dark:bg-blue-500 rounded-lg hover:bg-black dark:hover:bg-blue-600 transition-all duration-300 shadow-sm"
                         href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
                     >
                         Download Resume
                     </a>

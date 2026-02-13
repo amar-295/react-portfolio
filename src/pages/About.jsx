@@ -34,18 +34,13 @@ export default function About() {
 
             <div className="text-light-text-secondary dark:text-gray-300 space-y-6 text-lg leading-relaxed">
               <p>
-                I'm a frontend developer who loves building interfaces that don't make
-                users think. Currently focused on React and accessibility—because if
-                someone can't use what I build, I haven't finished the job.
+                I'm a frontend developer focused on building clean, intuitive web interfaces with a strong emphasis on accessibility and performance. My approach centers on creating functional codebases that are both maintainable and user-centric.
               </p>
               <p>
-                Recently shipped a task management app with offline-first
-                functionality (my first dive into service workers). Now learning backend
-                development to understand the full stack, but UI is where I'm happiest.
+                Currently focusing on the MERN stack and exploring RESTful API architectures. I enjoy the process of translating complex requirements into reliable, component-based frontend solutions.
               </p>
               <p>
-                Currently pursuing my BCA and actively looking for internships or
-                junior developer roles where I can contribute to real products.
+                Pursuing a Bachelor of Computer Applications and dedicated to continuous learning through project-based development and research into modern web standards.
               </p>
             </div>
 
@@ -61,7 +56,7 @@ export default function About() {
                   <div className="flex-1">
                     <h4 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Education</h4>
                     <p className="text-base text-light-text-secondary dark:text-gray-300">
-                      BCA Student (Currently pursuing)
+                      Bachelor of Computer Applications
                     </p>
                   </div>
                 </div>

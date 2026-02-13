@@ -42,7 +42,7 @@ export default function Button({
 
     /* ---- icon element ---- */
     const iconEl = icon ? (
-        <span className="material-symbols-outlined text-[1.25em] leading-none text-accent-dark dark:text-accent-teal group-hover:text-current transition-colors duration-300">
+        <span className="material-symbols-outlined text-[1.25em] leading-none text-current transition-colors duration-300">
             {icon}
         </span>
     ) : null;

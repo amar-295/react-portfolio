@@ -34,8 +34,8 @@ export default function Projects() {
 
             {/* ---- CTA Banner ---- */}
             <CTABanner
-                heading="Interested in my work? I'm actively looking for internships and junior web developer roles."
-                buttonText="Contact Me"
+                heading="Building something technical? Let's connect and discuss the details."
+                buttonText="Connect with me"
                 buttonIcon="mail"
                 buttonHref="#"
             />

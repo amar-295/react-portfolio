@@ -64,6 +64,8 @@ export default function ExperimentCard({
                             className="text-slate-400 hover:text-accent-dark dark:hover:text-white transition-colors"
                             href={repoLink}
                             title="GitHub"
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <span className="material-symbols-outlined text-lg">code</span>
                         </a>
@@ -73,6 +75,8 @@ export default function ExperimentCard({
                             className="text-slate-400 hover:text-accent-dark dark:hover:text-white transition-colors"
                             href={demoLink}
                             title="Live Demo"
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <span className="material-symbols-outlined text-lg">arrow_outward</span>
                         </a>
