@@ -17,8 +17,8 @@ export default function Skills() {
 
 
             {/* ===== Core Competencies ===== */}
-            <section className="py-20 md:py-32 px-6 md:px-12 max-w-7xl mx-auto w-full">
-                <SectionHeading title="Core Competencies" badge="Updated 2025" />
+            <section className="py-20 md:py-32 px-6 md:px-12 max-w-7xl mx-auto w-full" id="skills">
+                <SectionHeading title="Technical Skills" badge="Updated 2025" />
 
                 <h3 className="text-gray-900 dark:text-slate-400 text-sm font-bold dark:font-medium mb-6 uppercase tracking-wider">
                     Frontend Development
@@ -30,7 +30,7 @@ export default function Skills() {
                     ))}
                 </div>
 
-                <div className="border-l-4 border-gray-900 dark:border-emerald-600/50 pl-4 mb-6">
+                <div className="border-l-4 border-gray-900 dark:border-blue-600/50 pl-4 mb-6">
                     <h3 className="text-gray-900 dark:text-slate-400 text-sm font-bold dark:font-medium uppercase tracking-wider">
                         Currently Learning
                     </h3>

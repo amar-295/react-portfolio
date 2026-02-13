@@ -26,9 +26,7 @@ export default function Footer({
                     {/* Brand Section */}
                     <div className="space-y-4">
                         <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 bg-gray-900 dark:bg-blue-600 rounded-lg flex items-center justify-center text-white shadow-md dark:shadow-blue-900/20">
-                                <Logo className="w-6 h-6 text-white" />
-                            </div>
+                            <Logo className="w-8 h-8 text-gray-900 dark:text-blue-500" />
                             <span className="text-lg font-bold tracking-tight text-gray-900 dark:text-white">
                                 {brandName}
                             </span>

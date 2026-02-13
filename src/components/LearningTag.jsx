@@ -9,15 +9,15 @@ import PropTypes from "prop-types";
  */
 export default function LearningTag({ icon, label }) {
     return (
-        <div className="px-6 py-3 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800/50 text-gray-900 dark:text-gray-300 text-sm font-bold dark:font-normal flex items-center gap-2 shadow-sm dark:shadow-none">
+        <div className="flex items-center gap-3 px-4 py-2 bg-light-surface dark:bg-blue-600/5 border border-light-border dark:border-blue-500/20 rounded-lg group hover:border-accent-dark dark:hover:border-blue-500/50 transition-all duration-300">
             {icon.includes("devicon") ? (
-                <i className={`${icon} text-xl`}></i>
+                <i className={`${icon} text-xl text-accent-dark dark:text-blue-500`}></i>
             ) : (
-                <span className="material-symbols-outlined text-gray-600 dark:text-emerald-400 text-xl dark:text-lg">
+                <span className="material-symbols-outlined text-accent-dark dark:text-blue-500 text-xl group-hover:scale-110 transition-transform duration-300">
                     {icon}
                 </span>
             )}
-            {label}
+            <span className="text-gray-900 dark:text-slate-300 font-medium">{label}</span>
         </div>
     );
 }

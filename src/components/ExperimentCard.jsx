@@ -6,7 +6,7 @@ import TechTag from "./TechTag";
  *
  * Props:
  *   icon        – Material Symbols icon name
- *   iconColor   – color theme: "indigo" | "emerald" | "blue"
+ *   iconColor   – color theme: "indigo" | "blue" | "slate"
  *   title       – experiment name
  *   type        – e.g. "Tooling"
  *   status      – e.g. "Learning"
@@ -22,15 +22,15 @@ const colorMap = {
         border: "border-indigo-200 dark:border-indigo-500/20",
         text: "text-indigo-600 dark:text-indigo-400",
     },
-    emerald: {
-        bg: "bg-emerald-100 dark:bg-emerald-900/30",
-        border: "border-emerald-200 dark:border-emerald-500/20",
-        text: "text-emerald-600 dark:text-emerald-400",
-    },
     blue: {
         bg: "bg-blue-100 dark:bg-blue-900/30",
         border: "border-blue-200 dark:border-blue-500/20",
         text: "text-blue-600 dark:text-blue-400",
+    },
+    slate: {
+        bg: "bg-slate-100 dark:bg-slate-900/30",
+        border: "border-slate-200 dark:border-slate-500/20",
+        text: "text-slate-600 dark:text-slate-400",
     },
 };
 
@@ -52,9 +52,9 @@ export default function ExperimentCard({
             {/* Header row: icon + links */}
             <div className="flex items-center justify-between mb-3">
                 <div
-                    className={`w-8 h-8 ${colors.bg} rounded-lg flex items-center justify-center border ${colors.border}`}
+                    className={`w-12 h-12 ${colors.bg} rounded-lg flex items-center justify-center border ${colors.border} group-hover:dark:border-blue-500/30 transition-all duration-300`}
                 >
-                    <span className={`material-symbols-outlined ${colors.text} text-lg`}>
+                    <span className={`material-symbols-outlined ${colors.text} text-2xl`}>
                         {icon}
                     </span>
                 </div>
@@ -111,7 +111,7 @@ export default function ExperimentCard({
 
 ExperimentCard.propTypes = {
     icon: PropTypes.string.isRequired,
-    iconColor: PropTypes.oneOf(["indigo", "emerald", "blue"]),
+    iconColor: PropTypes.oneOf(["indigo", "blue", "slate"]),
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,

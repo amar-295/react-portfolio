@@ -29,7 +29,7 @@ export default {
         slate: "#64748b", // Slate-500
         lightSlate: "#94a3b8", // Slate-400
         white: "#f1f5f9", // Slate-100
-        "accent-teal": "#2dd4bf", // Teal accent for dark mode
+        "accent-teal": "#3b82f6", // Replacing with Blue as requested
         "brand-bg": "#050505",
         "card-bg": "#13161c",
         "primary-blue": "#2563EB",

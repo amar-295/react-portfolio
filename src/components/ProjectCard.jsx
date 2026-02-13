@@ -82,7 +82,7 @@ export default function ProjectCard({
             <span className="text-slate-400 dark:text-slate-600">|</span>
             <span>Focus: {focus}</span>
             <span className="text-slate-400 dark:text-slate-600">|</span>
-            <span className="text-accent-dark dark:text-emerald-400 font-bold">Status: {status}</span>
+            <span className="text-accent-dark dark:text-blue-500 font-bold">Status: {status}</span>
           </div>
         </div>
 
@@ -92,7 +92,7 @@ export default function ProjectCard({
             {description}
           </p>
           {learningOutcome && (
-            <p className="text-base text-accent-dark dark:text-emerald-400/90 font-medium italic border-l-2 border-accent-dark/50 dark:border-emerald-500/30 pl-4 py-1">
+            <p className="text-base text-accent-dark dark:text-blue-400/90 font-medium italic border-l-2 border-accent-dark/50 dark:border-blue-500/30 pl-4 py-1">
               Learning Outcome: {learningOutcome}
             </p>
           )}

@@ -5,7 +5,8 @@ export default function Hero() {
   return (
     <section
       className="relative pt-32 md:pt-40 pb-20 md:pb-32 min-h-screen flex items-center grid-bg"
-      data-purpose="hero-section">
+      data-purpose="hero-section"
+      id="home">
 
       <div className="container mx-auto px-6 grid md:grid-cols-12 gap-10 md:gap-16 items-center">
         <div className="md:col-span-7 space-y-8 text-center md:text-left order-1">

@@ -7,7 +7,7 @@ export const contactInfo = [
     {
         id: "email",
         icon: "fa-solid fa-envelope",
-        label: "PREFERRED",
+        label: "Gmail",
         labelColor: "text-gray-600 dark:text-blue-400",
         content: "612amar@gmail.com",
         href: "mailto:612amar@gmail.com",

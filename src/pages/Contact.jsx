@@ -16,7 +16,7 @@ export default function Contact() {
     return (
         <>
             {/* ===== Contact Section ===== */}
-            <section className="relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-[#020617]">
+            <section className="relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-[#020617]" id="contact">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
                     {/* Left Column: Contact Info */}
                     <div className="lg:col-span-5 flex flex-col space-y-8">

@@ -32,13 +32,13 @@ export const timelineEntries = [
         subtitle: "Skill Development",
         emoji: "💻",
         badge: "Self-Directed",
-        badgeColor: "emerald",
+        badgeColor: "blue",
         title: "Independent Learning Projects",
         institution: null,
         description:
             "Building and deploying frontend projects to practice React, UI design, and JavaScript fundamentals. Focused on writing clean code and understanding modern development workflows.",
         side: "left",
-        dotColor: "emerald",
+        dotColor: "blue",
         isActive: false,
     },
 ];

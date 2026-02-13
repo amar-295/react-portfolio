@@ -20,17 +20,15 @@ import PropTypes from "prop-types";
 
 const badgeColors = {
     green: "bg-blue-100 dark:bg-green-900/30 text-blue-700 dark:text-green-400 border-blue-200 dark:border-green-800 font-bold dark:font-normal",
-    emerald: "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800 font-bold dark:font-normal",
+    blue: "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-800 font-bold dark:font-normal",
 };
 
 const dotColors = {
     blue: "border-blue-500 dark:border-blue-500",
-    emerald: "border-emerald-500 dark:border-emerald-500",
 };
 
 const dotBgColors = {
     blue: "bg-primary-blue dark:bg-primary-blue",
-    emerald: "bg-emerald-500 dark:bg-emerald-500",
 };
 
 export default function TimelineItem({
@@ -116,11 +114,11 @@ TimelineItem.propTypes = {
     subtitle: PropTypes.string.isRequired,
     emoji: PropTypes.string,
     badge: PropTypes.string,
-    badgeColor: PropTypes.oneOf(["green", "emerald"]),
+    badgeColor: PropTypes.oneOf(["green", "blue"]),
     title: PropTypes.string.isRequired,
     institution: PropTypes.string,
     description: PropTypes.string.isRequired,
     side: PropTypes.oneOf(["right", "left"]),
-    dotColor: PropTypes.oneOf(["blue", "emerald"]),
+    dotColor: PropTypes.oneOf(["blue"]),
     isActive: PropTypes.bool,
 };
