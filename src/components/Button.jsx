@@ -27,7 +27,7 @@ export default function Button({
 }) {
     /* ---- variant class maps ---- */
     const base =
-        "font-bold rounded-xl text-base transition-all duration-300 inline-flex items-center justify-center gap-2.5 active:scale-95";
+        "group font-bold rounded-xl text-base transition-all duration-300 inline-flex items-center justify-center gap-2.5 active:scale-95";
 
     const variants = {
         primary:
@@ -42,7 +42,7 @@ export default function Button({
 
     /* ---- icon element ---- */
     const iconEl = icon ? (
-        <span className="material-symbols-outlined text-[1.25em] leading-none text-current">
+        <span className="material-symbols-outlined text-[1.25em] leading-none text-accent-dark dark:text-accent-teal group-hover:text-current transition-colors duration-300">
             {icon}
         </span>
     ) : null;

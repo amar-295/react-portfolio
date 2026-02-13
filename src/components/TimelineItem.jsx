@@ -57,9 +57,16 @@ export default function TimelineItem({
                     : "text-center md:text-left pl-0 md:pl-12 order-1 md:order-3"
                     }`}
             >
-                <h4 className="text-gray-900 dark:text-white font-extrabold dark:font-bold text-xl dark:text-lg">{period}</h4>
-                <p className="text-gray-600 dark:text-slate-400 font-semibold dark:font-normal text-sm uppercase tracking-wide">{subtitle}</p>
+                <div className={`inline-block px-4 py-2 rounded-lg bg-white dark:bg-card-bg border border-light-border dark:border-white/10 shadow-micro dark:shadow-none mb-2 ${isRight ? "md:mr-0" : "md:ml-0"}`}>
+                    <span className="text-secondary-dark dark:text-accent-teal font-mono font-bold text-sm tracking-wider">
+                        {period}
+                    </span>
+                </div>
+                <p className="text-light-text-secondary dark:text-slate-400 font-medium text-sm mt-1">{subtitle}</p>
             </div>
+
+            {/* ---- Connector Line (Desktop) ---- */}
+            <div className={`hidden md:block absolute top-1/2 w-12 h-0.5 bg-light-border dark:bg-white/10 -translate-y-1/2 z-0 ${isRight ? "left-1/2" : "right-1/2"}`}></div>
 
             {/* ---- Center Dot ---- */}
             <div

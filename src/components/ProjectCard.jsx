@@ -53,7 +53,7 @@ export default function ProjectCard({
       )}
 
       {/* ---- Image Column ---- */}
-      <div className="w-full lg:w-[45%]">
+      <div className="w-full lg:w-5/12">
         <div className={`relative group bg-light-surface dark:bg-card-bg rounded-xl overflow-hidden border-2 ${featured
           ? "border-emerald-500 dark:border-blue-500 shadow-lg shadow-emerald-500/20 dark:shadow-blue-500/20"
           : "border-light-border dark:border-slate-800/50"
@@ -81,7 +81,7 @@ export default function ProjectCard({
       </div>
 
       {/* ---- Details Column ---- */}
-      <div className="w-full lg:w-[55%] space-y-4 flex flex-col justify-center">
+      <div className="w-full lg:w-7/12 space-y-4 flex flex-col justify-center">
         {/* Title + Meta */}
         <div>
           <h3 className="text-3xl lg:text-4xl font-extrabold text-light-text-primary dark:text-white leading-tight font-display">

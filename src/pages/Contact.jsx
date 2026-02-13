@@ -17,9 +17,9 @@ export default function Contact() {
         <>
             {/* ===== Contact Section ===== */}
             <section className="relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-[#020617]">
-                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
                     {/* Left Column: Contact Info */}
-                    <div className="flex flex-col space-y-8">
+                    <div className="lg:col-span-5 flex flex-col space-y-8">
                         {/* Badge */}
                         <div>
                             <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-gray-100 dark:bg-blue-500/10 text-gray-600 dark:text-blue-400 border border-gray-200 dark:border-blue-500/20 tracking-widest uppercase">
@@ -66,7 +66,9 @@ export default function Contact() {
                     </div>
 
                     {/* Right Column: Contact Form */}
-                    <ContactForm onSubmit={handleFormSubmit} />
+                    <div className="lg:col-span-7">
+                        <ContactForm onSubmit={handleFormSubmit} />
+                    </div>
                 </div>
             </section>
 
