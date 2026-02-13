@@ -31,7 +31,7 @@ export default function SocialLink({
         return (
             <a
                 href={href}
-                className={`flex items-center justify-center px-6 py-3 rounded-lg text-white transition-all duration-200 font-medium shadow-lg ${baseStyles}`}
+                className={`flex items-center justify-center px-6 py-3 rounded-xl text-white transition-all duration-200 font-bold shadow-lg active:scale-95 ${baseStyles}`}
             >
                 <i className={`${icon} text-xl mr-2`}></i> {label}
             </a>
@@ -41,7 +41,7 @@ export default function SocialLink({
     return (
         <a
             href={href}
-            className={`w-12 h-12 flex items-center justify-center rounded-lg text-slate-400 hover:text-white transition-all duration-200 ${baseStyles}`}
+            className={`w-12 h-12 flex items-center justify-center rounded-xl text-slate-400 hover:text-white transition-all duration-200 active:scale-95 ${baseStyles}`}
         >
             <i className={`${icon} text-xl`}></i>
         </a>

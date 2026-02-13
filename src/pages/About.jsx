@@ -17,7 +17,7 @@ export default function About() {
 
                 <img
                   alt="PROFILE_PICTURE"
-                  className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700 block"
+                  className="w-full h-full object-cover hover:scale-105 transition-all duration-700 block"
                   src={aboutMeImage}
                 />
                 <div className="absolute inset-0 bg-accent-teal/10 mixed-blend-multiply opacity-40 hover:opacity-0 transition-opacity duration-500 pointer-events-none dark:opacity-0"></div>
@@ -28,7 +28,6 @@ export default function About() {
           {/* Text Column - Left side on desktop */}
           <div className="md:col-span-7 order-1 md:order-1">
             <h2 className="flex items-center text-3xl md:text-4xl font-bold text-light-text-primary dark:text-white mb-10 font-display">
-              <span className="text-accent-dark dark:text-accent-teal font-mono text-xl mr-4">01.</span>{" "}
               About Me
               <span className="h-px bg-light-border dark:bg-white/10 grow ml-8 max-w-xs hidden md:block"></span>
             </h2>

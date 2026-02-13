@@ -18,19 +18,19 @@ import TechTag from "./TechTag";
 
 const colorMap = {
     indigo: {
-        bg: "bg-indigo-900/30",
-        border: "border-indigo-500/20",
-        text: "text-indigo-400",
+        bg: "bg-indigo-100 dark:bg-indigo-900/30",
+        border: "border-indigo-200 dark:border-indigo-500/20",
+        text: "text-indigo-600 dark:text-indigo-400",
     },
     emerald: {
-        bg: "bg-emerald-900/30",
-        border: "border-emerald-500/20",
-        text: "text-emerald-400",
+        bg: "bg-emerald-100 dark:bg-emerald-900/30",
+        border: "border-emerald-200 dark:border-emerald-500/20",
+        text: "text-emerald-600 dark:text-emerald-400",
     },
     blue: {
-        bg: "bg-blue-900/30",
-        border: "border-blue-500/20",
-        text: "text-blue-400",
+        bg: "bg-blue-100 dark:bg-blue-900/30",
+        border: "border-blue-200 dark:border-blue-500/20",
+        text: "text-blue-600 dark:text-blue-400",
     },
 };
 
@@ -48,7 +48,7 @@ export default function ExperimentCard({
     const colors = colorMap[iconColor] || colorMap.indigo;
 
     return (
-        <article className="bg-card-bg rounded-xl border border-slate-800/50 p-6 flex flex-col h-full hover:border-slate-700 transition-colors shadow-sm dark:shadow-lg dark:shadow-black/20">
+        <article className="bg-white dark:bg-card-bg rounded-xl border border-light-border dark:border-slate-800/50 p-6 flex flex-col h-full hover:border-accent-dark dark:hover:border-slate-600 transition-all duration-300 shadow-sm hover:shadow-md dark:shadow-lg dark:shadow-black/20">
             {/* Header row: icon + links */}
             <div className="flex items-center justify-between mb-3">
                 <div
@@ -61,7 +61,7 @@ export default function ExperimentCard({
                 <div className="flex gap-2">
                     {repoLink && (
                         <a
-                            className="text-slate-400 hover:text-white transition-colors"
+                            className="text-slate-400 hover:text-accent-dark dark:hover:text-white transition-colors"
                             href={repoLink}
                             title="GitHub"
                         >
@@ -70,7 +70,7 @@ export default function ExperimentCard({
                     )}
                     {demoLink && (
                         <a
-                            className="text-slate-400 hover:text-white transition-colors"
+                            className="text-slate-400 hover:text-accent-dark dark:hover:text-white transition-colors"
                             href={demoLink}
                             title="Live Demo"
                         >
@@ -81,8 +81,7 @@ export default function ExperimentCard({
             </div>
 
             {/* Title */}
-            {/* Title */}
-            <h4 className="text-lg font-bold text-white mb-2">{title}</h4>
+            <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2 font-display">{title}</h4>
 
             {/* Type & Status */}
             <div className="text-xs text-slate-500 dark:text-slate-400 font-medium mb-2 uppercase tracking-wider">
@@ -90,7 +89,7 @@ export default function ExperimentCard({
             </div>
 
             {/* Description */}
-            <p className="text-sm text-slate-400 dark:text-slate-300 mb-3 grow leading-relaxed">
+            <p className="text-sm text-light-text-secondary dark:text-slate-300 mb-3 grow leading-relaxed">
                 {description}
             </p>
 

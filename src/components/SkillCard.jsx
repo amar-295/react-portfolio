@@ -11,9 +11,9 @@ import PropTypes from "prop-types";
 export default function SkillCard({ icon, name, className = "" }) {
     return (
         <div
-            className={`bg-gray-50 dark:bg-transparent border border-gray-100 dark:border-white/10 p-6 rounded-xl flex items-center gap-6 hover:border-gray-900 dark:hover:border-primary-blue/50 transition-all shadow-sm dark:shadow-none group cursor-default ${className}`}
+            className={`bg-light-surface dark:bg-transparent border border-light-border dark:border-white/10 p-6 rounded-xl flex items-center gap-6 hover:border-accent-dark dark:hover:border-primary-blue/50 transition-all shadow-sm hover:shadow-md dark:shadow-none group cursor-default ${className}`}
         >
-            <i className={`${icon} text-4xl`}></i>
+            <i className={`${icon} text-4xl transition-transform duration-300 group-hover:scale-110`}></i>
             <span className="font-semibold text-gray-900 dark:text-gray-200">{name}</span>
         </div>
     );

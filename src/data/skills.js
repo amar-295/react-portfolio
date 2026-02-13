@@ -7,14 +7,14 @@ export const coreSkills = [
 ];
 
 export const learningItems = [
-    { icon: "school", label: "Backend Basics" },
-    { icon: "api", label: "REST APIs" },
-    { icon: "terminal", label: "Node.js Fundamentals" },
+    { icon: "devicon-nodejs-plain colored", label: "Backend Basics" },
+    { icon: "devicon-express-original colored", label: "REST APIs" },
+    { icon: "devicon-mongodb-plain colored", label: "Database Concepts" },
 ];
 
 export const timelineEntries = [
     {
-        period: "2023 - Present",
+        period: "2023 – Present",
         subtitle: "Formal Education",
         emoji: "🎓",
         badge: "Class of 2025",
@@ -28,7 +28,7 @@ export const timelineEntries = [
         isActive: true,
     },
     {
-        period: "2023 - Present",
+        period: "2023 – Present",
         subtitle: "Skill Development",
         emoji: "💻",
         badge: "Self-Directed",

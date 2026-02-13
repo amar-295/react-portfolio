@@ -46,7 +46,7 @@ export default function Footer({
                             {quickLinks.map((link) => (
                                 <li key={link.label}>
                                     <a
-                                        className="text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-blue-500 transition-colors text-sm font-medium"
+                                        className="text-gray-600 dark:text-slate-400 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-colors text-sm font-medium"
                                         href={link.href}
                                     >
                                         {link.label}
@@ -65,7 +65,7 @@ export default function Footer({
                             {socialLinks.map((social) => (
                                 <li key={social.platform}>
                                     <a
-                                        className="text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-blue-500 transition-colors text-sm flex items-center gap-2 font-medium"
+                                        className="text-gray-600 dark:text-slate-400 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-colors text-sm flex items-center gap-2 font-medium"
                                         href={social.href}
                                     >
                                         <i className={social.icon}></i> {social.platform}

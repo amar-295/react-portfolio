@@ -27,13 +27,13 @@ export default function Button({
 }) {
     /* ---- variant class maps ---- */
     const base =
-        "font-medium rounded-lg text-sm transition-all inline-flex items-center justify-center gap-2";
+        "font-bold rounded-xl text-base transition-all duration-300 inline-flex items-center justify-center gap-2.5 active:scale-95";
 
     const variants = {
         primary:
-            "px-6 py-3 bg-gray-900 dark:bg-blue-500 hover:bg-black dark:hover:bg-blue-600 text-white shadow-md dark:shadow-lg dark:shadow-blue-500/20",
+            "px-8 py-3.5 bg-gray-900 dark:bg-blue-600 hover:bg-black dark:hover:bg-blue-500 text-white shadow-lg hover:shadow-xl dark:shadow-blue-500/30 hover:-translate-y-0.5",
         outline:
-            "px-6 py-3 bg-transparent border-2 border-gray-900 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-800 text-gray-900 dark:text-slate-300 font-bold",
+            "px-8 py-3.5 bg-transparent border-2 border-gray-900 dark:border-slate-600 hover:border-gray-900 dark:hover:border-blue-500 hover:bg-gray-50 dark:hover:bg-blue-500/10 text-gray-900 dark:text-white",
     };
 
     const widthClass = fullWidth ? "w-full" : "";
@@ -42,7 +42,7 @@ export default function Button({
 
     /* ---- icon element ---- */
     const iconEl = icon ? (
-        <span className="material-symbols-outlined text-sm">
+        <span className="material-symbols-outlined text-[1.25em] leading-none text-current">
             {icon}
         </span>
     ) : null;
