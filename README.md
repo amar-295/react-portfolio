@@ -10,7 +10,7 @@
 ![Portfolio Preview](./docs/images/portfolio-preview.png)
 <!-- TODO: Add portfolio-preview.png to /docs/images/ -->
 
-**[View Live Demo]([INSERT YOUR DEPLOYED URL])** | **[Download Resume](./resume.pdf)**
+**[View Live Demo](https://react-portfolio-lilac-nine.vercel.app/)** | **[Download Resume](./resume.pdf)**
 
 ---
 
@@ -207,10 +207,10 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 I am currently **open to opportunities** for Frontend Developer internship or junior roles. Let's connect!
 
-- **Email**: [YOUR EMAIL]
+- **Email**: [612amar@gmail.com](mailto:612amar@gmail.com)
 - **LinkedIn**: [Your LinkedIn Profile]
 - **GitHub**: [@amar-295](https://github.com/amar-295)
-- **Portfolio**: [[INSERT YOUR DEPLOYED URL]]([INSERT YOUR DEPLOYED URL])
+- **Portfolio**: [react-portfolio-lilac-nine.vercel.app](https://react-portfolio-lilac-nine.vercel.app/)
 
 ---
 
