@@ -88,7 +88,7 @@ export default function ExperimentCard({
             <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2 font-display">{title}</h4>
 
             {/* Type & Status */}
-            <div className="text-xs text-slate-500 dark:text-slate-400 font-medium mb-2 uppercase tracking-wider">
+            <div className="text-xs text-slate-600 dark:text-slate-300 font-medium mb-2 uppercase tracking-wider">
                 Type: {type} | Status: {status}
             </div>
 

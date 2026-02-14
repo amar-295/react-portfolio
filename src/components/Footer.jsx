@@ -30,7 +30,7 @@ export default function Footer({
                                 {brandName}
                             </span>
                         </div>
-                        <p className="text-gray-600 dark:text-slate-400 text-sm leading-relaxed max-w-xs">
+                        <p className="text-gray-700 dark:text-slate-400 text-sm leading-relaxed max-w-xs">
                             {tagline}
                         </p>
                     </div>
@@ -44,7 +44,7 @@ export default function Footer({
                             {quickLinks.map((link) => (
                                 <li key={link.label}>
                                     <a
-                                        className="text-gray-600 dark:text-slate-400 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-colors text-sm font-medium"
+                                        className="text-gray-700 dark:text-slate-300 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-colors text-sm font-medium"
                                         href={link.href}
                                     >
                                         {link.label}
@@ -63,7 +63,7 @@ export default function Footer({
                             {socialLinks.map((social) => (
                                 <li key={social.platform}>
                                     <a
-                                        className="text-gray-600 dark:text-slate-400 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-colors text-sm flex items-center gap-2 font-medium"
+                                        className="text-gray-700 dark:text-slate-300 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-colors text-sm flex items-center gap-2 font-medium"
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -78,7 +78,7 @@ export default function Footer({
 
                 {/* Copyright */}
                 <div className="pt-6 border-t border-gray-200 dark:border-white/10 text-center">
-                    <p className="text-gray-500 dark:text-slate-500 text-xs">
+                    <p className="text-gray-600 dark:text-slate-400 text-xs">
                         © {new Date().getFullYear()} {brandName}. All rights reserved.
                     </p>
                 </div>

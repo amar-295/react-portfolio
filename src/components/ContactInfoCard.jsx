@@ -50,7 +50,7 @@ export default function ContactInfoCard({
                     {label}
                 </p>
                 <ContentWrapper {...contentProps}>{content}</ContentWrapper>
-                {subtitle && <p className="text-xs text-gray-600 dark:text-slate-500 mt-1">{subtitle}</p>}
+                {subtitle && <p className="text-xs text-gray-700 dark:text-slate-400 mt-1">{subtitle}</p>}
             </div>
         </div>
     );

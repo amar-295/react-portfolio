@@ -21,7 +21,7 @@ export default function Contact() {
                     <div className="lg:col-span-5 flex flex-col space-y-8">
                         {/* Badge */}
                         <div>
-                            <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-gray-100 dark:bg-blue-500/10 text-gray-600 dark:text-blue-400 border border-gray-200 dark:border-blue-500/20 tracking-widest uppercase">
+                            <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-gray-100 dark:bg-blue-500/10 text-gray-700 dark:text-blue-300 border border-gray-200 dark:border-blue-500/20 tracking-widest uppercase">
                                 Contact
                             </span>
                         </div>

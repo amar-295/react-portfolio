@@ -55,7 +55,7 @@ export default function About() {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Education</h4>
+                    <h3 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Education</h3>
                     <p className="text-base text-light-text-secondary dark:text-gray-300">
                       BCA | DAV Centenary College
                     </p>
@@ -72,7 +72,7 @@ export default function About() {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Experience</h4>
+                    <h3 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Experience</h3>
                     <p className="text-base text-light-text-secondary dark:text-gray-300">
                       Project-Based Learning (Self-Driven Projects)
                     </p>
@@ -89,7 +89,7 @@ export default function About() {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Location</h4>
+                    <h3 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Location</h3>
                     <p className="text-base text-light-text-secondary dark:text-gray-300">India (Remote Friendly)</p>
                   </div>
                 </div>
@@ -104,7 +104,7 @@ export default function About() {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Specialization</h4>
+                    <h3 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Specialization</h3>
                     <p className="text-base text-light-text-secondary dark:text-gray-300">Frontend Web Development</p>
                   </div>
                 </div>
