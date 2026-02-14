@@ -27,7 +27,7 @@ export default function Button({
 }) {
     /* ---- variant class maps ---- */
     const base =
-        "group font-bold rounded-xl text-base transition-colors transition-transform duration-300 inline-flex items-center justify-center gap-2.5 active:scale-95";
+        "group font-bold rounded-xl text-base transition-opacity transition-transform duration-300 inline-flex items-center justify-center gap-2.5 active:scale-95 hover:opacity-90";
 
     const variants = {
         primary:

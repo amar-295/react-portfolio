@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import compression from 'vite-plugin-compression'
-import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
+
 import webfontDl from 'vite-plugin-webfont-dl'
 
 // https://vite.dev/config/
@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    cssInjectedByJsPlugin(),
+
     webfontDl([
       'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Outfit:wght@600;700;800&family=Fira+Code:wght@400;600&display=swap'
     ]),

@@ -1,4 +1,5 @@
-import CodeWindow from "../components/CodeWindow";
+import { lazy, Suspense } from "react";
+const CodeWindow = lazy(() => import("../components/CodeWindow"));
 import Button from "../components/Button";
 
 export default function Hero() {
@@ -88,7 +89,9 @@ export default function Hero() {
 
         <div className="md:col-span-5 relative flex justify-center items-center order-2 md:order-2 mt-8 md:mt-0 min-h-[300px] aspect-[4/3] md:aspect-auto">
           <div className="absolute w-48 md:w-64 h-48 md:h-64 bg-accent-dark/5 dark:bg-accent-teal/10 rounded-full blur-[80px] -z-10"></div>
-          <CodeWindow />
+          <Suspense fallback={<div className="w-full h-full bg-gray-900/10 dark:bg-white/5 rounded-xl animate-pulse"></div>}>
+            <CodeWindow />
+          </Suspense>
         </div>
       </div>
 

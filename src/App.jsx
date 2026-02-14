@@ -1,11 +1,14 @@
+import { lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./pages/Hero";
 import About from "./pages/About";
-import Projects from "./pages/Projects";
-import Skills from "./pages/Skills";
-import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
 import { footerData } from "./data/contact";
+
+// Lazy load non-critical sections
+const Projects = lazy(() => import("./pages/Projects"));
+const Skills = lazy(() => import("./pages/Skills"));
+const Contact = lazy(() => import("./pages/Contact"));
 
 function App() {
   return (
@@ -14,9 +17,11 @@ function App() {
       <main>
         <Hero />
         <About />
-        <Projects />
-        <Skills />
-        <Contact />
+        <Suspense fallback={<div className="h-40" />}>
+          <Projects />
+          <Skills />
+          <Contact />
+        </Suspense>
       </main>
       <Footer {...footerData} />
     </>

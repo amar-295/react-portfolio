@@ -54,7 +54,7 @@ export default function Navbar() {
 
             const mainElement = document.querySelector("main");
             if (mainElement) {
-                mutationObserver.observe(mainElement, { childList: true, subtree: true });
+                mutationObserver.observe(mainElement, { childList: true, subtree: false });
             }
         };
 
@@ -85,9 +85,9 @@ export default function Navbar() {
 
     const getLinkClass = (id) => {
         const isActive = activeSection === id;
-        return `relative text-sm font-semibold transition-colors duration-300 group ${isActive
+        return `relative text-sm font-semibold transition-opacity duration-300 group ${isActive
             ? "text-accent-dark dark:text-blue-400"
-            : "text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400"
+            : "text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 hover:opacity-80"
             }`;
     };
 
@@ -129,7 +129,7 @@ export default function Navbar() {
                     <button
                         aria-label="Toggle Theme"
                         onClick={toggleTheme}
-                        className="text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 transition-colors flex items-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5"
+                        className="text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity flex items-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 hover:opacity-80"
                     >
                         {isDarkMode ? (
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -145,7 +145,7 @@ export default function Navbar() {
                     </button>
 
                     <a
-                        className="inline-flex items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-accent-dark dark:bg-blue-600 rounded-lg hover:bg-black dark:hover:bg-blue-700 transition-colors duration-300 shadow-sm"
+                        className="inline-flex items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-accent-dark dark:bg-blue-600 rounded-lg hover:bg-black dark:hover:bg-blue-700 transition-opacity transition-transform duration-300 shadow-sm hover:opacity-90 active:scale-95"
                         href="/resume.pdf"
                         download="Amarnath_Resume.pdf"
                         target="_blank"
@@ -159,7 +159,7 @@ export default function Navbar() {
                 <div className="md:hidden flex items-center gap-6">
                     <button
                         onClick={toggleTheme}
-                        className="text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 transition-colors p-2"
+                        className="text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity p-2 hover:opacity-80"
                         aria-label="Toggle Theme"
                     >
                         {isDarkMode ? (
@@ -220,7 +220,7 @@ export default function Navbar() {
                                                 setIsMenuOpen(false);
                                             }}
                                             className={`
-                                                block w-full py-3 px-6 rounded-xl text-center text-lg font-medium transition-colors duration-300
+                                                block w-full py-3 px-6 rounded-xl text-center text-lg font-medium transition-opacity duration-300 hover:opacity-80
                                                 ${isActive
                                                     ? "bg-accent-light/50 dark:bg-blue-500/10 text-accent-dark dark:text-blue-400 font-bold"
                                                     : "text-light-text-secondary dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-white/5"
@@ -256,7 +256,7 @@ export default function Navbar() {
                                                 href={link.href}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-gray-500 dark:text-slate-400 hover:text-accent-dark dark:hover:text-blue-400 transition-colors transform hover:scale-110"
+                                                className="text-gray-500 dark:text-slate-400 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity transform hover:scale-110 hover:opacity-80"
                                             >
                                                 <link.icon className="text-2xl" />
                                             </a>

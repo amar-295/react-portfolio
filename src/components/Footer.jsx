@@ -44,7 +44,7 @@ export default function Footer({
                             {quickLinks.map((link) => (
                                 <li key={link.label}>
                                     <a
-                                        className="text-gray-700 dark:text-slate-300 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-colors text-sm font-medium"
+                                        className="text-gray-700 dark:text-slate-300 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-opacity text-sm font-medium hover:opacity-80"
                                         href={link.href}
                                     >
                                         {link.label}
@@ -63,7 +63,7 @@ export default function Footer({
                             {socialLinks.map((social) => (
                                 <li key={social.platform}>
                                     <a
-                                        className="text-gray-700 dark:text-slate-300 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-colors text-sm flex items-center gap-2 font-medium"
+                                        className="text-gray-700 dark:text-slate-300 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-opacity text-sm flex items-center gap-2 font-medium hover:opacity-80"
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
