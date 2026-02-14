@@ -18,28 +18,32 @@ export default function ContactForm({ onSubmit }) {
         const newErrors = {};
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!formData.get("name").trim()) {
+        const name = formData.get("name")?.toString().trim();
+        if (!name) {
             newErrors.name = "Name is required";
         }
 
-        const email = formData.get("email");
+        const email = formData.get("email")?.toString().trim();
         if (!email) {
             newErrors.email = "Email is required";
         } else if (!emailRegex.test(email)) {
             newErrors.email = "Please enter a valid email address";
         }
 
-        if (!formData.get("_subject").trim()) {
+        const subject = formData.get("_subject")?.toString().trim();
+        if (!subject) {
             newErrors._subject = "Subject is required";
         }
 
-        if (!formData.get("message").trim()) {
+        const message = formData.get("message")?.toString().trim();
+        if (!message) {
             newErrors.message = "Message is required";
         }
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
+    /* ... inside render ... */
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -141,13 +145,15 @@ export default function ContactForm({ onSubmit }) {
                                 name="name"
                                 placeholder="Full Name"
                                 type="text"
+                                aria-invalid={!!errors.name}
+                                aria-describedby={errors.name ? "name-error" : undefined}
                                 onChange={() => {
                                     if (errors.name) setErrors({ ...errors, name: null });
                                 }}
                             />
                         </div>
                         {errors.name && (
-                            <p className="text-xs text-rose-500 mt-1 ml-1">{errors.name}</p>
+                            <p id="name-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.name}</p>
                         )}
                     </div>
 
@@ -169,13 +175,15 @@ export default function ContactForm({ onSubmit }) {
                                 name="email"
                                 placeholder="hello@yourcompany.com"
                                 type="email"
+                                aria-invalid={!!errors.email}
+                                aria-describedby={errors.email ? "email-error" : undefined}
                                 onChange={() => {
                                     if (errors.email) setErrors({ ...errors, email: null });
                                 }}
                             />
                         </div>
                         {errors.email && (
-                            <p className="text-xs text-rose-500 mt-1 ml-1">{errors.email}</p>
+                            <p id="email-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.email}</p>
                         )}
                     </div>
                 </div>
@@ -199,13 +207,15 @@ export default function ContactForm({ onSubmit }) {
                             name="_subject"
                             placeholder="How can I help you today?"
                             type="text"
+                            aria-invalid={!!errors._subject}
+                            aria-describedby={errors._subject ? "subject-error" : undefined}
                             onChange={() => {
                                 if (errors._subject) setErrors({ ...errors, _subject: null });
                             }}
                         />
                     </div>
                     {errors._subject && (
-                        <p className="text-xs text-rose-500 mt-1 ml-1">{errors._subject}</p>
+                        <p id="subject-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors._subject}</p>
                     )}
                 </div>
 
@@ -223,12 +233,14 @@ export default function ContactForm({ onSubmit }) {
                         name="message"
                         placeholder="Share some details about your vision, goals, or just say hello..."
                         rows="4"
+                        aria-invalid={!!errors.message}
+                        aria-describedby={errors.message ? "message-error" : undefined}
                         onChange={() => {
                             if (errors.message) setErrors({ ...errors, message: null });
                         }}
                     ></textarea>
                     {errors.message && (
-                        <p className="text-xs text-rose-500 mt-1 ml-1">{errors.message}</p>
+                        <p id="message-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.message}</p>
                     )}
                 </div>
 
