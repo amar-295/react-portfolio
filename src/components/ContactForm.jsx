@@ -43,7 +43,6 @@ export default function ContactForm({ onSubmit }) {
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
-    /* ... inside render ... */
 
     const handleSubmit = async (e) => {
         e.preventDefault();
