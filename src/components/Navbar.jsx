@@ -2,6 +2,7 @@ import { useTheme } from "../context/ThemeContext";
 import { useState, useEffect } from "react";
 import { Logo } from "./index";
 import { socialLinks } from "../data/contact";
+import { HiDownload } from "react-icons/hi";
 
 export default function Navbar() {
     const { theme, toggleTheme } = useTheme();
@@ -110,7 +111,7 @@ export default function Navbar() {
                         rel="noopener noreferrer"
                     >
                         <span>Download Resume</span>
-                        <span className="material-symbols-outlined text-sm">download</span>
+                        <HiDownload className="text-sm" />
                     </a>
                 </div>
 
@@ -202,7 +203,7 @@ export default function Navbar() {
                                         className="w-max mx-auto px-8 py-3 rounded-full flex items-center justify-center gap-2 bg-accent-dark dark:bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/20 active:scale-95 transition-all duration-300 text-sm"
                                     >
                                         <span>Download Resume</span>
-                                        <span className="material-symbols-outlined text-sm">download</span>
+                                        <HiDownload className="text-sm" />
                                     </a>
 
                                     {/* Footer Actions: Socials */}

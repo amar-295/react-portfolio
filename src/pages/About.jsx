@@ -1,4 +1,5 @@
 import aboutMeImage from '../assets/About.svg'
+import { FaGraduationCap, FaBriefcase, FaMapMarkerAlt, FaCode } from 'react-icons/fa';
 
 export default function About() {
   return (
@@ -11,7 +12,7 @@ export default function About() {
         <div className="grid md:grid-cols-12 gap-12 md:gap-20 items-center">
           {/* Photo Column - Right side on desktop */}
           <div className="md:col-span-5 flex justify-center md:justify-start relative order-2 md:order-2">
-            <div className="relative group max-w-70 md:max-w-sm mx-auto md:mx-0">
+            <div className="relative group max-w-70 md:max-w-sm mx-auto md:mx-0 aspect-square w-full">
               <div className="absolute top-6 left-6 w-full h-full border-2 border-accent-dark/30 dark:border-accent-teal/20 rounded-xl transition-transform duration-500 group-hover:translate-x-[-4px] group-hover:translate-y-[-4px]"></div>
               <div className="relative z-10 rounded-xl overflow-hidden shadow-md dark:shadow-2xl border-2 border-light-border dark:border-slate-700 bg-white">
 
@@ -50,7 +51,7 @@ export default function About() {
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
                     <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center">
-                      <i className="material-symbols-outlined text-white text-2xl">school</i>
+                      <FaGraduationCap className="text-white text-2xl" />
                     </div>
                   </div>
                   <div className="flex-1">
@@ -67,7 +68,7 @@ export default function About() {
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
                     <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center">
-                      <i className="material-symbols-outlined text-white text-2xl">work</i>
+                      <FaBriefcase className="text-white text-2xl" />
                     </div>
                   </div>
                   <div className="flex-1">
@@ -84,7 +85,7 @@ export default function About() {
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
                     <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center">
-                      <i className="material-symbols-outlined text-white text-2xl">location_on</i>
+                      <FaMapMarkerAlt className="text-white text-2xl" />
                     </div>
                   </div>
                   <div className="flex-1">
@@ -99,7 +100,7 @@ export default function About() {
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
                     <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center">
-                      <i className="material-symbols-outlined text-white text-2xl">code</i>
+                      <FaCode className="text-white text-2xl" />
                     </div>
                   </div>
                   <div className="flex-1">

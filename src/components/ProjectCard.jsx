@@ -2,6 +2,7 @@ import { useTheme } from "../context/ThemeContext";
 import PropTypes from "prop-types";
 import Button from "./Button";
 import TechTag from "./TechTag";
+import { HiArrowUpRight, HiCode } from "react-icons/hi";
 
 /**
  * Large featured project card — image + details side-by-side on desktop,
@@ -54,7 +55,7 @@ export default function ProjectCard({
     >
       {/* ---- Image Column ---- */}
       <div className="w-full lg:w-5/12">
-        <div className="relative group bg-light-surface dark:bg-card-bg rounded-xl overflow-hidden border-2 border-light-border dark:border-slate-800/50 shadow-sm">
+        <div className="relative group bg-light-surface dark:bg-card-bg rounded-xl overflow-hidden border-2 border-light-border dark:border-slate-800/50 shadow-sm aspect-video">
           <img
             alt={imageAlt || title}
             className="w-full h-64 lg:h-80 object-contain bg-gray-50 dark:bg-slate-900/50 transform group-hover:scale-105 transition-transform duration-500"
@@ -68,12 +69,12 @@ export default function ProjectCard({
         {/* Mobile-only buttons */}
         <div className="flex flex-col sm:flex-row gap-4 pt-6 lg:hidden">
           {liveDemoLink && (
-            <Button href={liveDemoLink} icon="arrow_outward" fullWidth target="_blank" rel="noopener noreferrer">
+            <Button href={liveDemoLink} icon={HiArrowUpRight} fullWidth target="_blank" rel="noopener noreferrer">
               Live Demo
             </Button>
           )}
           {repoLink && (
-            <Button variant="outline" href={repoLink} icon="code" fullWidth target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" href={repoLink} icon={HiCode} fullWidth target="_blank" rel="noopener noreferrer">
               GitHub Repository
             </Button>
           )}
@@ -118,12 +119,12 @@ export default function ProjectCard({
         {/* Desktop-only buttons */}
         <div className="hidden lg:flex gap-4 pt-4">
           {liveDemoLink && (
-            <Button href={liveDemoLink} icon="arrow_outward" target="_blank" rel="noopener noreferrer">
+            <Button href={liveDemoLink} icon={HiArrowUpRight} target="_blank" rel="noopener noreferrer">
               Live Demo
             </Button>
           )}
           {repoLink && (
-            <Button variant="outline" href={repoLink} icon="code" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" href={repoLink} icon={HiCode} target="_blank" rel="noopener noreferrer">
               GitHub Repository
             </Button>
           )}

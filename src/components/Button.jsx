@@ -41,7 +41,10 @@ export default function Button({
     const classes = `${base} ${variants[variant] || variants.primary} ${widthClass} ${className}`.trim();
 
     /* ---- icon element ---- */
-    const iconEl = icon ? (
+    const Icon = icon;
+    const iconEl = Icon && typeof Icon !== "string" ? (
+        <Icon className="text-[1.25em] leading-none text-current transition-colors duration-300" />
+    ) : icon ? (
         <span className="material-symbols-outlined text-[1.25em] leading-none text-current transition-colors duration-300">
             {icon}
         </span>
@@ -68,7 +71,7 @@ export default function Button({
 Button.propTypes = {
     variant: PropTypes.oneOf(["primary", "outline"]),
     href: PropTypes.string,
-    icon: PropTypes.string,
+    icon: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
     fullWidth: PropTypes.bool,
     className: PropTypes.string,
     children: PropTypes.node.isRequired,

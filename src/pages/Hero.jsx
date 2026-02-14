@@ -86,7 +86,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="md:col-span-5 relative flex justify-center items-center order-2 md:order-2 mt-8 md:mt-0">
+        <div className="md:col-span-5 relative flex justify-center items-center order-2 md:order-2 mt-8 md:mt-0 min-h-[300px] aspect-[4/3] md:aspect-auto">
           <div className="absolute w-48 md:w-64 h-48 md:h-64 bg-accent-dark/5 dark:bg-accent-teal/10 rounded-full blur-[80px] -z-10"></div>
           <CodeWindow />
         </div>
