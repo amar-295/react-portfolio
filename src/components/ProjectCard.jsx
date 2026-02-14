@@ -1,3 +1,4 @@
+import { useTheme } from "../context/ThemeContext";
 import PropTypes from "prop-types";
 import Button from "./Button";
 import TechTag from "./TechTag";
@@ -35,7 +36,16 @@ export default function ProjectCard({
   repoLink,
   showBorder = true,
   featured = false, // New prop for featured projects
+  imageDark, // New prop for dark mode screenshot (to be shown in light mode)
 }) {
+  const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
+
+  // Logic: In Light Mode, show Dark Screenshot (imageDark) for contrast.
+  // In Dark Mode, show Light Screenshot (image).
+  // If imageDark is not provided, fall back to image.
+  const displayImage = (imageDark && !isDarkMode) ? imageDark : image;
+
   return (
     <article
       className={`flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12 ${showBorder ? "border-b-2 border-light-border dark:border-slate-800/40 pb-16 lg:pb-24" : "pb-16 lg:pb-0"
@@ -47,8 +57,8 @@ export default function ProjectCard({
         <div className="relative group bg-light-surface dark:bg-card-bg rounded-xl overflow-hidden border-2 border-light-border dark:border-slate-800/50 shadow-sm">
           <img
             alt={imageAlt || title}
-            className="w-full h-64 lg:h-80 object-cover transform group-hover:scale-105 transition-transform duration-500"
-            src={image}
+            className="w-full h-64 lg:h-80 object-contain bg-gray-50 dark:bg-slate-900/50 transform group-hover:scale-105 transition-transform duration-500"
+            src={displayImage}
             onError={(e) => {
               e.target.src = "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop";
             }}
@@ -136,5 +146,6 @@ ProjectCard.propTypes = {
   liveDemoLink: PropTypes.string,
   repoLink: PropTypes.string,
   showBorder: PropTypes.bool,
-  featured: PropTypes.bool, // New prop
+  featured: PropTypes.bool,
+  imageDark: PropTypes.string,
 };

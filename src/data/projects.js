@@ -1,3 +1,8 @@
+import portfolioLight from "../assets/projects/portfolio-1.webp";
+import portfolioDark from "../assets/projects/portfolio-2.webp";
+// import backendSnippet from "../assets/projects/backend-snippet.webp"; // Reverted as per user request
+import passwordGenerator from "../assets/projects/password-generator.webp";
+
 export const featuredProjects = [
     {
         image:
@@ -16,8 +21,8 @@ export const featuredProjects = [
         featured: false,
     },
     {
-        image:
-            "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop",
+        image: portfolioLight,
+        imageDark: portfolioDark,
         imageAlt: "Personal Portfolio Website",
         title: "Personal Portfolio Website",
         type: "Frontend Application",
@@ -33,8 +38,7 @@ export const featuredProjects = [
         featured: false,
     },
     {
-        image:
-            "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop&cb=1",
+        image: passwordGenerator,
         imageAlt: "React Password & Security Tool",
         title: "React Password Generator",
         type: "Frontend Utility",
@@ -46,7 +50,7 @@ export const featuredProjects = [
             "Implemented advanced React patterns including useRef for DOM manipulation and optimized side effects with useEffect for a responsive user experience.",
         techStack: ["React", "Tailwind CSS", "Vite"],
         repoLink: "https://github.com/amar-295/react-password-generator",
-        liveDemoLink: "https://password-gen-live.netlify.app/",
+        liveDemoLink: "https://byteshield.netlify.app/",
         featured: false,
     },
 ];

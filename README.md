@@ -3,9 +3,9 @@
 > A modern, accessible portfolio showcasing my frontend development skills and projects
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![React](https://img.shields.io/badge/React-18.x-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/React-19.x-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-7.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 
 ![Portfolio Preview](./docs/images/portfolio-preview.png)
 <!-- TODO: Add portfolio-preview.png to /docs/images/ -->
@@ -48,6 +48,8 @@ I built this portfolio to provide recruiters and hiring managers with a central 
 - 🚀 **Performance Optimized**: Leverages Vite's fast build cycles, lazy-loading, and efficient asset management for lightning-fast load times.
 - 📧 **Contact Integration**: Functional contact form with real-time validation and professional feedback loops.
 - 📁 **Project Case Studies**: Detailed project cards highlighting technical focus, status, and key learning outcomes.
+- 📜 **Resume Download**: Direct access to professional resume via the navigation bar.
+- 🎨 **Custom Scrollbar**: A sleek, theme-aware scrollbar implementation for a polished look.
 
 ---
 
@@ -55,9 +57,9 @@ I built this portfolio to provide recruiters and hiring managers with a central 
 
 | Category | Technology | Rationale |
 | :--- | :--- | :--- |
-| **Frontend** | React 18 | Component-based architecture for high reusability and state management. |
-| **Styling** | Tailwind CSS | Utility-first approach for rapid, consistent styling and design token management. |
-| **Build Tool** | Vite | Provides an extremely fast development environment and optimized production bundles. |
+| **Frontend** | React 19 | Component-based architecture for high reusability and state management. |
+| **Styling** | Tailwind CSS v4 | Utility-first approach for rapid, consistent styling and design token management. |
+| **Build Tool** | Vite 7 | Provides an extremely fast development environment and optimized production bundles. |
 | **Icons** | Material Symbols | Clean, recognizable iconography that scales perfectly across themes. |
 | **Deploy** | Netlify / Vercel | Automatic CI/CD pipelines for fast and reliable deployments. |
 
@@ -125,7 +127,7 @@ VITE_CONTACT_SERVICE_ID=your_id_here
 
 ```text
 src/
-├── assets/             # Images, SVGs, and static assets
+├── assets/             # Images (projects/, icons/), SVGs, and static assets
 ├── components/         # Reusable UI components (Button, Card, Logo, etc.)
 ├── data/               # Centralized data files (projects, skills, contact)
 ├── pages/              # Main section components (Hero, About, Projects)
@@ -139,7 +141,7 @@ src/
 ## 🧩 Key Components
 
 - **`Button.jsx`**: A versatile, multi-variant button component supporting `primary` and `outline` styles with theme-aware transitions.
-- **`ProjectCard.jsx`**: A sophisticated card component for showcasing projects, including technical focus, status tags, and learning outcomes.
+- **`ProjectCard.jsx`**: A sophisticated card component for showcasing projects, supporting **theme-aware screenshots** (Light/Dark variants), status tags, and learning outcomes.
 - **`Logo.jsx`**: A hand-drawn, high-detail SVG brand identity optimized for both light and dark mode visibility.
 - **`Hero.jsx`**: Features a premium `CodeWindow` visual and high-impact typography to establish brand identity immediately.
 
