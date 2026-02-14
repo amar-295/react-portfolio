@@ -13,7 +13,7 @@ import {
 
 // Social Media URLs
 export const SOCIAL_URLS = {
-    linkedin: "https://www.linkedin.com/in/arnamath-webdev/",
+    linkedin: "https://www.linkedin.com/in/amarnath-webdev",
     github: "https://github.com/amar-295",
 };
 
