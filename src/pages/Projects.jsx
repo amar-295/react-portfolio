@@ -37,7 +37,7 @@ export default function Projects() {
                 heading="Building something technical? Let's connect and discuss the details."
                 buttonText="Connect with me"
                 buttonIcon="mail"
-                buttonHref="#"
+                buttonHref="#contact"
             />
 
             {/* ---- Code Experiments Grid ---- */}

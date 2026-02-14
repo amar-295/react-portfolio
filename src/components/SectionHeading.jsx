@@ -13,16 +13,22 @@ export default function SectionHeading({
     badge,
     borderColor = "border-gray-900 dark:border-primary-blue",
 }) {
+    // Map border color to background color for the new bar style
+    const barColor = borderColor.replace("border-", "bg-");
+
     return (
-        <div className={`flex justify-between items-center mb-12 border-l-4 ${borderColor} pl-4`}>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-light-text-primary dark:text-white font-display tracking-tight">
-                {title}
-            </h2>
-            {badge && (
-                <span className="bg-light-surface dark:bg-gray-800 text-light-text-secondary dark:text-gray-400 text-xs px-3 py-1 rounded border border-light-border dark:border-gray-700 ml-auto font-medium">
-                    {badge}
-                </span>
-            )}
+        <div className="flex items-center mb-12">
+            <div className={`w-1.5 h-8 md:h-10 rounded-full ${barColor} mr-4 md:mr-6 shrink-0`}></div>
+            <div className="grow flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-light-text-primary dark:text-white font-display tracking-tight leading-none">
+                    {title}
+                </h2>
+                {badge && (
+                    <span className="self-start sm:self-center bg-light-surface dark:bg-gray-800/50 text-light-text-secondary dark:text-gray-400 text-xs px-3 py-1 rounded-full border border-light-border dark:border-gray-700/50 font-medium whitespace-nowrap">
+                        {badge}
+                    </span>
+                )}
+            </div>
         </div>
     );
 }

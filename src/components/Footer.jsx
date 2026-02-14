@@ -39,7 +39,7 @@ export default function Footer({
                     {/* Quick Links */}
                     <div>
                         <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
-                            Details
+                            Quick Links
                         </h3>
                         <ul className="space-y-2">
                             {quickLinks.map((link) => (

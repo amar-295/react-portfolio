@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "./Button";
 
 /**
- * Contact form component.
+ * Contact form component with custom validation.
  *
  * Props:
  *   onSubmit – form submit handler (optional)
@@ -11,15 +11,59 @@ import Button from "./Button";
 
 export default function ContactForm({ onSubmit }) {
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const validateForm = (formData) => {
+        const newErrors = {};
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!formData.get("name").trim()) {
+            newErrors.name = "Name is required";
+        }
+
+        const email = formData.get("email");
+        if (!email) {
+            newErrors.email = "Email is required";
+        } else if (!emailRegex.test(email)) {
+            newErrors.email = "Please enter a valid email address";
+        }
+
+        if (!formData.get("_subject").trim()) {
+            newErrors._subject = "Subject is required";
+        }
+
+        if (!formData.get("message").trim()) {
+            newErrors.message = "Message is required";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
 
+        if (!validateForm(formData)) {
+            return;
+        }
+
+        setIsSubmitting(true);
+
         try {
-            // Simplified Formspree integration
-            const response = await fetch("https://formspree.io/f/612amar@gmail.com", {
+            // Formspree integration via environment variable
+            const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID;
+
+            if (!contactServiceId) {
+                console.warn("Contact form submission failed: VITE_CONTACT_SERVICE_ID is not defined.");
+                alert("The contact form is currently not configured. Please use a different method to contact me.");
+                setIsSubmitting(false);
+                return;
+            }
+
+            const response = await fetch(`https://formspree.io/f/${contactServiceId}`, {
                 method: "POST",
                 body: formData,
                 headers: {
@@ -35,11 +79,23 @@ export default function ContactForm({ onSubmit }) {
             }
         } catch (error) {
             alert("Oops! There was a connection error. Please try again later.");
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
     const handleSendAnother = () => {
         setIsSubmitted(false);
+        setErrors({});
+    };
+
+    // Helper to get input classes based on error state
+    const getInputClass = (fieldName) => {
+        const baseClass = "block w-full rounded-lg bg-white dark:bg-[#1e293b]/50 py-3 pl-10 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 sm:text-sm transition-all duration-300 focus:ring-4";
+        const validClass = "border-gray-300 dark:border-slate-700 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500/10 dark:focus:ring-blue-400/10";
+        const errorClass = "border-rose-500 dark:border-rose-500 focus:border-rose-500 focus:ring-rose-500/10";
+
+        return `${baseClass} ${errors[fieldName] ? errorClass : validClass}`;
     };
 
     // Success UI
@@ -65,7 +121,7 @@ export default function ContactForm({ onSubmit }) {
 
     return (
         <div className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-lg shadow-gray-100/50 dark:shadow-none backdrop-blur-sm">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {/* Full Name */}
                     <div className="space-y-2">
@@ -77,17 +133,22 @@ export default function ContactForm({ onSubmit }) {
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i className="fa-regular fa-user text-gray-400 dark:text-slate-500"></i>
+                                <i className={`fa-regular fa-user ${errors.name ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`}></i>
                             </div>
                             <input
-                                className="block w-full rounded-lg border-gray-200 dark:border-slate-700/50 bg-white dark:bg-[#1e293b]/50 py-3 pl-10 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:border-gray-900 dark:focus:border-blue-500 focus:ring-gray-900 dark:focus:ring-blue-500 sm:text-sm transition-colors"
+                                className={getInputClass("name")}
                                 id="name"
                                 name="name"
                                 placeholder="Full Name"
                                 type="text"
-                                required
+                                onChange={() => {
+                                    if (errors.name) setErrors({ ...errors, name: null });
+                                }}
                             />
                         </div>
+                        {errors.name && (
+                            <p className="text-xs text-rose-500 mt-1 ml-1">{errors.name}</p>
+                        )}
                     </div>
 
                     {/* Email */}
@@ -100,17 +161,22 @@ export default function ContactForm({ onSubmit }) {
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i className="fa-solid fa-at text-gray-400 dark:text-slate-500"></i>
+                                <i className={`fa-solid fa-at ${errors.email ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`}></i>
                             </div>
                             <input
-                                className="block w-full rounded-lg border-gray-200 dark:border-slate-700/50 bg-white dark:bg-[#1e293b]/50 py-3 pl-10 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:border-gray-900 dark:focus:border-blue-500 focus:ring-gray-900 dark:focus:ring-blue-500 sm:text-sm transition-colors"
+                                className={getInputClass("email")}
                                 id="email"
                                 name="email"
                                 placeholder="hello@yourcompany.com"
                                 type="email"
-                                required
+                                onChange={() => {
+                                    if (errors.email) setErrors({ ...errors, email: null });
+                                }}
                             />
                         </div>
+                        {errors.email && (
+                            <p className="text-xs text-rose-500 mt-1 ml-1">{errors.email}</p>
+                        )}
                     </div>
                 </div>
 
@@ -125,17 +191,22 @@ export default function ContactForm({ onSubmit }) {
 
                     <div className="relative rounded-md shadow-sm">
                         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <i className="fa-regular fa-folder text-gray-400 dark:text-slate-500"></i>
+                            <i className={`fa-regular fa-folder ${errors._subject ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`}></i>
                         </div>
                         <input
-                            className="block w-full rounded-lg border-gray-200 dark:border-slate-700/50 bg-white dark:bg-[#1e293b]/50 py-3 pl-10 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:border-gray-900 dark:focus:border-blue-500 focus:ring-gray-900 dark:focus:ring-blue-500 sm:text-sm transition-colors"
+                            className={getInputClass("_subject")}
                             id="subject"
-                            name="subject"
+                            name="_subject"
                             placeholder="How can I help you today?"
                             type="text"
-                            required
+                            onChange={() => {
+                                if (errors._subject) setErrors({ ...errors, _subject: null });
+                            }}
                         />
                     </div>
+                    {errors._subject && (
+                        <p className="text-xs text-rose-500 mt-1 ml-1">{errors._subject}</p>
+                    )}
                 </div>
 
                 {/* Message */}
@@ -147,13 +218,18 @@ export default function ContactForm({ onSubmit }) {
                         Your Message
                     </label>
                     <textarea
-                        className="block w-full rounded-lg border-gray-200 dark:border-slate-700/50 bg-white dark:bg-[#1e293b]/50 py-3 px-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:border-gray-900 dark:focus:border-blue-500 focus:ring-gray-900 dark:focus:ring-blue-500 sm:text-sm transition-colors"
+                        className={`${getInputClass("message").replace("pl-10", "px-4")}`}
                         id="message"
                         name="message"
                         placeholder="Share some details about your vision, goals, or just say hello..."
                         rows="4"
-                        required
+                        onChange={() => {
+                            if (errors.message) setErrors({ ...errors, message: null });
+                        }}
                     ></textarea>
+                    {errors.message && (
+                        <p className="text-xs text-rose-500 mt-1 ml-1">{errors.message}</p>
+                    )}
                 </div>
 
                 {/* Submit Button */}
@@ -162,9 +238,11 @@ export default function ContactForm({ onSubmit }) {
                         variant="primary"
                         fullWidth
                         type="submit"
+                        disabled={isSubmitting}
+                        className={isSubmitting ? "opacity-75 cursor-not-allowed" : ""}
                     >
-                        Send Message
-                        <i className="fa-solid fa-arrow-right"></i>
+                        {isSubmitting ? "Sending..." : "Send Message"}
+                        {!isSubmitting && <i className="fa-solid fa-arrow-right"></i>}
                     </Button>
                 </div>
             </form>

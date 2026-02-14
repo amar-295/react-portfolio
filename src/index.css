@@ -19,7 +19,7 @@ html {
 
 /* Text gradient - theme aware */
 .text-gradient {
-    background: linear-gradient(90deg, #4338ca 0%, #0d9488 100%);
+    background: linear-gradient(90deg, #4338ca 0%, #3b82f6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -79,4 +79,29 @@ html {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(30, 41, 59, 0.5);
+}
+
+/* Custom Autofill Styles - Refined Approach */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: inherit !important;
+    transition: background-color 99999s ease-in-out 0s;
+    background-color: transparent !important;
+    caret-color: currentColor;
+}
+
+/* Light mode autofill background */
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+/* Dark mode autofill background - matching bg-[#1e293b] */
+.dark input:-webkit-autofill,
+.dark textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #1e293b inset !important;
 }
