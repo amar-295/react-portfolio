@@ -26,6 +26,10 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-css-injected-by-js": "^3.5.2",
+    "vite-plugin-html-inline-sources": "^0.0.4",
+    "vite-plugin-webfont-dl": "^3.12.0"
   }
 }

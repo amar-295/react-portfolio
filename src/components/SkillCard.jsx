@@ -12,7 +12,7 @@ export default function SkillCard({ icon, name, color = "", className = "" }) {
     const Icon = icon;
     return (
         <div
-            className={`bg-light-surface dark:bg-transparent border border-light-border dark:border-white/10 p-6 rounded-xl flex items-center gap-6 hover:border-accent-dark dark:hover:border-primary-blue/50 transition-all shadow-sm hover:shadow-md dark:shadow-none group cursor-default ${className}`}
+            className={`bg-light-surface dark:bg-transparent border border-light-border dark:border-white/10 p-6 rounded-xl flex items-center gap-6 hover:border-accent-dark dark:hover:border-primary-blue/50 transition-transform hover:-translate-y-1 duration-300 shadow-sm hover:shadow-md dark:shadow-none group cursor-default ${className}`}
         >
             <Icon className={`text-4xl transition-transform duration-300 group-hover:scale-110 ${color}`} />
             <span className="font-semibold text-gray-900 dark:text-gray-200">{name}</span>

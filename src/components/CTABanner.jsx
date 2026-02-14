@@ -13,7 +13,7 @@ import Button from "./Button";
 export default function CTABanner({
     heading,
     buttonText = "Contact Me",
-    buttonIcon = "mail",
+    buttonIcon,
     buttonHref = "#",
 }) {
     return (
@@ -33,6 +33,6 @@ export default function CTABanner({
 CTABanner.propTypes = {
     heading: PropTypes.string.isRequired,
     buttonText: PropTypes.string,
-    buttonIcon: PropTypes.string,
+    buttonIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
     buttonHref: PropTypes.string,
 };

@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import TechTag from "./TechTag";
+import { HiCode, HiExternalLink } from "react-icons/hi";
 
 /**
  * Small "Code Experiment" card for the bottom grid section.
@@ -46,17 +47,18 @@ export default function ExperimentCard({
     demoLink,
 }) {
     const colors = colorMap[iconColor] || colorMap.indigo;
+    const Icon = icon;
 
     return (
-        <article className="bg-white dark:bg-card-bg rounded-xl border border-light-border dark:border-slate-800/50 p-6 flex flex-col h-full hover:border-accent-dark dark:hover:border-slate-600 transition-all duration-300 shadow-sm hover:shadow-md dark:shadow-lg dark:shadow-black/20">
+        <article className="bg-white dark:bg-card-bg rounded-xl border border-light-border dark:border-slate-800/50 p-6 flex flex-col h-full hover:border-accent-dark dark:hover:border-slate-600 transition-colors duration-300 shadow-sm hover:shadow-md dark:shadow-lg dark:shadow-black/20">
             {/* Header row: icon + links */}
             <div className="flex items-center justify-between mb-3">
                 <div
-                    className={`w-12 h-12 ${colors.bg} rounded-lg flex items-center justify-center border ${colors.border} group-hover:dark:border-blue-500/30 transition-all duration-300`}
+                    className={`w-12 h-12 ${colors.bg} rounded-lg flex items-center justify-center border ${colors.border} group-hover:dark:border-blue-500/30 transition-colors duration-300`}
                 >
-                    <span className={`material-symbols-outlined ${colors.text} text-2xl`}>
-                        {icon}
-                    </span>
+                    {Icon && (
+                        <Icon className={`${colors.text} text-2xl`} />
+                    )}
                 </div>
                 <div className="flex gap-2">
                     {repoLink && (
@@ -67,7 +69,7 @@ export default function ExperimentCard({
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            <span className="material-symbols-outlined text-lg">code</span>
+                            <HiCode className="text-xl" />
                         </a>
                     )}
                     {demoLink && (
@@ -78,7 +80,7 @@ export default function ExperimentCard({
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            <span className="material-symbols-outlined text-lg">arrow_outward</span>
+                            <HiExternalLink className="text-xl" />
                         </a>
                     )}
                 </div>
@@ -110,7 +112,7 @@ export default function ExperimentCard({
 }
 
 ExperimentCard.propTypes = {
-    icon: PropTypes.string.isRequired,
+    icon: PropTypes.oneOfType([PropTypes.elementType, PropTypes.node]).isRequired,
     iconColor: PropTypes.oneOf(["indigo", "blue", "slate"]),
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,

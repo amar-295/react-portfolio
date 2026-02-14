@@ -2,7 +2,7 @@ import { useTheme } from "../context/ThemeContext";
 import PropTypes from "prop-types";
 import Button from "./Button";
 import TechTag from "./TechTag";
-import { HiArrowUpRight, HiCode } from "react-icons/hi";
+import { HiExternalLink, HiCode } from "react-icons/hi";
 
 /**
  * Large featured project card — image + details side-by-side on desktop,
@@ -58,10 +58,22 @@ export default function ProjectCard({
         <div className="relative group bg-light-surface dark:bg-card-bg rounded-xl overflow-hidden border-2 border-light-border dark:border-slate-800/50 shadow-sm aspect-video">
           <img
             alt={imageAlt || title}
-            className="w-full h-64 lg:h-80 object-contain bg-gray-50 dark:bg-slate-900/50 transform group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-contain bg-gray-50 dark:bg-slate-900/50 transform group-hover:scale-105 transition-transform duration-500"
             src={displayImage}
+            loading="lazy"
+            decoding="async"
+            width="800"
+            height="450"
+            {...(displayImage.includes("unsplash.com") ? {
+              srcSet: `
+                ${displayImage.replace("w=1000", "w=400")} 400w,
+                ${displayImage.replace("w=1000", "w=800")} 800w,
+                ${displayImage.replace("w=1000", "w=1000")} 1000w
+              `,
+              sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+            } : {})}
             onError={(e) => {
-              e.target.src = "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop";
+              e.target.src = "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop";
             }}
           />
         </div>
@@ -69,7 +81,7 @@ export default function ProjectCard({
         {/* Mobile-only buttons */}
         <div className="flex flex-col sm:flex-row gap-4 pt-6 lg:hidden">
           {liveDemoLink && (
-            <Button href={liveDemoLink} icon={HiArrowUpRight} fullWidth target="_blank" rel="noopener noreferrer">
+            <Button href={liveDemoLink} icon={HiExternalLink} fullWidth target="_blank" rel="noopener noreferrer">
               Live Demo
             </Button>
           )}
@@ -119,7 +131,7 @@ export default function ProjectCard({
         {/* Desktop-only buttons */}
         <div className="hidden lg:flex gap-4 pt-4">
           {liveDemoLink && (
-            <Button href={liveDemoLink} icon={HiArrowUpRight} target="_blank" rel="noopener noreferrer">
+            <Button href={liveDemoLink} icon={HiExternalLink} target="_blank" rel="noopener noreferrer">
               Live Demo
             </Button>
           )}

@@ -6,7 +6,7 @@ import passwordGenerator from "../assets/projects/password-generator.webp";
 export const featuredProjects = [
     {
         image:
-            "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
         imageAlt: "Express JS Authentication Backend",
         title: "Express Authentication Backend",
         type: "Backend API",
@@ -55,9 +55,11 @@ export const featuredProjects = [
     },
 ];
 
+import { MdPalette } from "react-icons/md";
+
 export const experimentsData = [
     {
-        icon: "palette",
+        icon: MdPalette,
         iconColor: "pink",
         title: "Bg Color Changer",
         type: "DOM Tool",

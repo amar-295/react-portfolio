@@ -5,6 +5,17 @@
 
 
   <meta charset="UTF-8" />
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (theme === 'dark' || (!theme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="shortcut icon" href="/favicon.ico" />
@@ -12,6 +23,24 @@
   <meta name="apple-mobile-web-app-title" content="Portfolio" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Portfolio of Amarnath, a Frontend Developer specialized in React, UI/UX, and performance-driven web development. Explore projects, skills, and contact information." />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://react-portfolio-lilac-nine.vercel.app/" />
+  <meta property="og:title" content="Amarnath | Frontend Developer Portfolio" />
+  <meta property="og:description"
+    content="Portfolio of Amarnath, a Frontend Developer specialized in React, UI/UX, and performance-driven web development." />
+  <meta property="og:image" content="/og-image.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://react-portfolio-lilac-nine.vercel.app/" />
+  <meta property="twitter:title" content="Amarnath | Frontend Developer Portfolio" />
+  <meta property="twitter:description"
+    content="Portfolio of Amarnath, a Frontend Developer specialized in React, UI/UX, and performance-driven web development." />
+  <meta property="twitter:image" content="/og-image.png" />
   <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,23 +49,12 @@
 
 
 
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
-    rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
-      rel="stylesheet" />
-  </noscript>
-
-
   <title>Amarnath | Frontend Developer Portfolio</title>
 </head>
 
 <body>
   <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
+  <script type="module" src="/src/main.jsx" fetchpriority="high"></script>
 </body>
 
 </html>

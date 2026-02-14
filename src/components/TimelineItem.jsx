@@ -84,7 +84,7 @@ export default function TimelineItem({
                     : "pr-0 md:pr-12 order-3 md:order-1"
                     }`}
             >
-                <div className="bg-gray-50 dark:bg-transparent border border-gray-100 dark:border-white/10 p-8 rounded-xl relative hover:border-gray-900 dark:hover:border-primary-blue/30 transition-all shadow-sm dark:shadow-none hover:shadow-md dark:hover:shadow-none">
+                <div className="bg-gray-50 dark:bg-transparent border border-gray-100 dark:border-white/10 p-8 rounded-xl relative hover:border-gray-900 dark:hover:border-primary-blue/30 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-none hover:shadow-md dark:hover:shadow-none group">
                     {emoji && (
                         <div className="mb-5 flex justify-between items-start">
                             <span className="text-4xl">{emoji}</span>

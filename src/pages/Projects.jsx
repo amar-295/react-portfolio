@@ -1,5 +1,6 @@
 import { ProjectCard, ExperimentCard, CTABanner } from "../components";
 import { featuredProjects, experimentsData } from "../data/projects";
+import { HiMail } from "react-icons/hi";
 
 /* ------------------------------------------------------------------ */
 /*  Projects Page                                                      */
@@ -36,7 +37,7 @@ export default function Projects() {
             <CTABanner
                 heading="Building something technical? Let's connect and discuss the details."
                 buttonText="Connect with me"
-                buttonIcon="mail"
+                buttonIcon={HiMail}
                 buttonHref="#contact"
             />
 

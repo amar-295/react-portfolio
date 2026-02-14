@@ -17,10 +17,14 @@ export function ThemeProvider({ children }) {
     useEffect(() => {
         // Apply theme class to html element
         const root = document.documentElement;
-        if (theme === "dark") {
-            root.classList.add("dark");
-        } else {
-            root.classList.remove("dark");
+        const currentClass = root.classList.contains("dark") ? "dark" : "light";
+
+        if (theme !== currentClass) {
+            if (theme === "dark") {
+                root.classList.add("dark");
+            } else {
+                root.classList.remove("dark");
+            }
         }
 
         // Save to localStorage

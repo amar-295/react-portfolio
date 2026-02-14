@@ -34,7 +34,7 @@ export default function Hero() {
             </p>
           </div>
 
-          <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 bg-light-surface dark:bg-navy/60 border-2 border-light-border dark:border-white/10 rounded-2xl shadow-md dark:shadow-2xl">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 bg-light-surface dark:bg-navy/60 border-2 border-light-border dark:border-white/10 rounded-2xl shadow-md dark:shadow-2xl min-h-[360px] lg:min-h-[140px]">
             <div className="flex-1 text-center lg:text-left">
               <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
                 React & JS

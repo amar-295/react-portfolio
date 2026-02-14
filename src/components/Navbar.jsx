@@ -11,28 +11,69 @@ export default function Navbar() {
     const [activeSection, setActiveSection] = useState("home");
 
     useEffect(() => {
-        const sections = ["home", "about", "skills", "projects", "contact"];
+        const sectionIds = ["home", "about", "skills", "projects", "contact"];
+        let observer;
+        let mutationObserver;
+        let idleHandle;
 
-        const observerOptions = {
-            root: null,
-            rootMargin: "-10% 0px -80% 0px",
-            threshold: 0
+        const initObserver = () => {
+            if (observer) observer.disconnect();
+
+            const observerOptions = {
+                root: null,
+                rootMargin: "-30% 0px -30% 0px",
+                threshold: 0,
+            };
+
+            const callback = (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveSection(entry.target.id);
+                    }
+                });
+            };
+
+            observer = new IntersectionObserver(callback, observerOptions);
+
+            sectionIds.forEach((id) => {
+                const el = document.getElementById(id);
+                if (el) observer.observe(el);
+            });
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    setActiveSection(entry.target.id);
-                }
+        const setupObservers = () => {
+            // Initial setup
+            initObserver();
+
+            // Fallback for DOM changes: Use a debounced observer to reduce main-thread tasks
+            let timeoutId;
+            mutationObserver = new MutationObserver(() => {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(initObserver, 200);
             });
-        }, observerOptions);
 
-        sections.forEach((id) => {
-            const el = document.getElementById(id);
-            if (el) observer.observe(el);
-        });
+            const mainElement = document.querySelector("main");
+            if (mainElement) {
+                mutationObserver.observe(mainElement, { childList: true, subtree: true });
+            }
+        };
 
-        return () => observer.disconnect();
+        // Move to idle callback to avoid blocking the initial mount
+        if ('requestIdleCallback' in window) {
+            idleHandle = window.requestIdleCallback(setupObservers);
+        } else {
+            idleHandle = setTimeout(setupObservers, 100);
+        }
+
+        return () => {
+            if (observer) observer.disconnect();
+            if (mutationObserver) mutationObserver.disconnect();
+            if ('cancelIdleCallback' in window) {
+                window.cancelIdleCallback(idleHandle);
+            } else {
+                clearTimeout(idleHandle);
+            }
+        };
     }, []);
 
     const navLinks = [
@@ -59,7 +100,7 @@ export default function Navbar() {
                 {/* Logo */}
                 <a
                     href="#home"
-                    className="flex items-center gap-2 group transition-all duration-300 font-display"
+                    className="flex items-center gap-2 group transition-colors transition-transform duration-300 font-display"
                     onClick={() => setActiveSection("home")}
                 >
                     <Logo className={`w-8 h-8 transition-transform duration-300 group-hover:rotate-12 ${activeSection === "home" ? "text-accent-dark dark:text-blue-500 scale-105" : "text-accent-dark dark:text-blue-500"
@@ -104,7 +145,7 @@ export default function Navbar() {
                     </button>
 
                     <a
-                        className="inline-flex items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-accent-dark dark:bg-blue-600 rounded-lg hover:bg-black dark:hover:bg-blue-700 transition-all duration-300 shadow-sm"
+                        className="inline-flex items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-accent-dark dark:bg-blue-600 rounded-lg hover:bg-black dark:hover:bg-blue-700 transition-colors duration-300 shadow-sm"
                         href="/resume.pdf"
                         download="Amarnath_Resume.pdf"
                         target="_blank"
@@ -179,7 +220,7 @@ export default function Navbar() {
                                                 setIsMenuOpen(false);
                                             }}
                                             className={`
-                                                block w-full py-3 px-6 rounded-xl text-center text-lg font-medium transition-all duration-300
+                                                block w-full py-3 px-6 rounded-xl text-center text-lg font-medium transition-colors duration-300
                                                 ${isActive
                                                     ? "bg-accent-light/50 dark:bg-blue-500/10 text-accent-dark dark:text-blue-400 font-bold"
                                                     : "text-light-text-secondary dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-white/5"
@@ -200,7 +241,7 @@ export default function Navbar() {
                                         download="Amarnath_Resume.pdf"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-max mx-auto px-8 py-3 rounded-full flex items-center justify-center gap-2 bg-accent-dark dark:bg-blue-700 text-white font-bold shadow-lg shadow-blue-500/20 active:scale-95 transition-all duration-300 text-sm"
+                                        className="w-max mx-auto px-8 py-3 rounded-full flex items-center justify-center gap-2 bg-accent-dark dark:bg-blue-700 text-white font-bold shadow-lg shadow-blue-500/20 active:scale-95 transition-colors duration-300 text-sm"
                                     >
                                         <span>Download Resume</span>
                                         <HiDownload className="text-sm" />

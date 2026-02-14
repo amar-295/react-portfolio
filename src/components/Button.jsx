@@ -27,7 +27,7 @@ export default function Button({
 }) {
     /* ---- variant class maps ---- */
     const base =
-        "group font-bold rounded-xl text-base transition-all duration-300 inline-flex items-center justify-center gap-2.5 active:scale-95";
+        "group font-bold rounded-xl text-base transition-colors transition-transform duration-300 inline-flex items-center justify-center gap-2.5 active:scale-95";
 
     const variants = {
         primary:
@@ -42,12 +42,8 @@ export default function Button({
 
     /* ---- icon element ---- */
     const Icon = icon;
-    const iconEl = Icon && typeof Icon !== "string" ? (
-        <Icon className="text-[1.25em] leading-none text-current transition-colors duration-300" />
-    ) : icon ? (
-        <span className="material-symbols-outlined text-[1.25em] leading-none text-current transition-colors duration-300">
-            {icon}
-        </span>
+    const iconEl = Icon ? (
+        <Icon className="text-[1.25em] leading-none text-current" />
     ) : null;
 
     /* ---- render as <a> or <button> ---- */
@@ -71,7 +67,7 @@ export default function Button({
 Button.propTypes = {
     variant: PropTypes.oneOf(["primary", "outline"]),
     href: PropTypes.string,
-    icon: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+    icon: PropTypes.elementType,
     fullWidth: PropTypes.bool,
     className: PropTypes.string,
     children: PropTypes.node.isRequired,

@@ -18,8 +18,12 @@ export default function About() {
 
                 <img
                   alt="PROFILE_PICTURE"
-                  className="w-full h-full object-cover hover:scale-105 transition-all duration-700 block"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform transition-opacity duration-700 block"
                   src={aboutMeImage}
+                  loading="lazy"
+                  decoding="async"
+                  width="400"
+                  height="400"
                 />
                 <div className="absolute inset-0 bg-accent-teal/10 mixed-blend-multiply opacity-40 hover:opacity-0 transition-opacity duration-500 pointer-events-none dark:opacity-0"></div>
               </div>
@@ -47,10 +51,10 @@ export default function About() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-12">
               {/* Education Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-8 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-all duration-300 shadow-sm dark:shadow-lg">
+              <div className="bg-white dark:bg-lightNavy/40 p-8 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
                       <FaGraduationCap className="text-white text-2xl" />
                     </div>
                   </div>
@@ -64,10 +68,10 @@ export default function About() {
               </div>
 
               {/* Experience Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-8 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-all duration-300 shadow-sm dark:shadow-lg">
+              <div className="bg-white dark:bg-lightNavy/40 p-8 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
                       <FaBriefcase className="text-white text-2xl" />
                     </div>
                   </div>
@@ -81,10 +85,10 @@ export default function About() {
               </div>
 
               {/* Location Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-8 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-all duration-300 shadow-sm dark:shadow-lg">
+              <div className="bg-white dark:bg-lightNavy/40 p-8 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
                       <FaMapMarkerAlt className="text-white text-2xl" />
                     </div>
                   </div>
@@ -96,10 +100,10 @@ export default function About() {
               </div>
 
               {/* Specialization Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-8 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-all duration-300 shadow-sm dark:shadow-lg">
+              <div className="bg-white dark:bg-lightNavy/40 p-8 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
                       <FaCode className="text-white text-2xl" />
                     </div>
                   </div>

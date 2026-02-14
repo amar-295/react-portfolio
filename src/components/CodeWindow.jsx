@@ -5,9 +5,9 @@ const CodeWindow = () => {
         <div className="w-full max-w-sm mx-auto bg-gray-900 rounded-xl shadow-2xl overflow-hidden border border-gray-800 transform hover:scale-[1.02] transition-transform duration-500 hover:shadow-accent-dark/10 dark:hover:shadow-accent-teal/20">
             {/* Window Header */}
             <div className="bg-gray-800 px-4 py-3 flex items-center gap-2 border-b border-gray-700">
-                <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors"></div>
+                <div className="w-3 h-3 rounded-full bg-red-500 hover:opacity-80 transition-opacity"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500 hover:opacity-80 transition-opacity"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500 hover:opacity-80 transition-opacity"></div>
                 <div className="ml-4 flex-1 text-center pr-12">
                     <span className="text-[10px] text-gray-400 font-mono bg-gray-900/50 px-3 py-1 rounded-md border border-gray-700/50">Developer.jsx</span>
                 </div>
