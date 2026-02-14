@@ -21,9 +21,9 @@ export default function Footer({
     return (
         <footer className="border-t border-gray-200 dark:border-white/10 bg-white dark:bg-[#020617] pt-10 pb-6">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-8">
                     {/* Brand Section */}
-                    <div className="space-y-4">
+                    <div className="col-span-2 md:col-span-1 space-y-4">
                         <div className="flex items-center gap-3">
                             <Logo className="w-8 h-8 text-gray-900 dark:text-blue-500" />
                             <span className="text-lg font-bold tracking-tight text-gray-900 dark:text-white">
@@ -36,7 +36,7 @@ export default function Footer({
                     </div>
 
                     {/* Quick Links */}
-                    <div>
+                    <div className="col-span-1">
                         <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
                             Quick Links
                         </h3>
