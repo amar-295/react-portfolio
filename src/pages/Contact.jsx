@@ -1,7 +1,7 @@
 import ContactInfoCard from "../components/ContactInfoCard";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
-import { contactInfo, footerData } from "../data/contact";
+import { contactInfo, footerData, socialLinks } from "../data/contact";
 
 /* ------------------------------------------------------------------ */
 /*  Contact Page                                                      */
