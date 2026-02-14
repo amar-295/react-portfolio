@@ -80,7 +80,7 @@ export default function ContactForm({ onSubmit }) {
             } else {
                 alert("Oops! There was a problem submitting your form. Please try again or contact me directly.");
             }
-        } catch (error) {
+        } catch {
             alert("Oops! There was a connection error. Please try again later.");
         } finally {
             setIsSubmitting(false);

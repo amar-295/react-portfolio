@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Logo } from "./index";
+import Logo from "./Logo";
 
 /**
  * Footer component with brand, quick links, and social links.
@@ -14,7 +14,6 @@ import { Logo } from "./index";
 
 export default function Footer({
     brandName = "AMARNATH",
-    brandInitial = "A",
     tagline = "Building and learning one project at a time.",
     quickLinks = [],
     socialLinks = [],
@@ -90,7 +89,6 @@ export default function Footer({
 
 Footer.propTypes = {
     brandName: PropTypes.string,
-    brandInitial: PropTypes.string,
     tagline: PropTypes.string,
     quickLinks: PropTypes.arrayOf(
         PropTypes.shape({

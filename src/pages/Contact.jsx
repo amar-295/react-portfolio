@@ -8,7 +8,7 @@ import { contactInfo, footerData, socialLinks } from "../data/contact";
 /* ------------------------------------------------------------------ */
 
 export default function Contact() {
-    const handleFormSubmit = (formData) => {
+    const handleFormSubmit = () => {
         // Form submission handled successfully in ContactForm component
     };
 
