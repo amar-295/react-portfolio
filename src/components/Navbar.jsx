@@ -216,7 +216,7 @@ export default function Navbar() {
                                                 rel="noopener noreferrer"
                                                 className="text-gray-500 dark:text-slate-400 hover:text-accent-dark dark:hover:text-blue-400 transition-colors transform hover:scale-110"
                                             >
-                                                <i className={`${link.icon} text-2xl`}></i>
+                                                <link.icon className="text-2xl" />
                                             </a>
                                         ))}
                                     </div>

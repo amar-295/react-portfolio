@@ -4,17 +4,20 @@ import PropTypes from "prop-types";
  * Pill-shaped tag for "Currently Learning" items.
  *
  * Props:
- *   icon  – Material Symbols icon name (e.g. "school")
+ *   icon  – React Icon component or Material Symbols icon name
  *   label – display text
+ *   color – optional text color class for icons
  */
-export default function LearningTag({ icon, label }) {
+export default function LearningTag({ icon: Icon, label, color = "" }) {
+    const isComponent = typeof Icon !== "string";
+
     return (
         <div className="flex items-center gap-3 px-4 py-2 bg-light-surface dark:bg-blue-600/5 border border-light-border dark:border-blue-500/20 rounded-lg group hover:border-accent-dark dark:hover:border-blue-500/50 transition-all duration-300">
-            {icon.includes("devicon") ? (
-                <i className={`${icon} text-xl text-accent-dark dark:text-blue-500`}></i>
+            {isComponent ? (
+                <Icon className={`text-lg ${color}`} />
             ) : (
                 <span className="material-symbols-outlined text-accent-dark dark:text-blue-500 text-xl group-hover:scale-110 transition-transform duration-300">
-                    {icon}
+                    {Icon}
                 </span>
             )}
             <span className="text-gray-900 dark:text-slate-300 font-medium">{label}</span>
@@ -23,6 +26,7 @@ export default function LearningTag({ icon, label }) {
 }
 
 LearningTag.propTypes = {
-    icon: PropTypes.string.isRequired,
+    icon: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]).isRequired,
     label: PropTypes.string.isRequired,
+    color: PropTypes.string,
 };

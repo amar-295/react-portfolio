@@ -68,7 +68,7 @@ export default function Footer({
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        <i className={`${social.icon} w-5 text-center`}></i> {social.platform}
+                                        <social.icon className="w-5 h-5 text-center" /> {social.platform}
                                     </a>
                                 </li>
                             ))}
@@ -99,7 +99,7 @@ Footer.propTypes = {
     socialLinks: PropTypes.arrayOf(
         PropTypes.shape({
             platform: PropTypes.string.isRequired,
-            icon: PropTypes.string.isRequired,
+            icon: PropTypes.elementType.isRequired,
             href: PropTypes.string.isRequired,
         })
     ),

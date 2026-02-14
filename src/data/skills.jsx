@@ -1,15 +1,27 @@
+import {
+    SiReact,
+    SiTailwindcss,
+    SiJavascript,
+    SiHtml5,
+    SiCss3,
+    SiGit,
+    SiNodedotjs,
+    SiExpress,
+    SiMongodb
+} from "react-icons/si";
+
 export const coreSkills = [
-    { icon: "devicon-react-original colored", name: "React" },
-    { icon: "devicon-tailwindcss-original colored", name: "Tailwind CSS" },
-    { icon: "devicon-javascript-plain colored", name: "JavaScript (ES6+)" },
-    { icon: "devicon-html5-plain colored", name: "HTML / CSS" },
-    { icon: "devicon-git-plain colored", name: "Git & GitHub" },
+    { icon: SiReact, name: "React", color: "text-[#61DAFB]" },
+    { icon: SiTailwindcss, name: "Tailwind CSS", color: "text-[#06B6D4]" },
+    { icon: SiJavascript, name: "JavaScript (ES6+)", color: "text-[#F7DF1E]" },
+    { icon: SiHtml5, name: "HTML / CSS", color: "text-[#E34F26]" },
+    { icon: SiGit, name: "Git & GitHub", color: "text-[#F05032]" },
 ];
 
 export const learningItems = [
-    { icon: "devicon-nodejs-plain colored", label: "Backend Basics" },
-    { icon: "devicon-express-original colored", label: "REST APIs" },
-    { icon: "devicon-mongodb-plain colored", label: "Database Concepts" },
+    { icon: SiNodedotjs, label: "Backend Basics", color: "text-[#339933]" },
+    { icon: SiExpress, label: "REST APIs", color: "text-gray-400" },
+    { icon: SiMongodb, label: "Database Concepts", color: "text-[#47A248]" },
 ];
 
 export const timelineEntries = [

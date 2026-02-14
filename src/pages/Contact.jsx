@@ -56,7 +56,7 @@ export default function Contact() {
                                         className="w-10 h-10 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800/50 hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white transition-all duration-200 border border-gray-200 dark:border-slate-700/50 shadow-sm dark:shadow-none"
                                         aria-label={link.label || link.platform}
                                     >
-                                        <i className={`${link.icon} text-lg`}></i>
+                                        <link.icon className="text-lg" />
                                     </a>
                                 ))}
                             </div>

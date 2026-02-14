@@ -24,6 +24,7 @@ export default function SocialLink({
     icon,
     variant = "button",
 }) {
+    const Icon = icon;
     const isButton = variant === "button";
     const baseStyles = platformStyles[platform] || platformStyles.custom;
 
@@ -35,7 +36,7 @@ export default function SocialLink({
                 rel="noopener noreferrer"
                 className={`flex items-center justify-center px-6 py-3 rounded-xl text-white transition-all duration-200 font-bold shadow-lg active:scale-95 ${baseStyles}`}
             >
-                <i className={`${icon} text-xl mr-2`}></i> {label}
+                <Icon className="text-xl mr-2" /> {label}
             </a>
         );
     }
@@ -47,7 +48,7 @@ export default function SocialLink({
             rel="noopener noreferrer"
             className={`w-12 h-12 flex items-center justify-center rounded-xl text-slate-400 hover:text-white transition-all duration-200 active:scale-95 ${baseStyles}`}
         >
-            <i className={`${icon} text-xl`}></i>
+            <Icon className="text-xl" />
         </a>
     );
 }
@@ -56,6 +57,6 @@ SocialLink.propTypes = {
     platform: PropTypes.oneOf(["linkedin", "github", "custom"]),
     href: PropTypes.string.isRequired,
     label: PropTypes.string,
-    icon: PropTypes.string.isRequired,
+    icon: PropTypes.elementType.isRequired,
     variant: PropTypes.oneOf(["button", "icon"]),
 };

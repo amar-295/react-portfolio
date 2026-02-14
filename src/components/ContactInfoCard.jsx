@@ -25,6 +25,7 @@ export default function ContactInfoCard({
     iconBg = "bg-blue-500",
     variant = "primary",
 }) {
+    const Icon = icon;
     const isPrimary = variant === "primary";
 
     const ContentWrapper = href ? "a" : "span";
@@ -42,7 +43,7 @@ export default function ContactInfoCard({
                     } rounded-xl flex items-center justify-center ${isPrimary ? "text-gray-900 dark:text-white" : "text-gray-700 dark:text-blue-500"
                     } shadow-md`}
             >
-                <i className={`${icon} text-2xl`}></i>
+                <Icon className="text-2xl" />
             </div>
             <div className="pt-1">
                 <p className={`text-xs ${labelColor} font-bold tracking-widest uppercase mb-2`}>
@@ -56,7 +57,7 @@ export default function ContactInfoCard({
 }
 
 ContactInfoCard.propTypes = {
-    icon: PropTypes.string.isRequired,
+    icon: PropTypes.elementType.isRequired,
     label: PropTypes.string.isRequired,
     labelColor: PropTypes.string,
     content: PropTypes.string.isRequired,

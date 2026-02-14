@@ -2,6 +2,14 @@
  * Contact page data
  * All contact information, social links, and footer data
  */
+import {
+    HiMail,
+    HiLocationMarker
+} from "react-icons/hi";
+import {
+    FaLinkedin,
+    FaGithub
+} from "react-icons/fa";
 
 // Social Media URLs
 export const SOCIAL_URLS = {
@@ -12,7 +20,7 @@ export const SOCIAL_URLS = {
 export const contactInfo = [
     {
         id: "email",
-        icon: "fa-solid fa-envelope",
+        icon: HiMail,
         label: "Gmail",
         labelColor: "text-gray-600 dark:text-blue-400",
         content: "612amar@gmail.com",
@@ -22,7 +30,7 @@ export const contactInfo = [
     },
     {
         id: "location",
-        icon: "fa-solid fa-location-dot",
+        icon: HiLocationMarker,
         label: "LOCATION",
         labelColor: "text-slate-500",
         content: "Faridabad, India",
@@ -37,14 +45,14 @@ export const socialLinks = [
         platform: "linkedin",
         href: SOCIAL_URLS.linkedin,
         label: "LinkedIn",
-        icon: "fa-brands fa-linkedin",
+        icon: FaLinkedin,
         variant: "button",
     },
     {
         id: "github-button",
         platform: "github",
         href: SOCIAL_URLS.github,
-        icon: "fa-brands fa-github",
+        icon: FaGithub,
         variant: "icon",
     },
 ];
@@ -62,12 +70,12 @@ export const footerData = {
     socialLinks: [
         {
             platform: "Linkedin",
-            icon: "fa-brands fa-linkedin",
+            icon: FaLinkedin,
             href: SOCIAL_URLS.linkedin,
         },
         {
             platform: "Github",
-            icon: "fa-brands fa-github",
+            icon: FaGithub,
             href: SOCIAL_URLS.github,
         },
     ],
