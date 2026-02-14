@@ -29,7 +29,7 @@ export const socialLinks = [
     {
         id: "linkedin-button",
         platform: "linkedin",
-        href: "#",
+        href: "https://www.linkedin.com/in/arnamath-webdev/",
         label: "LinkedIn",
         icon: "fa-brands fa-linkedin",
         variant: "button",
@@ -37,7 +37,7 @@ export const socialLinks = [
     {
         id: "github-button",
         platform: "github",
-        href: "#",
+        href: "https://github.com/amar-295",
         icon: "fa-brands fa-github",
         variant: "icon",
     },
@@ -48,21 +48,21 @@ export const footerData = {
     brandInitial: "A",
     tagline: "Building and learning one project at a time.",
     quickLinks: [
-        { label: "Home", href: "#" },
-        { label: "About", href: "#" },
-        { label: "Projects", href: "#" },
-        { label: "Resume", href: "#" },
+        { label: "Home", href: "#home" },
+        { label: "About", href: "#about" },
+        { label: "Projects", href: "#projects" },
+        { label: "Contact", href: "#contact" },
     ],
     socialLinks: [
         {
             platform: "Linkedin",
             icon: "fa-brands fa-linkedin",
-            href: "#",
+            href: "https://www.linkedin.com/in/arnamath-webdev/",
         },
         {
             platform: "Github",
             icon: "fa-brands fa-github",
-            href: "#",
+            href: "https://github.com/amar-295",
         },
     ],
 };
