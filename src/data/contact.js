@@ -3,6 +3,12 @@
  * All contact information, social links, and footer data
  */
 
+// Social Media URLs
+export const SOCIAL_URLS = {
+    linkedin: "https://www.linkedin.com/in/arnamath-webdev/",
+    github: "https://github.com/amar-295",
+};
+
 export const contactInfo = [
     {
         id: "email",
@@ -29,7 +35,7 @@ export const socialLinks = [
     {
         id: "linkedin-button",
         platform: "linkedin",
-        href: "https://www.linkedin.com/in/arnamath-webdev/",
+        href: SOCIAL_URLS.linkedin,
         label: "LinkedIn",
         icon: "fa-brands fa-linkedin",
         variant: "button",
@@ -37,7 +43,7 @@ export const socialLinks = [
     {
         id: "github-button",
         platform: "github",
-        href: "https://github.com/amar-295",
+        href: SOCIAL_URLS.github,
         icon: "fa-brands fa-github",
         variant: "icon",
     },
@@ -57,12 +63,12 @@ export const footerData = {
         {
             platform: "Linkedin",
             icon: "fa-brands fa-linkedin",
-            href: "https://www.linkedin.com/in/arnamath-webdev/",
+            href: SOCIAL_URLS.linkedin,
         },
         {
             platform: "Github",
             icon: "fa-brands fa-github",
-            href: "https://github.com/amar-295",
+            href: SOCIAL_URLS.github,
         },
     ],
 };
