@@ -14,21 +14,21 @@ export const learningItems = [
 
 export const timelineEntries = [
     {
-        period: "2023 – Present",
+        period: "2024 – 2027",
         subtitle: "Formal Education",
         emoji: "🎓",
-        badge: "Class of 2025",
+        badge: "Class of 2027",
         badgeColor: "green",
         title: "BCA Student",
-        institution: "[University Name]",
+        institution: "DAV Centenary College | Faridabad",
         description:
-            "Focusing on core computer science concepts including Data Structures, Algorithms, and Web Technologies. Consistent academic performer with a passion for practical application.",
+            "Pursuing a Bachelor's degree in Computer Applications. Studied core subjects including Data Structures, OOP, DBMS, and Operating Systems.",
         side: "right",
         dotColor: "blue",
         isActive: true,
     },
     {
-        period: "2023 – Present",
+        period: "2026 – Present",
         subtitle: "Skill Development",
         emoji: "💻",
         badge: "Self-Directed",

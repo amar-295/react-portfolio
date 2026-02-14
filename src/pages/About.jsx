@@ -56,7 +56,7 @@ export default function About() {
                   <div className="flex-1">
                     <h4 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Education</h4>
                     <p className="text-base text-light-text-secondary dark:text-gray-300">
-                      Bachelor of Computer Applications
+                      BCA | DAV Centenary College
                     </p>
                   </div>
                 </div>

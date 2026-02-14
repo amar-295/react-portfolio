@@ -17,6 +17,23 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Custom Scrollbar - Professional Look */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-slate-700 rounded-full border-[2px] border-transparent bg-clip-content;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-slate-600;
+}
+
 /* Text gradient - theme aware */
 .text-gradient {
     background: linear-gradient(90deg, #4338ca 0%, #3b82f6 100%);

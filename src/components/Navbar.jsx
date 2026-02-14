@@ -104,7 +104,8 @@ export default function Navbar() {
 
                     <a
                         className="inline-flex items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-accent-dark dark:bg-blue-500 rounded-lg hover:bg-black dark:hover:bg-blue-600 transition-all duration-300 shadow-sm"
-                        href="#"
+                        href="/resume.pdf"
+                        download="Amarnath_Resume.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
@@ -194,7 +195,8 @@ export default function Navbar() {
 
                                     {/* Resume Button */}
                                     <a
-                                        href="#"
+                                        href="/resume.pdf"
+                                        download="Amarnath_Resume.pdf"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="w-max mx-auto px-8 py-3 rounded-full flex items-center justify-center gap-2 bg-accent-dark dark:bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/20 active:scale-95 transition-all duration-300 text-sm"
