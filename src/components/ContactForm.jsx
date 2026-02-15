@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { HiArrowRight } from "react-icons/hi";
+import { HiArrowRight, HiCheck } from "react-icons/hi";
 import Button from "./Button";
 
 /**
@@ -108,7 +108,7 @@ export default function ContactForm({ onSubmit }) {
         return (
             <div className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-sm dark:shadow-none backdrop-blur-sm flex flex-col items-center justify-center min-h-[400px] text-center">
                 <div className="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-500/20 border-2 border-blue-200 dark:border-blue-500 flex items-center justify-center mb-6">
-                    <i className="fa-solid fa-check text-blue-600 dark:text-blue-500 text-3xl"></i>
+                    <HiCheck className="text-blue-600 dark:text-blue-500 text-3xl" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Message Sent!</h3>
                 <p className="text-gray-600 dark:text-slate-400 max-w-md mb-8 leading-relaxed">
