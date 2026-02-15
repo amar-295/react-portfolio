@@ -49,9 +49,9 @@ export default function About() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
               {/* Education Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-8 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
+              <div className="bg-white dark:bg-lightNavy/40 p-6 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
                     <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
@@ -68,7 +68,7 @@ export default function About() {
               </div>
 
               {/* Experience Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-8 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
+              <div className="bg-white dark:bg-lightNavy/40 p-6 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
                     <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
@@ -85,7 +85,7 @@ export default function About() {
               </div>
 
               {/* Location Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-8 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
+              <div className="bg-white dark:bg-lightNavy/40 p-6 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
                     <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
@@ -100,7 +100,7 @@ export default function About() {
               </div>
 
               {/* Specialization Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-8 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
+              <div className="bg-white dark:bg-lightNavy/40 p-6 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
                     <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">

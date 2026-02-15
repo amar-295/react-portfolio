@@ -9,8 +9,8 @@ import Button from "./Button";
  */
 
 export default function ContactForm({ onSubmit }) {
-    const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID;
-    const [state, submitToFormspree] = useForm(contactServiceId || "");
+    const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID || "xeelgjya";
+    const [state, submitToFormspree] = useForm(contactServiceId);
     const [errors, setErrors] = useState({});
 
     const validateForm = (formData) => {
