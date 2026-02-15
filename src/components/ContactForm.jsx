@@ -1,18 +1,17 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useForm, ValidationError } from '@formspree/react';
+import { HiArrowRight } from "react-icons/hi";
 import Button from "./Button";
 
 /**
- * Contact form component with custom validation.
- *
- * Props:
- *   onSubmit – form submit handler (optional)
+ * Contact form component with custom validation and Formspree hook integration.
  */
 
 export default function ContactForm({ onSubmit }) {
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID;
+    const [state, submitToFormspree] = useForm(contactServiceId || "");
     const [errors, setErrors] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const validateForm = (formData) => {
         const newErrors = {};
@@ -44,7 +43,7 @@ export default function ContactForm({ onSubmit }) {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = async (e) => {
+    const handleLocalSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
@@ -53,43 +52,22 @@ export default function ContactForm({ onSubmit }) {
             return;
         }
 
-        setIsSubmitting(true);
+        if (!contactServiceId) {
+            console.warn("Contact form submission failed: VITE_CONTACT_SERVICE_ID is not defined.");
+            alert("The contact form is currently not configured. Please use a different method to contact me.");
+            return;
+        }
 
-        try {
-            // Formspree integration via environment variable
-            const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID;
+        // Pass the event to the Formspree hook's handler
+        const result = await submitToFormspree(e);
 
-            if (!contactServiceId) {
-                console.warn("Contact form submission failed: VITE_CONTACT_SERVICE_ID is not defined.");
-                alert("The contact form is currently not configured. Please use a different method to contact me.");
-                setIsSubmitting(false);
-                return;
-            }
-
-            const response = await fetch(`https://formspree.io/f/${contactServiceId}`, {
-                method: "POST",
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-
-            if (response.ok) {
-                setIsSubmitted(true);
-                if (onSubmit) onSubmit(Object.fromEntries(formData));
-            } else {
-                alert("Oops! There was a problem submitting your form. Please try again or contact me directly.");
-            }
-        } catch {
-            alert("Oops! There was a connection error. Please try again later.");
-        } finally {
-            setIsSubmitting(false);
+        if (result.response.ok && onSubmit) {
+            onSubmit(Object.fromEntries(formData));
         }
     };
 
     const handleSendAnother = () => {
-        setIsSubmitted(false);
-        setErrors({});
+        window.location.reload();
     };
 
     // Helper to get input classes based on error state
@@ -102,7 +80,7 @@ export default function ContactForm({ onSubmit }) {
     };
 
     // Success UI
-    if (isSubmitted) {
+    if (state.succeeded) {
         return (
             <div className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-sm dark:shadow-none backdrop-blur-sm flex flex-col items-center justify-center min-h-[400px] text-center">
                 <div className="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-500/20 border-2 border-blue-200 dark:border-blue-500 flex items-center justify-center mb-6">
@@ -124,7 +102,7 @@ export default function ContactForm({ onSubmit }) {
 
     return (
         <div className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-lg shadow-gray-100/50 dark:shadow-none backdrop-blur-sm">
-            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+            <form onSubmit={handleLocalSubmit} className="space-y-6" noValidate>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {/* Full Name */}
                     <div className="space-y-2">
@@ -154,6 +132,7 @@ export default function ContactForm({ onSubmit }) {
                         {errors.name && (
                             <p id="name-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.name}</p>
                         )}
+                        <ValidationError prefix="Name" field="name" errors={state.errors} className="text-xs text-rose-500 mt-1 ml-1" />
                     </div>
 
                     {/* Email */}
@@ -184,6 +163,7 @@ export default function ContactForm({ onSubmit }) {
                         {errors.email && (
                             <p id="email-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.email}</p>
                         )}
+                        <ValidationError prefix="Email" field="email" errors={state.errors} className="text-xs text-rose-500 mt-1 ml-1" />
                     </div>
                 </div>
 
@@ -216,6 +196,7 @@ export default function ContactForm({ onSubmit }) {
                     {errors._subject && (
                         <p id="subject-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors._subject}</p>
                     )}
+                    <ValidationError prefix="Subject" field="_subject" errors={state.errors} className="text-xs text-rose-500 mt-1 ml-1" />
                 </div>
 
                 {/* Message */}
@@ -241,6 +222,7 @@ export default function ContactForm({ onSubmit }) {
                     {errors.message && (
                         <p id="message-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.message}</p>
                     )}
+                    <ValidationError prefix="Message" field="message" errors={state.errors} className="text-xs text-rose-500 mt-1 ml-1" />
                 </div>
 
                 {/* Submit Button */}
@@ -249,11 +231,11 @@ export default function ContactForm({ onSubmit }) {
                         variant="primary"
                         fullWidth
                         type="submit"
-                        disabled={isSubmitting}
-                        className={isSubmitting ? "opacity-75 cursor-not-allowed" : ""}
+                        disabled={state.submitting}
+                        className={state.submitting ? "opacity-75 cursor-not-allowed" : ""}
+                        icon={!state.submitting ? HiArrowRight : null}
                     >
-                        {isSubmitting ? "Sending..." : "Send Message"}
-                        {!isSubmitting && <i className="fa-solid fa-arrow-right"></i>}
+                        {state.submitting ? "Sending..." : "Send Message"}
                     </Button>
                 </div>
             </form>
