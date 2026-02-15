@@ -44,7 +44,7 @@ export default function Contact() {
 
                         {/* Social Links */}
                         <div className="pt-8">
-                            <p className="text-gray-600 dark:text-slate-400 text-sm mb-4">Connect with me</p>
+                            <p className="text-gray-600 dark:text-slate-400 text-sm mb-4">Find Me Online</p>
                             <div className="flex space-x-4">
                                 {socialLinks.map((link) => (
                                     <a

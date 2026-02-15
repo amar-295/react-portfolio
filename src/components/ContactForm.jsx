@@ -61,7 +61,7 @@ export default function ContactForm({ onSubmit }) {
         // Pass the event to the Formspree hook's handler
         const result = await submitToFormspree(e);
 
-        if (result.response.ok && onSubmit) {
+        if (result?.response?.ok && onSubmit) {
             onSubmit(Object.fromEntries(formData));
         }
     };
