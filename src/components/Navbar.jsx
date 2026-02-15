@@ -93,7 +93,7 @@ export default function Navbar() {
 
     return (
         <header
-            className="fixed top-0 w-full z-50 bg-light-bg/80 dark:bg-navy/80 backdrop-blur-lg border-b border-light-border dark:border-slate-800/50 h-[72px]"
+            className="fixed top-0 left-0 right-0 w-full z-50 bg-light-bg/80 dark:bg-navy/80 backdrop-blur-lg border-b border-light-border dark:border-slate-800/50 h-[72px]"
             data-purpose="main-navigation"
         >
             <div className="container mx-auto px-6 h-full flex items-center justify-between">

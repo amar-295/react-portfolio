@@ -1,12 +1,11 @@
 import portfolioLight from "../assets/projects/portfolio-1.webp";
 import portfolioDark from "../assets/projects/portfolio-2.webp";
-// import backendSnippet from "../assets/projects/backend-snippet.webp"; // Reverted as per user request
+import backendSnippet from "../assets/projects/backend-snippet.webp";
 import passwordGenerator from "../assets/projects/password-generator.webp";
 
 export const featuredProjects = [
     {
-        image:
-            "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
+        image: backendSnippet,
         imageAlt: "Express JS Authentication Backend",
         title: "Express Authentication Backend",
         type: "Backend API",

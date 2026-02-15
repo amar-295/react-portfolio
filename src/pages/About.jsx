@@ -12,8 +12,8 @@ export default function About() {
         <div className="grid md:grid-cols-12 gap-12 md:gap-20 items-center">
           {/* Photo Column - Right side on desktop */}
           <div className="md:col-span-5 flex justify-center md:justify-start relative order-2 md:order-2">
-            <div className="relative group max-w-70 md:max-w-sm mx-auto md:mx-0 aspect-square w-full">
-              <div className="absolute top-6 left-6 w-full h-full border-2 border-accent-dark/30 dark:border-accent-teal/20 rounded-xl transition-transform duration-500 group-hover:translate-x-[-4px] group-hover:translate-y-[-4px]"></div>
+            <div className="relative group max-w-[280px] sm:max-w-sm mx-auto md:mx-0 aspect-square w-full">
+              <div className="absolute inset-0 translate-x-4 translate-y-4 border-2 border-accent-dark/30 dark:border-accent-teal/20 rounded-xl transition-transform duration-500 group-hover:translate-x-6 group-hover:translate-y-6"></div>
               <div className="relative z-10 rounded-xl overflow-hidden shadow-md dark:shadow-2xl border-2 border-light-border dark:border-slate-700 bg-white">
 
                 <img

@@ -20,7 +20,7 @@ export default function SectionHeading({
         <div className="flex items-center mb-12">
             <div className={`w-1.5 h-8 md:h-10 rounded-full ${barColor} mr-4 md:mr-6 shrink-0`}></div>
             <div className="grow flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
-                <h2 className="text-3xl md:text-4xl font-extrabold text-light-text-primary dark:text-white font-display tracking-tight leading-none">
+                <h2 className="text-2xl md:text-4xl font-extrabold text-light-text-primary dark:text-white font-display tracking-tight leading-none">
                     {title}
                 </h2>
                 {badge && (

@@ -2,7 +2,7 @@ import React from 'react';
 
 const CodeWindow = () => {
     return (
-        <div className="w-full max-w-sm mx-auto bg-gray-900 rounded-xl shadow-2xl overflow-hidden border border-gray-800 transform hover:scale-[1.02] transition-transform duration-500 hover:shadow-accent-dark/10 dark:hover:shadow-accent-teal/20">
+        <div className="w-full max-w-[calc(100vw-3rem)] md:max-w-sm mx-auto bg-gray-900 rounded-xl shadow-2xl overflow-hidden border border-gray-800 transform hover:scale-[1.02] transition-transform duration-500 hover:shadow-accent-dark/10 dark:hover:shadow-accent-teal/20">
             {/* Window Header */}
             <div className="bg-gray-800 px-4 py-3 flex items-center gap-2 border-b border-gray-700">
                 <div className="w-3 h-3 rounded-full bg-red-500 hover:opacity-80 transition-opacity"></div>

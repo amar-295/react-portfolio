@@ -5,18 +5,18 @@ import Button from "../components/Button";
 export default function Hero() {
   return (
     <section
-      className="relative pt-32 md:pt-40 pb-20 md:pb-32 min-h-screen flex items-center grid-bg"
+      className="relative pt-32 md:pt-40 pb-20 md:pb-32 min-h-screen flex items-center grid-bg overflow-hidden"
       data-purpose="hero-section"
       id="home">
 
-      <div className="container mx-auto px-6 grid md:grid-cols-12 gap-10 md:gap-16 items-center">
+      <div className="w-full max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-10 md:gap-16 items-center">
         <div className="md:col-span-7 space-y-8 text-center md:text-left order-1">
           <div className="flex flex-col space-y-2">
             <h1 className="tracking-tight">
               <span className="block text-xl md:text-2xl font-mono text-accent-dark dark:text-accent-teal font-bold mb-4">
                 Hi, I'm
               </span>
-              <span className="block text-5xl md:text-8xl font-extrabold text-light-text-primary dark:text-white leading-tight font-display">
+              <span className="block text-xl sm:text-5xl md:text-8xl font-extrabold text-light-text-primary dark:text-white leading-tight font-display">
                 Amarnath.
               </span>
             </h1>
@@ -35,7 +35,7 @@ export default function Hero() {
             </p>
           </div>
 
-          <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 bg-light-surface dark:bg-navy/60 border-2 border-light-border dark:border-white/10 rounded-2xl shadow-md dark:shadow-2xl min-h-[360px] lg:min-h-[140px]">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 bg-light-surface dark:bg-navy/60 border-2 border-light-border dark:border-white/10 rounded-2xl shadow-md dark:shadow-2xl md:min-h-[140px]">
             <div className="flex-1 text-center lg:text-left">
               <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
                 React & JS
@@ -87,7 +87,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="md:col-span-5 relative flex justify-center items-center order-2 md:order-2 mt-8 md:mt-0 min-h-[300px] aspect-[4/3] md:aspect-auto">
+        <div className="md:col-span-5 relative flex justify-center items-center order-2 md:order-2 mt-8 md:mt-0 min-h-[250px] md:min-h-[300px] w-full max-w-[320px] md:max-w-none mx-auto">
           <div className="absolute w-48 md:w-64 h-48 md:h-64 bg-accent-dark/5 dark:bg-accent-teal/10 rounded-full blur-[80px] -z-10"></div>
           <Suspense fallback={<div className="w-full h-full bg-gray-900/10 dark:bg-white/5 rounded-xl animate-pulse"></div>}>
             <CodeWindow />

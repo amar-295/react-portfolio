@@ -12,6 +12,18 @@ body {
     @apply bg-midnight text-slate selection:bg-accent-teal/30 selection:text-accent-teal;
 }
 
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 html {
     scroll-behavior: smooth;
 }
