@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { useForm, ValidationError } from '@formspree/react';
 import { HiArrowRight } from "react-icons/hi";
 import Button from "./Button";
 
@@ -10,7 +9,11 @@ import Button from "./Button";
 
 export default function ContactForm({ onSubmit }) {
     const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID || "xeelgjya";
-    const [state, submitToFormspree] = useForm(contactServiceId);
+    const [status, setStatus] = useState({
+        submitting: false,
+        succeeded: false,
+        errors: []
+    });
     const [errors, setErrors] = useState({});
 
     const validateForm = (formData) => {
@@ -58,16 +61,37 @@ export default function ContactForm({ onSubmit }) {
             return;
         }
 
-        // Pass the event to the Formspree hook's handler
-        const result = await submitToFormspree(e);
+        setStatus({ submitting: true, succeeded: false, errors: [] });
 
-        if (result?.response?.ok && onSubmit) {
-            onSubmit(Object.fromEntries(formData));
+        try {
+            const response = await fetch(`https://formspree.io/f/${contactServiceId}`, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setStatus({ submitting: false, succeeded: true, errors: [] });
+                if (onSubmit) {
+                    onSubmit(Object.fromEntries(formData));
+                }
+                form.reset();
+            } else {
+                const errorMessages = data.errors?.map(err => err.message) || ["Something went wrong. Please try again."];
+                setStatus({ submitting: false, succeeded: false, errors: errorMessages });
+            }
+        } catch (error) {
+            setStatus({ submitting: false, succeeded: false, errors: ["Network error. Please try again later."] });
         }
     };
 
     const handleSendAnother = () => {
-        window.location.reload();
+        setStatus({ submitting: false, succeeded: false, errors: [] });
+        setErrors({});
     };
 
     // Helper to get input classes based on error state
@@ -80,7 +104,7 @@ export default function ContactForm({ onSubmit }) {
     };
 
     // Success UI
-    if (state.succeeded) {
+    if (status.succeeded) {
         return (
             <div className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-sm dark:shadow-none backdrop-blur-sm flex flex-col items-center justify-center min-h-[400px] text-center">
                 <div className="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-500/20 border-2 border-blue-200 dark:border-blue-500 flex items-center justify-center mb-6">
@@ -88,7 +112,7 @@ export default function ContactForm({ onSubmit }) {
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Message Sent!</h3>
                 <p className="text-gray-600 dark:text-slate-400 max-w-md mb-8 leading-relaxed">
-                    Thank you for reaching out. I've received your message and will get back to you soon via email or LinkedIn.
+                    Thank you for reaching out. I've received your message and will get back to you soon.
                 </p>
                 <Button
                     variant="outline"
@@ -103,6 +127,11 @@ export default function ContactForm({ onSubmit }) {
     return (
         <div className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-lg shadow-gray-100/50 dark:shadow-none backdrop-blur-sm">
             <form onSubmit={handleLocalSubmit} className="space-y-6" noValidate>
+                {status.errors.length > 0 && (
+                    <div className="p-4 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-lg text-rose-600 dark:text-rose-300 text-sm">
+                        {status.errors.join(", ")}
+                    </div>
+                )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {/* Full Name */}
                     <div className="space-y-2">
@@ -132,7 +161,6 @@ export default function ContactForm({ onSubmit }) {
                         {errors.name && (
                             <p id="name-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.name}</p>
                         )}
-                        <ValidationError prefix="Name" field="name" errors={state.errors} className="text-xs text-rose-500 mt-1 ml-1" />
                     </div>
 
                     {/* Email */}
@@ -163,7 +191,6 @@ export default function ContactForm({ onSubmit }) {
                         {errors.email && (
                             <p id="email-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.email}</p>
                         )}
-                        <ValidationError prefix="Email" field="email" errors={state.errors} className="text-xs text-rose-500 mt-1 ml-1" />
                     </div>
                 </div>
 
@@ -196,7 +223,6 @@ export default function ContactForm({ onSubmit }) {
                     {errors._subject && (
                         <p id="subject-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors._subject}</p>
                     )}
-                    <ValidationError prefix="Subject" field="_subject" errors={state.errors} className="text-xs text-rose-500 mt-1 ml-1" />
                 </div>
 
                 {/* Message */}
@@ -222,7 +248,6 @@ export default function ContactForm({ onSubmit }) {
                     {errors.message && (
                         <p id="message-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.message}</p>
                     )}
-                    <ValidationError prefix="Message" field="message" errors={state.errors} className="text-xs text-rose-500 mt-1 ml-1" />
                 </div>
 
                 {/* Submit Button */}
@@ -231,11 +256,11 @@ export default function ContactForm({ onSubmit }) {
                         variant="primary"
                         fullWidth
                         type="submit"
-                        disabled={state.submitting}
-                        className={state.submitting ? "opacity-75 cursor-not-allowed" : ""}
-                        icon={!state.submitting ? HiArrowRight : null}
+                        disabled={status.submitting}
+                        className={status.submitting ? "opacity-75 cursor-not-allowed" : ""}
+                        icon={!status.submitting ? HiArrowRight : null}
                     >
-                        {state.submitting ? "Sending..." : "Send Message"}
+                        {status.submitting ? "Sending..." : "Send Message"}
                     </Button>
                 </div>
             </form>
