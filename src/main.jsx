@@ -7,10 +7,8 @@ import { ThemeProvider } from './context/ThemeContext'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <FormspreeProvider project={import.meta.env.VITE_CONTACT_SERVICE_ID || "xeelgjya"}>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
-    </FormspreeProvider>
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </StrictMode>,
 )
