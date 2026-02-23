@@ -1,4 +1,5 @@
 export { default as Button } from "./Button";
+export { default as CodeWindow } from "./CodeWindow";
 export { default as TechTag } from "./TechTag";
 export { default as ProjectCard } from "./ProjectCard";
 export { default as ExperimentCard } from "./ExperimentCard";
