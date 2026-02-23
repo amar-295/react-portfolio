@@ -1,5 +1,12 @@
 import PropTypes from "prop-types";
 
+const SIZES = {
+    default:
+        "px-2.5 py-1 text-xs font-semibold text-light-text-primary dark:text-slate-300 bg-light-surface dark:bg-slate-800 border border-light-border dark:border-slate-700 rounded",
+    sm:
+        "px-1.5 py-0.5 text-[10px] text-light-text-secondary dark:text-slate-400 bg-light-surface dark:bg-slate-800 rounded",
+};
+
 /**
  * Reusable tech stack pill/tag component.
  *
@@ -9,15 +16,8 @@ import PropTypes from "prop-types";
  *   className – extra classes
  */
 export default function TechTag({ size = "default", className = "", children }) {
-    const sizes = {
-        default:
-            "px-2.5 py-1 text-xs font-semibold text-light-text-primary dark:text-slate-300 bg-light-surface dark:bg-slate-800 border border-light-border dark:border-slate-700 rounded",
-        sm:
-            "px-1.5 py-0.5 text-[10px] text-light-text-secondary dark:text-slate-400 bg-light-surface dark:bg-slate-800 rounded",
-    };
-
     return (
-        <span className={`${sizes[size] || sizes.default} ${className}`}>
+        <span className={`${SIZES[size] || SIZES.default} ${className}`}>
             {children}
         </span>
     );
