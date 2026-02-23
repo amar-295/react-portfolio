@@ -56,8 +56,8 @@ export default function ProjectCard({
       srcSet: `
         ${displayImage.replace("w=1000", "w=400")} 400w,
         ${displayImage.replace("w=1000", "w=800")} 800w,
-        ${displayImage.replace("w=1000", "w=1000")} 1000w
-      `,
+        ${displayImage} 1000w
+      `.trim(),
       sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
     };
   }, [displayImage]);
