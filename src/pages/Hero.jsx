@@ -1,10 +1,14 @@
-import { Button, CodeWindow } from "../components";
+import { lazy, Suspense } from "react";
+const CodeWindow = lazy(() => import("../components/CodeWindow"));
+import Button from "../components/Button";
+
 export default function Hero() {
   return (
     <section
       className="relative pt-32 md:pt-40 pb-20 md:pb-32 min-h-screen flex items-center grid-bg overflow-hidden"
       data-purpose="hero-section"
       id="home">
+
       <div className="w-full max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-10 md:gap-16 items-center">
         <div className="md:col-span-7 space-y-8 text-center md:text-left order-1">
           <div className="flex flex-col space-y-2">
@@ -17,17 +21,20 @@ export default function Hero() {
               </span>
             </h1>
           </div>
+
           <div className="space-y-4">
             <h2 className="text-xl md:text-3xl font-semibold text-slate-600 dark:text-slate-300 font-display">
               <span className="text-gradient">
                 Frontend Developer | Open to Opportunities
               </span>
             </h2>
+
             <p className="max-w-3xl mx-auto md:mx-0 text-light-text-secondary dark:text-slate-300 text-lg md:text-xl leading-relaxed font-light">
               I build responsive React interfaces, manage application state, and
               ship performant frontend projects using modern CSS.
             </p>
           </div>
+
           <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 bg-light-surface dark:bg-navy/60 border-2 border-light-border dark:border-white/10 rounded-2xl shadow-md dark:shadow-2xl md:min-h-[140px]">
             <div className="flex-1 text-center lg:text-left">
               <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
@@ -37,6 +44,7 @@ export default function Hero() {
                 Frontend Focused
               </span>
             </div>
+
             <div className="hidden lg:block w-px h-12 bg-light-border dark:bg-white/10 mx-8"></div>
             <div className="flex lg:hidden w-16 h-px bg-light-border dark:bg-white/10 mx-auto"></div>
             <div className="flex-1 text-center lg:text-left">
@@ -47,6 +55,7 @@ export default function Hero() {
                 Shipped & Deployed
               </span>
             </div>
+
             <div className="hidden lg:block w-px h-12 bg-light-border dark:bg-white/10 mx-8"></div>
             <div className="flex lg:hidden w-16 h-px bg-light-border dark:bg-white/10 mx-auto"></div>
             <div className="flex-1 text-center lg:text-left">
@@ -58,6 +67,7 @@ export default function Hero() {
               </span>
             </div>
           </div>
+
           <div className="flex flex-col md:flex-row gap-6 pt-4">
             <Button
               href="#contact"
@@ -66,6 +76,7 @@ export default function Hero() {
             >
               Contact Me
             </Button>
+
             <Button
               href="#projects"
               variant="outline"
@@ -75,11 +86,15 @@ export default function Hero() {
             </Button>
           </div>
         </div>
+
         <div className="md:col-span-5 relative flex justify-center items-center order-2 md:order-2 mt-8 md:mt-0 min-h-[250px] md:min-h-[300px] w-full max-w-[320px] md:max-w-none mx-auto">
           <div className="absolute w-48 md:w-64 h-48 md:h-64 bg-accent-dark/5 dark:bg-accent-teal/10 rounded-full blur-[80px] -z-10"></div>
+          <Suspense fallback={<div className="w-full h-full bg-gray-900/10 dark:bg-white/5 rounded-xl animate-pulse"></div>}>
             <CodeWindow />
+          </Suspense>
         </div>
       </div>
+
     </section>
   );
 }

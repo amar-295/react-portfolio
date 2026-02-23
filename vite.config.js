@@ -7,11 +7,6 @@ import webfontDl from 'vite-plugin-webfont-dl'
 
 // https://vite.dev/config/
 export default defineConfig({
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/tests/setup.js',
-  },
   plugins: [
     react(),
     tailwindcss(),

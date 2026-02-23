@@ -1,5 +1,4 @@
 export { default as Button } from "./Button";
-export { default as CodeWindow } from "./CodeWindow";
 export { default as TechTag } from "./TechTag";
 export { default as ProjectCard } from "./ProjectCard";
 export { default as ExperimentCard } from "./ExperimentCard";
@@ -13,4 +12,3 @@ export { default as ContactForm } from "./ContactForm";
 export { default as SocialLink } from "./SocialLink";
 export { default as Logo } from "./Logo";
 export { default as Footer } from "./Footer";
-export { default as ThemeIcon } from "./ThemeIcon";
