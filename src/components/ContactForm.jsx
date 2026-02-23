@@ -3,6 +3,8 @@ import { useState } from "react";
 import { HiArrowRight, HiCheck } from "react-icons/hi";
 import Button from "./Button";
 
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 /**
  * Contact form component with custom validation and Formspree hook integration.
  */
@@ -21,7 +23,6 @@ export default function ContactForm({ onSubmit }) {
 
     const validateForm = (formData) => {
         const newErrors = {};
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         const name = formData.get("name")?.toString().trim();
         if (!name) {
