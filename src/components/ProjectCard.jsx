@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useTheme } from "../context/ThemeContext";
 import PropTypes from "prop-types";
 import Button from "./Button";
@@ -47,6 +48,20 @@ export default function ProjectCard({
   // If imageDark is not provided, fall back to image.
   const displayImage = (imageDark && !isDarkMode) ? imageDark : image;
 
+  // Memoize Unsplash-specific props to avoid re-calculating on every render
+  const unsplashProps = useMemo(() => {
+    if (!displayImage.includes("unsplash.com")) return {};
+
+    return {
+      srcSet: `
+        ${displayImage.replace("w=1000", "w=400")} 400w,
+        ${displayImage.replace("w=1000", "w=800")} 800w,
+        ${displayImage.replace("w=1000", "w=1000")} 1000w
+      `,
+      sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+    };
+  }, [displayImage]);
+
   return (
     <article
       className={`flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12 ${showBorder ? "border-b-2 border-light-border dark:border-slate-800/40 pb-16 lg:pb-24" : "pb-16 lg:pb-0"
@@ -64,14 +79,7 @@ export default function ProjectCard({
             decoding="async"
             width="800"
             height="450"
-            {...(displayImage.includes("unsplash.com") ? {
-              srcSet: `
-                ${displayImage.replace("w=1000", "w=400")} 400w,
-                ${displayImage.replace("w=1000", "w=800")} 800w,
-                ${displayImage.replace("w=1000", "w=1000")} 1000w
-              `,
-              sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
-            } : {})}
+            {...unsplashProps}
             onError={(e) => {
               e.target.src = "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop";
             }}
