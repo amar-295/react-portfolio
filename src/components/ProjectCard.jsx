@@ -1,5 +1,5 @@
-import { useMemo } from "react";
 import { useTheme } from "../context/ThemeContext";
+import { useMemo } from "react";
 import PropTypes from "prop-types";
 import Button from "./Button";
 import TechTag from "./TechTag";
@@ -23,8 +23,6 @@ import { HiExternalLink, HiCode } from "react-icons/hi";
  *   liveDemoLink    – URL for live demo button (optional)
  *   repoLink        – URL for GitHub repo button (optional)
  *   showBorder      – show bottom border (default: true)
- *   featured        – marks this card as featured to adjust styling/layout (default: false)
- *   imageDark       – URL for the dark-mode version of the image or alt image source (optional)
  */
 export default function ProjectCard({
   image,
@@ -50,16 +48,17 @@ export default function ProjectCard({
   // If imageDark is not provided, fall back to image.
   const displayImage = (imageDark && !isDarkMode) ? imageDark : image;
 
-  // Memoize Unsplash-specific props to avoid re-calculating on every render
   const unsplashProps = useMemo(() => {
-    if (!displayImage.includes("unsplash.com")) return {};
+    if (!displayImage || !displayImage.includes("unsplash.com")) {
+      return {};
+    }
 
     return {
       srcSet: `
         ${displayImage.replace("w=1000", "w=400")} 400w,
         ${displayImage.replace("w=1000", "w=800")} 800w,
-        ${displayImage} 1000w
-      `.trim(),
+        ${displayImage.replace("w=1000", "w=1000")} 1000w
+      `,
       sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
     };
   }, [displayImage]);
