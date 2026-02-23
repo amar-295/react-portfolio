@@ -23,6 +23,8 @@ import { HiExternalLink, HiCode } from "react-icons/hi";
  *   liveDemoLink    – URL for live demo button (optional)
  *   repoLink        – URL for GitHub repo button (optional)
  *   showBorder      – show bottom border (default: true)
+ *   featured        – marks this card as featured to adjust styling/layout (default: false)
+ *   imageDark       – URL for the dark-mode version of the image or alt image source (optional)
  */
 export default function ProjectCard({
   image,
