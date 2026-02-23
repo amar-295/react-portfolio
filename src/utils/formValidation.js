@@ -1,3 +1,7 @@
+// Regular expression for basic email validation
+// Using a stricter pattern to avoid potential ReDoS issues with broad negations
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 /**
  * Validates the contact form data.
  * @param {FormData} formData - The form data to validate.
@@ -5,7 +9,6 @@
  */
 export const validateContactForm = (formData) => {
     const newErrors = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const name = formData.get("name")?.toString().trim();
     if (!name) {
@@ -17,7 +20,7 @@ export const validateContactForm = (formData) => {
         newErrors.email = "Email is required";
     } else if (email.length > 254) {
         newErrors.email = "Email address is too long";
-    } else if (!emailRegex.test(email)) {
+    } else if (!EMAIL_REGEX.test(email)) {
         newErrors.email = "Please enter a valid email address";
     }
 
