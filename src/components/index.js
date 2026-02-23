@@ -12,3 +12,4 @@ export { default as ContactForm } from "./ContactForm";
 export { default as SocialLink } from "./SocialLink";
 export { default as Logo } from "./Logo";
 export { default as Footer } from "./Footer";
+export { default as ThemeIcon } from "./ThemeIcon";
