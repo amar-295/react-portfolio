@@ -1,5 +1,16 @@
 import PropTypes from "prop-types";
 
+/* ---- variant class maps ---- */
+const base =
+    "group font-bold rounded-xl text-base transition-opacity transition-transform duration-300 inline-flex items-center justify-center gap-2.5 active:scale-95 hover:opacity-90";
+
+const variants = {
+    primary:
+        "px-8 py-3.5 bg-gray-900 dark:bg-blue-600 hover:bg-black dark:hover:bg-blue-500 text-white shadow-lg hover:shadow-xl dark:shadow-blue-500/30 hover:-translate-y-0.5",
+    outline:
+        "px-8 py-3.5 bg-transparent border-2 border-gray-900 dark:border-slate-600 hover:border-gray-900 dark:hover:border-blue-500 hover:bg-gray-50 dark:hover:bg-blue-500/10 text-gray-900 dark:text-white",
+};
+
 /**
  * Reusable Button / Link component extracted from the Projects section.
  *
@@ -25,17 +36,6 @@ export default function Button({
     children,
     ...rest
 }) {
-    /* ---- variant class maps ---- */
-    const base =
-        "group font-bold rounded-xl text-base transition-opacity transition-transform duration-300 inline-flex items-center justify-center gap-2.5 active:scale-95 hover:opacity-90";
-
-    const variants = {
-        primary:
-            "px-8 py-3.5 bg-gray-900 dark:bg-blue-600 hover:bg-black dark:hover:bg-blue-500 text-white shadow-lg hover:shadow-xl dark:shadow-blue-500/30 hover:-translate-y-0.5",
-        outline:
-            "px-8 py-3.5 bg-transparent border-2 border-gray-900 dark:border-slate-600 hover:border-gray-900 dark:hover:border-blue-500 hover:bg-gray-50 dark:hover:bg-blue-500/10 text-gray-900 dark:text-white",
-    };
-
     const widthClass = fullWidth ? "w-full" : "";
 
     const classes = `${base} ${variants[variant] || variants.primary} ${widthClass} ${className}`.trim();
