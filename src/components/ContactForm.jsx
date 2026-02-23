@@ -3,12 +3,14 @@ import { useState } from "react";
 import { HiArrowRight, HiCheck } from "react-icons/hi";
 import Button from "./Button";
 
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 /**
  * Contact form component with custom validation and Formspree hook integration.
  */
 
 export default function ContactForm({ onSubmit }) {
-    const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID || "xeelgjya";
+    const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID;
     const [status, setStatus] = useState({
         submitting: false,
         succeeded: false,
@@ -16,9 +18,11 @@ export default function ContactForm({ onSubmit }) {
     });
     const [errors, setErrors] = useState({});
 
+    // Track mount time for spam protection
+    const [mountTime] = useState(() => Date.now());
+
     const validateForm = (formData) => {
         const newErrors = {};
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         const name = formData.get("name")?.toString().trim();
         if (!name) {
@@ -50,6 +54,22 @@ export default function ContactForm({ onSubmit }) {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
+
+        // Security check: Honeypot field
+        const honeypot = formData.get("_gotcha")?.toString();
+        if (honeypot) {
+            // Silently fail if honeypot is filled
+            setStatus({ submitting: false, succeeded: true, errors: [] });
+            return;
+        }
+
+        // Security check: Time-based submission (minimum 2 seconds)
+        // If the form is submitted too quickly, it's likely a bot
+        if (Date.now() - mountTime < 2000) {
+            // Silently fail
+            setStatus({ submitting: false, succeeded: true, errors: [] });
+            return;
+        }
 
         if (!validateForm(formData)) {
             return;
@@ -84,7 +104,7 @@ export default function ContactForm({ onSubmit }) {
                 const errorMessages = data.errors?.map(err => err.message) || ["Something went wrong. Please try again."];
                 setStatus({ submitting: false, succeeded: false, errors: errorMessages });
             }
-        } catch (error) {
+        } catch {
             setStatus({ submitting: false, succeeded: false, errors: ["Network error. Please try again later."] });
         }
     };
@@ -127,6 +147,11 @@ export default function ContactForm({ onSubmit }) {
     return (
         <div className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-lg shadow-gray-100/50 dark:shadow-none backdrop-blur-sm">
             <form onSubmit={handleLocalSubmit} className="space-y-6" noValidate>
+                {/* Honeypot field for spam protection */}
+                <div style={{ position: "absolute", left: "-9999px" }} aria-hidden="true">
+                    <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" />
+                </div>
+
                 {status.errors.length > 0 && (
                     <div className="p-4 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-lg text-rose-600 dark:text-rose-300 text-sm">
                         {status.errors.join(", ")}
