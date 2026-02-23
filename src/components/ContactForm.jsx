@@ -3,12 +3,11 @@ import { useState } from "react";
 import { HiArrowRight, HiCheck } from "react-icons/hi";
 import Button from "./Button";
 
-
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 /**
  * Contact form component with custom validation and Formspree hook integration.
  */
-
 export default function ContactForm({ onSubmit }) {
     const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID;
     const [status, setStatus] = useState({
@@ -85,7 +84,7 @@ export default function ContactForm({ onSubmit }) {
                 const errorMessages = data.errors?.map(err => err.message) || ["Something went wrong. Please try again."];
                 setStatus({ submitting: false, succeeded: false, errors: errorMessages });
             }
-        } catch (error) {
+        } catch {
             setStatus({ submitting: false, succeeded: false, errors: ["Network error. Please try again later."] });
         }
     };
