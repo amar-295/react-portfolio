@@ -15,6 +15,8 @@ export const validateContactForm = (formData) => {
     const email = formData.get("email")?.toString().trim();
     if (!email) {
         newErrors.email = "Email is required";
+    } else if (email.length > 254) {
+        newErrors.email = "Email address is too long";
     } else if (!emailRegex.test(email)) {
         newErrors.email = "Please enter a valid email address";
     }
