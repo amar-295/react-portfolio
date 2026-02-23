@@ -8,7 +8,7 @@ import Button from "./Button";
  */
 
 export default function ContactForm({ onSubmit }) {
-    const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID || "xeelgjya";
+    const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID;
     const [status, setStatus] = useState({
         submitting: false,
         succeeded: false,
