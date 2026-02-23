@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { HiArrowRight, HiCheck } from "react-icons/hi";
 import Button from "./Button";
+import { validateContactForm } from "../utils/formValidation";
 
 /**
  * Contact form component with custom validation and Formspree hook integration.
@@ -17,34 +18,12 @@ export default function ContactForm({ onSubmit }) {
     const [errors, setErrors] = useState({});
 
     const validateForm = (formData) => {
-        const newErrors = {};
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        const name = formData.get("name")?.toString().trim();
-        if (!name) {
-            newErrors.name = "Name is required";
-        }
-
-        const email = formData.get("email")?.toString().trim();
-        if (!email) {
-            newErrors.email = "Email is required";
-        } else if (!emailRegex.test(email)) {
-            newErrors.email = "Please enter a valid email address";
-        }
-
-        const subject = formData.get("_subject")?.toString().trim();
-        if (!subject) {
-            newErrors._subject = "Subject is required";
-        }
-
-        const message = formData.get("message")?.toString().trim();
-        if (!message) {
-            newErrors.message = "Message is required";
-        }
-
+        const newErrors = validateContactForm(formData);
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
+
+
 
     const handleLocalSubmit = async (e) => {
         e.preventDefault();
