@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { HiArrowRight, HiCheck } from "react-icons/hi";
 import Button from "./Button";
 
@@ -84,7 +84,7 @@ export default function ContactForm({ onSubmit }) {
                 const errorMessages = data.errors?.map(err => err.message) || ["Something went wrong. Please try again."];
                 setStatus({ submitting: false, succeeded: false, errors: errorMessages });
             }
-        } catch (error) {
+        } catch {
             setStatus({ submitting: false, succeeded: false, errors: ["Network error. Please try again later."] });
         }
     };
@@ -93,6 +93,16 @@ export default function ContactForm({ onSubmit }) {
         setStatus({ submitting: false, succeeded: false, errors: [] });
         setErrors({});
     };
+
+    const handleInputChange = useCallback((e) => {
+        const { name } = e.target;
+        setErrors((prevErrors) => {
+            if (prevErrors[name]) {
+                return { ...prevErrors, [name]: null };
+            }
+            return prevErrors;
+        });
+    }, []);
 
     // Helper to get input classes based on error state
     const getInputClass = (fieldName) => {
@@ -153,9 +163,7 @@ export default function ContactForm({ onSubmit }) {
                                 type="text"
                                 aria-invalid={!!errors.name}
                                 aria-describedby={errors.name ? "name-error" : undefined}
-                                onChange={() => {
-                                    if (errors.name) setErrors({ ...errors, name: null });
-                                }}
+                                onChange={handleInputChange}
                             />
                         </div>
                         {errors.name && (
@@ -183,9 +191,7 @@ export default function ContactForm({ onSubmit }) {
                                 type="email"
                                 aria-invalid={!!errors.email}
                                 aria-describedby={errors.email ? "email-error" : undefined}
-                                onChange={() => {
-                                    if (errors.email) setErrors({ ...errors, email: null });
-                                }}
+                                onChange={handleInputChange}
                             />
                         </div>
                         {errors.email && (
@@ -215,9 +221,7 @@ export default function ContactForm({ onSubmit }) {
                             type="text"
                             aria-invalid={!!errors._subject}
                             aria-describedby={errors._subject ? "subject-error" : undefined}
-                            onChange={() => {
-                                if (errors._subject) setErrors({ ...errors, _subject: null });
-                            }}
+                            onChange={handleInputChange}
                         />
                     </div>
                     {errors._subject && (
@@ -241,9 +245,7 @@ export default function ContactForm({ onSubmit }) {
                         rows="4"
                         aria-invalid={!!errors.message}
                         aria-describedby={errors.message ? "message-error" : undefined}
-                        onChange={() => {
-                            if (errors.message) setErrors({ ...errors, message: null });
-                        }}
+                        onChange={handleInputChange}
                     ></textarea>
                     {errors.message && (
                         <p id="message-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.message}</p>
