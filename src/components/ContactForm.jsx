@@ -1,11 +1,8 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { HiArrowRight, HiCheck } from "react-icons/hi";
 import Button from "./Button";
-import { validateContactForm } from "../utils/formValidation";
 
-
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 /**
  * Contact form component with custom validation and Formspree hook integration.
  */
@@ -19,37 +16,40 @@ export default function ContactForm({ onSubmit }) {
     });
     const [errors, setErrors] = useState({});
 
-    // Track mount time for spam protection
-    const [mountTime] = useState(() => Date.now());
-
     const validateForm = (formData) => {
-        const newErrors = validateContactForm(formData);
+        const newErrors = {};
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        const name = formData.get("name")?.toString().trim();
+        if (!name) {
+            newErrors.name = "Name is required";
+        }
+
+        const email = formData.get("email")?.toString().trim();
+        if (!email) {
+            newErrors.email = "Email is required";
+        } else if (!emailRegex.test(email)) {
+            newErrors.email = "Please enter a valid email address";
+        }
+
+        const subject = formData.get("_subject")?.toString().trim();
+        if (!subject) {
+            newErrors._subject = "Subject is required";
+        }
+
+        const message = formData.get("message")?.toString().trim();
+        if (!message) {
+            newErrors.message = "Message is required";
+        }
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
-
-
 
     const handleLocalSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
-
-        // Security check: Honeypot field
-        const honeypot = formData.get("_gotcha")?.toString();
-        if (honeypot) {
-            // Silently fail if honeypot is filled
-            setStatus({ submitting: false, succeeded: true, errors: [] });
-            return;
-        }
-
-        // Security check: Time-based submission (minimum 2 seconds)
-        // If the form is submitted too quickly, it's likely a bot
-        if (Date.now() - mountTime < 2000) {
-            // Silently fail
-            setStatus({ submitting: false, succeeded: true, errors: [] });
-            return;
-        }
 
         if (!validateForm(formData)) {
             return;
@@ -94,6 +94,16 @@ export default function ContactForm({ onSubmit }) {
         setErrors({});
     };
 
+    const handleInputChange = useCallback((e) => {
+        const { name } = e.target;
+        setErrors((prevErrors) => {
+            if (prevErrors[name]) {
+                return { ...prevErrors, [name]: null };
+            }
+            return prevErrors;
+        });
+    }, []);
+
     // Helper to get input classes based on error state
     const getInputClass = (fieldName) => {
         const baseClass = "block w-full rounded-lg bg-white dark:bg-[#1e293b]/50 py-3 pl-10 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 sm:text-sm transition-opacity transition-transform duration-300 focus:ring-4";
@@ -127,11 +137,6 @@ export default function ContactForm({ onSubmit }) {
     return (
         <div className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-lg shadow-gray-100/50 dark:shadow-none backdrop-blur-sm">
             <form onSubmit={handleLocalSubmit} className="space-y-6" noValidate>
-                {/* Honeypot field for spam protection */}
-                <div style={{ position: "absolute", left: "-9999px" }} aria-hidden="true">
-                    <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" />
-                </div>
-
                 {status.errors.length > 0 && (
                     <div className="p-4 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-lg text-rose-600 dark:text-rose-300 text-sm">
                         {status.errors.join(", ")}
@@ -158,9 +163,7 @@ export default function ContactForm({ onSubmit }) {
                                 type="text"
                                 aria-invalid={!!errors.name}
                                 aria-describedby={errors.name ? "name-error" : undefined}
-                                onChange={() => {
-                                    if (errors.name) setErrors({ ...errors, name: null });
-                                }}
+                                onChange={handleInputChange}
                             />
                         </div>
                         {errors.name && (
@@ -188,9 +191,7 @@ export default function ContactForm({ onSubmit }) {
                                 type="email"
                                 aria-invalid={!!errors.email}
                                 aria-describedby={errors.email ? "email-error" : undefined}
-                                onChange={() => {
-                                    if (errors.email) setErrors({ ...errors, email: null });
-                                }}
+                                onChange={handleInputChange}
                             />
                         </div>
                         {errors.email && (
@@ -220,9 +221,7 @@ export default function ContactForm({ onSubmit }) {
                             type="text"
                             aria-invalid={!!errors._subject}
                             aria-describedby={errors._subject ? "subject-error" : undefined}
-                            onChange={() => {
-                                if (errors._subject) setErrors({ ...errors, _subject: null });
-                            }}
+                            onChange={handleInputChange}
                         />
                     </div>
                     {errors._subject && (
@@ -246,9 +245,7 @@ export default function ContactForm({ onSubmit }) {
                         rows="4"
                         aria-invalid={!!errors.message}
                         aria-describedby={errors.message ? "message-error" : undefined}
-                        onChange={() => {
-                            if (errors.message) setErrors({ ...errors, message: null });
-                        }}
+                        onChange={handleInputChange}
                     ></textarea>
                     {errors.message && (
                         <p id="message-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.message}</p>

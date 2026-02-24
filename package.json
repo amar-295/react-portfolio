@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-
+    "test": "vitest",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
@@ -19,6 +20,9 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
@@ -26,11 +30,12 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
-
+    "jsdom": "^28.1.0",
+    "react-test-renderer": "^19.2.4",
     "vite": "^7.3.1",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-html-inline-sources": "^0.0.4",
     "vite-plugin-webfont-dl": "^3.12.0",
-
+    "vitest": "^4.0.18"
   }
 }
