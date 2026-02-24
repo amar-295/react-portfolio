@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { HiArrowRight, HiCheck } from "react-icons/hi";
+import { FaRegUser, FaRegFolder, FaAt } from "react-icons/fa";
 import Button from "./Button";
 
 /**
@@ -94,6 +95,16 @@ export default function ContactForm({ onSubmit }) {
         setErrors({});
     };
 
+    const handleInputChange = useCallback((e) => {
+        const { name } = e.target;
+        setErrors((prevErrors) => {
+            if (prevErrors[name]) {
+                return { ...prevErrors, [name]: null };
+            }
+            return prevErrors;
+        });
+    }, []);
+
     // Helper to get input classes based on error state
     const getInputClass = (fieldName) => {
         const baseClass = "block w-full rounded-lg bg-white dark:bg-[#1e293b]/50 py-3 pl-10 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 sm:text-sm transition-opacity transition-transform duration-300 focus:ring-4";
@@ -143,7 +154,7 @@ export default function ContactForm({ onSubmit }) {
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i className={`fa-regular fa-user ${errors.name ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`}></i>
+                                <FaRegUser className={`${errors.name ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`} />
                             </div>
                             <input
                                 className={getInputClass("name")}
@@ -153,9 +164,7 @@ export default function ContactForm({ onSubmit }) {
                                 type="text"
                                 aria-invalid={!!errors.name}
                                 aria-describedby={errors.name ? "name-error" : undefined}
-                                onChange={() => {
-                                    if (errors.name) setErrors({ ...errors, name: null });
-                                }}
+                                onChange={handleInputChange}
                             />
                         </div>
                         {errors.name && (
@@ -173,7 +182,7 @@ export default function ContactForm({ onSubmit }) {
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i className={`fa-solid fa-at ${errors.email ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`}></i>
+                                <FaAt className={`${errors.email ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`} />
                             </div>
                             <input
                                 className={getInputClass("email")}
@@ -183,9 +192,7 @@ export default function ContactForm({ onSubmit }) {
                                 type="email"
                                 aria-invalid={!!errors.email}
                                 aria-describedby={errors.email ? "email-error" : undefined}
-                                onChange={() => {
-                                    if (errors.email) setErrors({ ...errors, email: null });
-                                }}
+                                onChange={handleInputChange}
                             />
                         </div>
                         {errors.email && (
@@ -205,7 +212,7 @@ export default function ContactForm({ onSubmit }) {
 
                     <div className="relative rounded-md shadow-sm">
                         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <i className={`fa-regular fa-folder ${errors._subject ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`}></i>
+                            <FaRegFolder className={`${errors._subject ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`} />
                         </div>
                         <input
                             className={getInputClass("_subject")}
@@ -215,9 +222,7 @@ export default function ContactForm({ onSubmit }) {
                             type="text"
                             aria-invalid={!!errors._subject}
                             aria-describedby={errors._subject ? "subject-error" : undefined}
-                            onChange={() => {
-                                if (errors._subject) setErrors({ ...errors, _subject: null });
-                            }}
+                            onChange={handleInputChange}
                         />
                     </div>
                     {errors._subject && (
@@ -241,9 +246,7 @@ export default function ContactForm({ onSubmit }) {
                         rows="4"
                         aria-invalid={!!errors.message}
                         aria-describedby={errors.message ? "message-error" : undefined}
-                        onChange={() => {
-                            if (errors.message) setErrors({ ...errors, message: null });
-                        }}
+                        onChange={handleInputChange}
                     ></textarea>
                     {errors.message && (
                         <p id="message-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.message}</p>
