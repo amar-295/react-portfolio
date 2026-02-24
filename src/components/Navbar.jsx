@@ -256,6 +256,8 @@ export default function Navbar() {
                                                 href={link.href}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
+                                                aria-label={link.label || link.platform}
+                                                title={link.label || link.platform}
                                                 className="text-gray-500 dark:text-slate-400 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity transform hover:scale-110 hover:opacity-80"
                                             >
                                                 <link.icon className="text-2xl" />

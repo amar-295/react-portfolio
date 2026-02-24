@@ -52,6 +52,7 @@ export const socialLinks = [
         id: "github-button",
         platform: "github",
         href: SOCIAL_URLS.github,
+        label: "GitHub",
         icon: FaGithub,
         variant: "icon",
     },
