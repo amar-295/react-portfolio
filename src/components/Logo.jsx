@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-
 /**
  * Reusable Logo component using the high-detail brand SVG.
  * 
@@ -34,11 +32,9 @@ const Logo = ({ className = "w-8 h-8", color = "currentColor", strokeWidth = 80 
         </svg>
     );
 };
-
 Logo.propTypes = {
     className: PropTypes.string,
     color: PropTypes.string,
     strokeWidth: PropTypes.number
 };
-
 export default Logo;
