@@ -26,11 +26,9 @@ const Logo = ({ className = "w-8 h-8", color = "currentColor", strokeWidth = 80 
         </svg>
     );
 };
-
 Logo.propTypes = {
     className: PropTypes.string,
     color: PropTypes.string,
     strokeWidth: PropTypes.number
 };
-
 export default Logo;
