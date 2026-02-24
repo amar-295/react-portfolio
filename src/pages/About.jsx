@@ -1,5 +1,6 @@
 import aboutMeImage from '../assets/About.svg'
 import { FaGraduationCap, FaBriefcase, FaMapMarkerAlt, FaCode } from 'react-icons/fa';
+import { InfoCard } from '../components';
 
 export default function About() {
   return (
@@ -50,70 +51,26 @@ export default function About() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-              {/* Education Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-6 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
-                <div className="flex items-start gap-4">
-                  <div className="shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
-                      <FaGraduationCap className="text-white text-2xl" />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Education</h3>
-                    <p className="text-base text-light-text-secondary dark:text-gray-300">
-                      BCA | DAV Centenary College
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Experience Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-6 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
-                <div className="flex items-start gap-4">
-                  <div className="shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
-                      <FaBriefcase className="text-white text-2xl" />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Experience</h3>
-                    <p className="text-base text-light-text-secondary dark:text-gray-300">
-                      Project-Based Learning (Self-Driven Projects)
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Location Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-6 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
-                <div className="flex items-start gap-4">
-                  <div className="shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
-                      <FaMapMarkerAlt className="text-white text-2xl" />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Location</h3>
-                    <p className="text-base text-light-text-secondary dark:text-gray-300">India (Remote Friendly)</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Specialization Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-6 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
-                <div className="flex items-start gap-4">
-                  <div className="shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
-                      <FaCode className="text-white text-2xl" />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Specialization</h3>
-                    <p className="text-base text-light-text-secondary dark:text-gray-300">Frontend Web Development</p>
-                  </div>
-                </div>
-              </div>
-
+              <InfoCard
+                icon={FaGraduationCap}
+                title="Education"
+                content="BCA | DAV Centenary College"
+              />
+              <InfoCard
+                icon={FaBriefcase}
+                title="Experience"
+                content="Project-Based Learning (Self-Driven Projects)"
+              />
+              <InfoCard
+                icon={FaMapMarkerAlt}
+                title="Location"
+                content="India (Remote Friendly)"
+              />
+              <InfoCard
+                icon={FaCode}
+                title="Specialization"
+                content="Frontend Web Development"
+              />
             </div>
           </div>
         </div>
