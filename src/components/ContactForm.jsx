@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useState, useCallback } from "react";
 import { HiArrowRight, HiCheck } from "react-icons/hi";
+import { FaRegUser, FaRegFolder, FaAt } from "react-icons/fa";
 import Button from "./Button";
 
 /**
@@ -153,7 +154,7 @@ export default function ContactForm({ onSubmit }) {
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i className={`fa-regular fa-user ${errors.name ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`}></i>
+                                <FaRegUser className={`${errors.name ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`} />
                             </div>
                             <input
                                 className={getInputClass("name")}
@@ -181,7 +182,7 @@ export default function ContactForm({ onSubmit }) {
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i className={`fa-solid fa-at ${errors.email ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`}></i>
+                                <FaAt className={`${errors.email ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`} />
                             </div>
                             <input
                                 className={getInputClass("email")}
@@ -211,7 +212,7 @@ export default function ContactForm({ onSubmit }) {
 
                     <div className="relative rounded-md shadow-sm">
                         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <i className={`fa-regular fa-folder ${errors._subject ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`}></i>
+                            <FaRegFolder className={`${errors._subject ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`} />
                         </div>
                         <input
                             className={getInputClass("_subject")}
