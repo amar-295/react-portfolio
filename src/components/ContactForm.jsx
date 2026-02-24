@@ -84,7 +84,7 @@ export default function ContactForm({ onSubmit }) {
                 const errorMessages = data.errors?.map(err => err.message) || ["Something went wrong. Please try again."];
                 setStatus({ submitting: false, succeeded: false, errors: errorMessages });
             }
-        } catch (error) {
+        } catch {
             setStatus({ submitting: false, succeeded: false, errors: ["Network error. Please try again later."] });
         }
     };
