@@ -17,29 +17,31 @@ describe('ContactForm', () => {
     vi.unstubAllEnvs();
   });
 
+  const fillAndSubmitForm = (name, email, subject, message) => {
+    fireEvent.change(screen.getByLabelText(/full name/i), {
+      target: { value: name },
+    });
+    fireEvent.change(screen.getByLabelText(/email address/i), {
+      target: { value: email },
+    });
+    fireEvent.change(screen.getByLabelText(/subject/i), {
+      target: { value: subject },
+    });
+    fireEvent.change(screen.getByLabelText(/your message/i), {
+      target: { value: message },
+    });
+
+    const submitButton = screen.getByRole('button', { name: /send message/i });
+    fireEvent.click(submitButton);
+  };
+
   it('displays general error message on network failure', async () => {
     // Mock network error
     globalThis.fetch.mockRejectedValue(new Error('Network error'));
 
     render(<ContactForm />);
 
-    // Fill out the form
-    fireEvent.change(screen.getByLabelText(/full name/i), {
-      target: { value: 'John Doe' },
-    });
-    fireEvent.change(screen.getByLabelText(/email address/i), {
-      target: { value: 'john@example.com' },
-    });
-    fireEvent.change(screen.getByLabelText(/subject/i), {
-      target: { value: 'Test Subject' },
-    });
-    fireEvent.change(screen.getByLabelText(/your message/i), {
-      target: { value: 'This is a test message.' },
-    });
-
-    // Submit the form
-    const submitButton = screen.getByRole('button', { name: /send message/i });
-    fireEvent.click(submitButton);
+    fillAndSubmitForm('John Doe', 'john@example.com', 'Test Subject', 'This is a test message.');
 
     // Verify loading state
     expect(screen.getByText(/sending.../i)).toBeInTheDocument();
@@ -62,23 +64,7 @@ describe('ContactForm', () => {
 
     render(<ContactForm />);
 
-    // Fill out the form
-    fireEvent.change(screen.getByLabelText(/full name/i), {
-      target: { value: 'Jane Doe' },
-    });
-    fireEvent.change(screen.getByLabelText(/email address/i), {
-      target: { value: 'jane@example.com' },
-    });
-    fireEvent.change(screen.getByLabelText(/subject/i), {
-      target: { value: 'Another Subject' },
-    });
-    fireEvent.change(screen.getByLabelText(/your message/i), {
-      target: { value: 'Another test message.' },
-    });
-
-    // Submit the form
-    const submitButton = screen.getByRole('button', { name: /send message/i });
-    fireEvent.click(submitButton);
+    fillAndSubmitForm('Jane Doe', 'jane@example.com', 'Another Subject', 'Another test message.');
 
     // Wait for error message
     await waitFor(() => {
@@ -96,31 +82,18 @@ describe('ContactForm', () => {
     const onSubmitMock = vi.fn();
     render(<ContactForm onSubmit={onSubmitMock} />);
 
-    // Fill out the form
-    fireEvent.change(screen.getByLabelText(/full name/i), {
-      target: { value: 'Success User' },
-    });
-    fireEvent.change(screen.getByLabelText(/email address/i), {
-      target: { value: 'success@example.com' },
-    });
-    fireEvent.change(screen.getByLabelText(/subject/i), {
-      target: { value: 'Success Subject' },
-    });
-    fireEvent.change(screen.getByLabelText(/your message/i), {
-      target: { value: 'Success message.' },
-    });
-
-    // Submit the form
-    const submitButton = screen.getByRole('button', { name: /send message/i });
-    fireEvent.click(submitButton);
+    fillAndSubmitForm('Success User', 'success@example.com', 'Success Subject', 'Success message.');
 
     // Wait for success message
     await waitFor(() => {
       expect(screen.getByText('Message Sent!')).toBeInTheDocument();
     });
 
-    // Since FormData is not easily inspecting in jsdom/node environment usually without proper polyfills,
-    // let's just check if onSubmit was called.
-    expect(onSubmitMock).toHaveBeenCalled();
+    expect(onSubmitMock).toHaveBeenCalledWith(expect.objectContaining({
+        name: 'Success User',
+        email: 'success@example.com',
+        _subject: 'Success Subject',
+        message: 'Success message.'
+    }));
   });
 });
