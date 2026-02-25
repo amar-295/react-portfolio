@@ -126,10 +126,10 @@ npm run build
 To make the Contact Form functional, you need to set up **Formspree**.
 
 1. Create a `.env` file in the root directory.
-2. Add your Formspree Service ID:
+2. Add your Formspree Project ID:
 
 ```env
-VITE_CONTACT_SERVICE_ID=your_service_id_here
+VITE_FORMSPREE_PROJECT_ID=your_project_id_here
 ```
 
 ---
