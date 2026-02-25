@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./pages/Hero";
 import About from "./pages/About";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 import { footerData } from "./data/contact";
 
 // Lazy load non-critical sections
@@ -24,6 +25,7 @@ function App() {
         </Suspense>
       </main>
       <Footer {...footerData} />
+      <ScrollToTop />
     </>
   );
 }
