@@ -14,7 +14,7 @@ export default function SectionHeading({
     borderColor = "border-gray-900 dark:border-primary-blue",
 }) {
     // Map border color to background color for the new bar style
-    const barColor = borderColor.replaceAll("border-", "bg-");
+    const barColor = borderColor.replace("border-", "bg-");
 
     return (
         <div className="flex items-center mb-12">
