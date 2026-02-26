@@ -50,7 +50,7 @@ export default function ExperimentCard({
     const Icon = icon;
 
     return (
-        <article className="bg-white dark:bg-card-bg rounded-xl border border-light-border dark:border-slate-800/50 p-6 flex flex-col h-full hover:border-accent-dark dark:hover:border-slate-600 transition-opacity duration-300 shadow-sm hover:shadow-md dark:shadow-lg dark:shadow-black/20 group hover:opacity-95">
+        <article className="bg-white dark:bg-card-bg rounded-xl border border-light-border dark:border-slate-800/50 p-6 flex flex-col h-full hover:border-accent-dark dark:hover:border-slate-600 shadow-sm group card-hover">
             {/* Header row: icon + links */}
             <div className="flex items-center justify-between mb-3">
                 <div

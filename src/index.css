@@ -75,13 +75,19 @@ html {
     background-size: 40px 40px;
 }
 
-/* Card hover effects - theme aware */
-.card-hover {
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+/* Card hover effects - theme aware & accessible */
+@media (prefers-reduced-motion: no-preference) {
+    .card-hover {
+        transition:
+            transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+            box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+            border-color 0.3s ease,
+            opacity 0.3s ease;
+    }
 
-.card-hover:hover {
-    transform: translateY(-4px);
+    .card-hover:hover {
+        transform: translateY(-4px);
+    }
 }
 
 /* Light mode card shadow */
