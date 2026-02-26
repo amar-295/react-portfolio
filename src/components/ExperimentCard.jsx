@@ -68,6 +68,7 @@ export default function ExperimentCard({
                             title="GitHub"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label={`View source code for ${title} on GitHub`}
                         >
                             <HiCode className="text-xl" />
                         </a>
@@ -79,6 +80,7 @@ export default function ExperimentCard({
                             title="Live Demo"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label={`View live demo of ${title}`}
                         >
                             <HiExternalLink className="text-xl" />
                         </a>
