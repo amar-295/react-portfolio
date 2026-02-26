@@ -35,7 +35,7 @@ export default function Hero() {
             </p>
           </div>
 
-          <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 glass-card rounded-2xl shadow-xl dark:shadow-2xl md:min-h-[140px] transform hover:scale-[1.02] transition-all duration-500">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 glass-card rounded-2xl shadow-xl dark:shadow-2xl md:min-h-[140px] transform motion-safe:hover:scale-[1.02] motion-safe:transition-all motion-safe:duration-500 motion-reduce:transform-none motion-reduce:transition-none">
             <div className="flex-1 text-center lg:text-left">
               <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
                 React & JS
