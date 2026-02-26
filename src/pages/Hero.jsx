@@ -35,7 +35,7 @@ export default function Hero() {
             </p>
           </div>
 
-          <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 bg-light-surface dark:bg-navy/60 border-2 border-light-border dark:border-white/10 rounded-2xl shadow-md dark:shadow-2xl md:min-h-[140px]">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 glass-card rounded-2xl shadow-xl dark:shadow-2xl md:min-h-[140px] transform hover:scale-[1.02] transition-all duration-500">
             <div className="flex-1 text-center lg:text-left">
               <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
                 React & JS
@@ -45,8 +45,8 @@ export default function Hero() {
               </span>
             </div>
 
-            <div className="hidden lg:block w-px h-12 bg-light-border dark:bg-white/10 mx-8"></div>
-            <div className="flex lg:hidden w-16 h-px bg-light-border dark:bg-white/10 mx-auto"></div>
+            <div className="hidden lg:block w-px h-12 bg-light-border/50 dark:bg-white/10 mx-8"></div>
+            <div className="flex lg:hidden w-16 h-px bg-light-border/50 dark:bg-white/10 mx-auto"></div>
             <div className="flex-1 text-center lg:text-left">
               <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
                 3+ Projects
@@ -56,8 +56,8 @@ export default function Hero() {
               </span>
             </div>
 
-            <div className="hidden lg:block w-px h-12 bg-light-border dark:bg-white/10 mx-8"></div>
-            <div className="flex lg:hidden w-16 h-px bg-light-border dark:bg-white/10 mx-auto"></div>
+            <div className="hidden lg:block w-px h-12 bg-light-border/50 dark:bg-white/10 mx-8"></div>
+            <div className="flex lg:hidden w-16 h-px bg-light-border/50 dark:bg-white/10 mx-auto"></div>
             <div className="flex-1 text-center lg:text-left">
               <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
                 Accessible
