@@ -81,12 +81,12 @@ export default function ProjectCard({
         {/* Mobile-only buttons */}
         <div className="flex flex-col sm:flex-row gap-4 pt-6 lg:hidden">
           {liveDemoLink && (
-            <Button href={liveDemoLink} icon={HiExternalLink} fullWidth target="_blank" rel="noopener noreferrer">
+            <Button href={liveDemoLink} icon={HiExternalLink} fullWidth target="_blank" rel="noopener noreferrer" aria-label={`Live Demo of ${title}`}>
               Live Demo
             </Button>
           )}
           {repoLink && (
-            <Button variant="outline" href={repoLink} icon={HiCode} fullWidth target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" href={repoLink} icon={HiCode} fullWidth target="_blank" rel="noopener noreferrer" aria-label={`GitHub Repository for ${title}`}>
               GitHub Repository
             </Button>
           )}
@@ -131,12 +131,12 @@ export default function ProjectCard({
         {/* Desktop-only buttons */}
         <div className="hidden lg:flex gap-4 pt-4">
           {liveDemoLink && (
-            <Button href={liveDemoLink} icon={HiExternalLink} target="_blank" rel="noopener noreferrer">
+            <Button href={liveDemoLink} icon={HiExternalLink} target="_blank" rel="noopener noreferrer" aria-label={`Live Demo of ${title}`}>
               Live Demo
             </Button>
           )}
           {repoLink && (
-            <Button variant="outline" href={repoLink} icon={HiCode} target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" href={repoLink} icon={HiCode} target="_blank" rel="noopener noreferrer" aria-label={`GitHub Repository for ${title}`}>
               GitHub Repository
             </Button>
           )}
