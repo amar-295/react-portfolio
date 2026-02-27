@@ -11,7 +11,7 @@ export default function Hero() {
 
       <div className="w-full max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-10 md:gap-16 items-center">
         <div className="md:col-span-7 space-y-8 text-center md:text-left order-1">
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-2 opacity-0 animate-fade-in-up">
             <h1 className="tracking-tight">
               <span className="block text-xl md:text-2xl font-mono text-accent-dark dark:text-accent-teal font-bold mb-4">
                 Hi, I'm
@@ -23,52 +23,54 @@ export default function Hero() {
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-xl md:text-3xl font-semibold text-slate-600 dark:text-slate-300 font-display">
+            <h2 className="text-xl md:text-3xl font-semibold text-slate-600 dark:text-slate-300 font-display opacity-0 animate-fade-in-up delay-100">
               <span className="text-gradient">
                 Frontend Developer | Open to Opportunities
               </span>
             </h2>
 
-            <p className="max-w-3xl mx-auto md:mx-0 text-light-text-secondary dark:text-slate-300 text-lg md:text-xl leading-relaxed font-light">
+            <p className="max-w-3xl mx-auto md:mx-0 text-light-text-secondary dark:text-slate-300 text-lg md:text-xl leading-relaxed font-light opacity-0 animate-fade-in-up delay-200">
               I build responsive React interfaces, manage application state, and
               ship performant frontend projects using modern CSS.
             </p>
           </div>
 
-          <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 glass-card rounded-2xl shadow-xl dark:shadow-2xl md:min-h-[140px] transform motion-safe:hover:scale-[1.02] motion-safe:transition-all motion-safe:duration-500 motion-reduce:transform-none motion-reduce:transition-none">
-            <div className="flex-1 text-center lg:text-left">
-              <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
-                React & JS
-              </span>
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent-dark dark:text-accent-teal/80">
-                Frontend Focused
-              </span>
-            </div>
+          <div className="opacity-0 animate-fade-in-up delay-300">
+            <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 glass-card rounded-2xl shadow-xl dark:shadow-2xl md:min-h-[140px] transform motion-safe:hover:scale-[1.02] motion-safe:transition-all motion-safe:duration-500 motion-reduce:transform-none motion-reduce:transition-none">
+              <div className="flex-1 text-center lg:text-left">
+                <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
+                  React & JS
+                </span>
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent-dark dark:text-accent-teal/80">
+                  Frontend Focused
+                </span>
+              </div>
 
-            <div className="hidden lg:block w-px h-12 bg-light-border/50 dark:bg-white/10 mx-8"></div>
-            <div className="flex lg:hidden w-16 h-px bg-light-border/50 dark:bg-white/10 mx-auto"></div>
-            <div className="flex-1 text-center lg:text-left">
-              <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
-                3+ Projects
-              </span>
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent-dark dark:text-accent-teal/80">
-                Shipped & Deployed
-              </span>
-            </div>
+              <div className="hidden lg:block w-px h-12 bg-light-border/50 dark:bg-white/10 mx-8"></div>
+              <div className="flex lg:hidden w-16 h-px bg-light-border/50 dark:bg-white/10 mx-auto"></div>
+              <div className="flex-1 text-center lg:text-left">
+                <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
+                  3+ Projects
+                </span>
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent-dark dark:text-accent-teal/80">
+                  Shipped & Deployed
+                </span>
+              </div>
 
-            <div className="hidden lg:block w-px h-12 bg-light-border/50 dark:bg-white/10 mx-8"></div>
-            <div className="flex lg:hidden w-16 h-px bg-light-border/50 dark:bg-white/10 mx-auto"></div>
-            <div className="flex-1 text-center lg:text-left">
-              <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
-                Accessible
-              </span>
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent-dark dark:text-accent-teal/80">
-                WCAG Compliant
-              </span>
+              <div className="hidden lg:block w-px h-12 bg-light-border/50 dark:bg-white/10 mx-8"></div>
+              <div className="flex lg:hidden w-16 h-px bg-light-border/50 dark:bg-white/10 mx-auto"></div>
+              <div className="flex-1 text-center lg:text-left">
+                <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
+                  Accessible
+                </span>
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent-dark dark:text-accent-teal/80">
+                  WCAG Compliant
+                </span>
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-6 pt-4">
+          <div className="flex flex-col md:flex-row gap-6 pt-4 opacity-0 animate-fade-in-up delay-500">
             <Button
               href="#contact"
               variant="primary"
