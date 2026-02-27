@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { HiArrowRight, HiCheck } from "react-icons/hi";
+import { HiArrowRight, HiCheck, HiUser, HiMail, HiFolder } from "react-icons/hi";
 import Button from "./Button";
 
 /**
@@ -84,7 +84,7 @@ export default function ContactForm({ onSubmit }) {
                 const errorMessages = data.errors?.map(err => err.message) || ["Something went wrong. Please try again."];
                 setStatus({ submitting: false, succeeded: false, errors: errorMessages });
             }
-        } catch (error) {
+        } catch {
             setStatus({ submitting: false, succeeded: false, errors: ["Network error. Please try again later."] });
         }
     };
@@ -143,7 +143,7 @@ export default function ContactForm({ onSubmit }) {
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i className={`fa-regular fa-user ${errors.name ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`}></i>
+                                <HiUser className={`text-lg ${errors.name ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`} />
                             </div>
                             <input
                                 className={getInputClass("name")}
@@ -173,7 +173,7 @@ export default function ContactForm({ onSubmit }) {
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <i className={`fa-solid fa-at ${errors.email ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`}></i>
+                                <HiMail className={`text-lg ${errors.email ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`} />
                             </div>
                             <input
                                 className={getInputClass("email")}
@@ -205,7 +205,7 @@ export default function ContactForm({ onSubmit }) {
 
                     <div className="relative rounded-md shadow-sm">
                         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <i className={`fa-regular fa-folder ${errors._subject ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`}></i>
+                            <HiFolder className={`text-lg ${errors._subject ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`} />
                         </div>
                         <input
                             className={getInputClass("_subject")}
