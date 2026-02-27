@@ -133,3 +133,32 @@ textarea:-webkit-autofill {
 .dark textarea:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px #1e293b inset !important;
 }
+/* Aurora Enhancement: Hero Entrance Animation */
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* Respect User Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
