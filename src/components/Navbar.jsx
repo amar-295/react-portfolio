@@ -1,13 +1,26 @@
 import { useState, useEffect } from "react";
 import Logo from "./Logo";
 
+/**
+ * Responsive site navigation bar with scroll-aware styling, a persistent dark-mode toggle, and a mobile menu.
+ *
+ * Renders the top navigation containing brand, navigation links, a "Let's Talk" CTA, and controls for toggling dark mode and the mobile menu.
+ * Manages internal state for whether the page is scrolled (>50px), whether the mobile menu is open, and whether dark mode is active.
+ * Side effects: attaches a passive scroll listener to update header styling; applies/removes the `dark` class on document.documentElement and persists the chosen theme to localStorage.
+ *
+ * @returns {JSX.Element} The Navbar React element.
+ */
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Initializer function for useState
     if (typeof window !== "undefined") {
+<<<<<<< HEAD
       return document.documentElement.classList.contains("dark") ||
+=======
+      return document.documentElement.classList.contains("dark") ||
+>>>>>>> a9d6ba74e05597ac8525b7741cc4048dc2cbbb4c
         (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches);
     }
     return false;
@@ -19,6 +32,7 @@ export default function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+<<<<<<< HEAD
 
     // Apply initial dark mode state to DOM if needed
     if (isDarkMode) {
@@ -133,6 +147,120 @@ export default function Navbar() {
         inert={!isMobileMenuOpen ? "" : undefined}
         className={`fixed inset-0 bg-white dark:bg-[#0a0a0a] z-40 flex flex-col justify-center items-center transition-transform duration-500 ease-in-out md:hidden ${
           isMobileMenuOpen ? "translate-y-0" : "-translate-y-full pointer-events-none"
+=======
+
+    // Apply initial dark mode state to DOM if needed
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    }
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => {
+    if (isDarkMode) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+    setIsDarkMode(!isDarkMode);
+  };
+
+  const navLinks = [
+    { name: "About", href: "#about" },
+    { name: "Work", href: "#projects" },
+    { name: "Skills", href: "#skills" },
+  ];
+
+  return (
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-lg border-b border-slate-200/50 dark:border-slate-800/50 py-4 shadow-sm"
+          : "bg-transparent py-6"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+
+        {/* Logo */}
+        <a href="#home" className="flex items-center gap-3 z-50 group">
+          <div className="w-10 h-10 bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center rounded-lg font-bold text-xl transition-transform group-hover:scale-105">
+            A
+          </div>
+          <span className="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white hidden sm:block">
+            Amarnath.
+          </span>
+        </a>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-8">
+          <div className="flex items-center gap-8 bg-white/50 dark:bg-white/5 backdrop-blur-md px-6 py-2.5 rounded-full border border-slate-200/50 dark:border-slate-800/50 shadow-sm">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-primary-blue dark:hover:text-primary-blue transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-4">
+            <button
+              onClick={toggleDarkMode}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-blue"
+              aria-label="Toggle dark mode"
+              data-testid="dark-mode-toggle"
+            >
+              {isDarkMode ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+              )}
+            </button>
+
+            <a
+              href="#contact"
+              className="px-6 py-2.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-bold rounded-full hover:bg-primary-blue hover:text-white dark:hover:bg-primary-blue dark:hover:text-white transition-all hover:scale-105"
+            >
+              Let's Talk
+            </a>
+          </div>
+        </div>
+
+        {/* Mobile Menu Toggle */}
+        <div className="flex items-center gap-4 md:hidden z-50">
+           <button
+              onClick={toggleDarkMode}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none"
+              aria-label="Toggle dark mode mobile"
+            >
+              {isDarkMode ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+              )}
+            </button>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              <span className={`block w-6 h-0.5 bg-slate-900 dark:bg-white transition-transform duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2" : ""}`}></span>
+              <span className={`block w-6 h-0.5 bg-slate-900 dark:bg-white transition-opacity duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`}></span>
+              <span className={`block w-6 h-0.5 bg-slate-900 dark:bg-white transition-transform duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}></span>
+            </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      <div
+        className={`fixed inset-0 bg-white dark:bg-[#0a0a0a] z-40 flex flex-col justify-center items-center transition-transform duration-500 ease-in-out md:hidden ${
+          isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
+>>>>>>> a9d6ba74e05597ac8525b7741cc4048dc2cbbb4c
         }`}
       >
         <div className="flex flex-col items-center gap-8 w-full px-6">
@@ -140,18 +268,30 @@ export default function Navbar() {
             <a
               key={link.name}
               href={link.href}
+<<<<<<< HEAD
               tabIndex={isMobileMenuOpen ? 0 : -1}
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-4xl font-bold text-slate-900 dark:text-white hover:text-primary-blue dark:hover:text-primary-blue transition-colors focus-visible:ring-4 focus-visible:ring-primary-blue rounded-lg p-2 focus:outline-none"
+=======
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-4xl font-bold text-slate-900 dark:text-white hover:text-primary-blue dark:hover:text-primary-blue transition-colors"
+>>>>>>> a9d6ba74e05597ac8525b7741cc4048dc2cbbb4c
             >
               {link.name}
             </a>
           ))}
+<<<<<<< HEAD
           <a
             href="#contact"
             tabIndex={isMobileMenuOpen ? 0 : -1}
             onClick={() => setIsMobileMenuOpen(false)}
             className="mt-8 px-8 py-4 w-full text-center bg-primary-blue text-white text-xl font-bold rounded-2xl hover:bg-blue-700 transition-colors focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 focus-visible:ring-primary-blue focus:outline-none"
+=======
+          <a
+            href="#contact"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="mt-8 px-8 py-4 w-full text-center bg-primary-blue text-white text-xl font-bold rounded-2xl hover:bg-blue-700 transition-colors"
+>>>>>>> a9d6ba74e05597ac8525b7741cc4048dc2cbbb4c
           >
             Let's Talk
           </a>
