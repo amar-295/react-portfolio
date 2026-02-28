@@ -16,7 +16,7 @@ export default function Hero() {
               <span className="block text-xl md:text-2xl font-mono text-accent-dark dark:text-accent-teal font-bold mb-4">
                 Hi, I'm
               </span>
-              <span className="block text-xl sm:text-5xl md:text-8xl font-extrabold text-light-text-primary dark:text-white leading-tight font-display">
+              <span className="block text-xl sm:text-5xl md:text-8xl font-extrabold leading-tight font-display bg-gradient-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400 text-transparent bg-clip-text">
                 Amarnath.
               </span>
             </h1>
