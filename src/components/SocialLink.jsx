@@ -36,7 +36,7 @@ export default function SocialLink({
                 rel="noopener noreferrer"
                 className={`flex items-center justify-center px-6 py-3 rounded-xl text-white transition-opacity transition-transform duration-200 font-bold shadow-lg active:scale-95 hover:opacity-90 ${baseStyles}`}
             >
-                <Icon className="text-xl mr-2" /> {label}
+                <Icon className="text-xl mr-2" aria-hidden="true" focusable="false" /> {label}
             </a>
         );
     }
@@ -46,9 +46,11 @@ export default function SocialLink({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={label || platform}
+            title={label || platform}
             className={`w-12 h-12 flex items-center justify-center rounded-xl text-slate-400 hover:text-white transition-opacity transition-transform duration-200 active:scale-95 hover:opacity-90 ${baseStyles}`}
         >
-            <Icon className="text-xl" />
+            <Icon className="text-xl" aria-hidden="true" focusable="false" />
         </a>
     );
 }
