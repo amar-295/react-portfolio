@@ -1,275 +1,158 @@
-import { useTheme } from "../context/ThemeContext";
 import { useState, useEffect } from "react";
-import { Logo } from "./index";
-import { socialLinks } from "../data/contact";
-import { HiDownload } from "react-icons/hi";
+import Logo from "./Logo";
 
 export default function Navbar() {
-    const { theme, toggleTheme } = useTheme();
-    const isDarkMode = theme === "dark";
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState("home");
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Initializer function for useState
+    if (typeof window !== "undefined") {
+      return document.documentElement.classList.contains("dark") ||
+        (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+    return false;
+  });
 
-    useEffect(() => {
-        const sectionIds = ["home", "about", "skills", "projects", "contact"];
-        let observer;
-        let mutationObserver;
-        let idleHandle;
-
-        const initObserver = () => {
-            if (observer) observer.disconnect();
-
-            const observerOptions = {
-                root: null,
-                rootMargin: "-30% 0px -30% 0px",
-                threshold: 0,
-            };
-
-            const callback = (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveSection(entry.target.id);
-                    }
-                });
-            };
-
-            observer = new IntersectionObserver(callback, observerOptions);
-
-            sectionIds.forEach((id) => {
-                const el = document.getElementById(id);
-                if (el) observer.observe(el);
-            });
-        };
-
-        const setupObservers = () => {
-            // Initial setup
-            initObserver();
-
-            // Fallback for DOM changes: Use a debounced observer to reduce main-thread tasks
-            let timeoutId;
-            mutationObserver = new MutationObserver(() => {
-                clearTimeout(timeoutId);
-                timeoutId = setTimeout(initObserver, 200);
-            });
-
-            const mainElement = document.querySelector("main");
-            if (mainElement) {
-                mutationObserver.observe(mainElement, { childList: true, subtree: false });
-            }
-        };
-
-        // Move to idle callback to avoid blocking the initial mount
-        if ('requestIdleCallback' in window) {
-            idleHandle = window.requestIdleCallback(setupObservers);
-        } else {
-            idleHandle = setTimeout(setupObservers, 100);
-        }
-
-        return () => {
-            if (observer) observer.disconnect();
-            if (mutationObserver) mutationObserver.disconnect();
-            if ('cancelIdleCallback' in window) {
-                window.cancelIdleCallback(idleHandle);
-            } else {
-                clearTimeout(idleHandle);
-            }
-        };
-    }, []);
-
-    const navLinks = [
-        { name: "About", href: "#about", id: "about" },
-        { name: "Projects", href: "#projects", id: "projects" },
-        { name: "Skills", href: "#skills", id: "skills" },
-        { name: "Contact", href: "#contact", id: "contact" },
-    ];
-
-    const getLinkClass = (id) => {
-        const isActive = activeSection === id;
-        return `relative text-sm font-semibold transition-opacity duration-300 group ${isActive
-            ? "text-accent-dark dark:text-blue-400"
-            : "text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 hover:opacity-80"
-            }`;
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
     };
 
-    return (
-        <header
-            className="fixed top-0 left-0 right-0 w-full z-50 bg-light-bg/80 dark:bg-navy/80 backdrop-blur-lg border-b border-light-border dark:border-slate-800/50 h-[72px]"
-            data-purpose="main-navigation"
-        >
-            <div className="container mx-auto px-6 h-full flex items-center justify-between">
-                {/* Logo */}
-                <a
-                    href="#home"
-                    className="flex items-center gap-2 group transition-colors transition-transform duration-300 font-display"
-                    onClick={() => setActiveSection("home")}
-                >
-                    <Logo className={`w-8 h-8 transition-transform duration-300 group-hover:rotate-12 ${activeSection === "home" ? "text-accent-dark dark:text-blue-500 scale-105" : "text-accent-dark dark:text-blue-500"
-                        }`} />
-                    <span className="text-lg font-bold tracking-tight text-light-text-primary dark:text-white font-display">
-                        AMARNATH
-                    </span>
-                </a>
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-                <nav className="hidden md:flex items-center space-x-10">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.id}
-                            className={getLinkClass(link.id)}
-                            href={link.href}
-                            onClick={() => setActiveSection(link.id)}
-                        >
-                            {link.name}
-                            <span className={`absolute -bottom-1 left-0 w-full h-[2px] bg-accent-dark dark:bg-blue-400 transition-transform duration-300 origin-left ${activeSection === link.id ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                                }`} />
-                        </a>
-                    ))}
-                </nav>
+    // Apply initial dark mode state to DOM if needed
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    }
 
-                <div className="hidden md:flex items-center space-x-6">
-                    <button
-                        aria-label="Toggle Theme"
-                        onClick={toggleTheme}
-                        className="text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity flex items-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 hover:opacity-80"
-                    >
-                        {isDarkMode ? (
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                        ) : (
-                            // Contrast Icon (Professional Theme Toggle)
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" />
-                                <path d="M12 3v18a9 9 0 0 0 0-18z" fill="currentColor" stroke="none" />
-                            </svg>
-                        )}
-                    </button>
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isDarkMode]);
 
-                    <a
-                        className="inline-flex items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-accent-dark dark:bg-blue-600 rounded-lg hover:bg-black dark:hover:bg-blue-700 transition-opacity transition-transform duration-300 shadow-sm hover:opacity-90 active:scale-95"
-                        href="/resume.pdf"
-                        download="Amarnath_Resume.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <span>Download Resume</span>
-                        <HiDownload className="text-sm" />
-                    </a>
-                </div>
+  const toggleDarkMode = () => {
+    if (isDarkMode) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+    setIsDarkMode(!isDarkMode);
+  };
 
-                <div className="md:hidden flex items-center gap-6">
-                    <button
-                        onClick={toggleTheme}
-                        className="text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity p-2 hover:opacity-80"
-                        aria-label="Toggle Theme"
-                    >
-                        {isDarkMode ? (
-                            // Sun Icon
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                        ) : (
-                            // Contrast Icon (Professional Theme Toggle)
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" />
-                                <path d="M12 3v18a9 9 0 0 0 0-18z" fill="currentColor" stroke="none" />
-                            </svg>
-                        )}
-                    </button>
+  const navLinks = [
+    { name: "About", href: "#about" },
+    { name: "Work", href: "#projects" },
+    { name: "Skills", href: "#skills" },
+  ];
 
-                    <button
-                        className="text-accent-dark dark:text-blue-400 focus:outline-none p-2"
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        aria-label="Toggle Menu"
-                    >
-                        {isMenuOpen ? (
-                            // Close Icon (X)
-                            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        ) : (
-                            // Menu Icon (Hamburger)
-                            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
-                        )}
-                    </button>
-                </div>
-            </div>
+  return (
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-lg border-b border-slate-200/50 dark:border-slate-800/50 py-4 shadow-sm"
+          : "bg-transparent py-6"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
 
-            {/* Mobile Menu Overlay */}
-            {isMenuOpen && (
-                <>
-                    {/* Backdrop */}
-                    <div
-                        className="fixed inset-0 top-[72px] bg-black/20 dark:bg-black/50 backdrop-blur-[2px] md:hidden z-40"
-                        onClick={() => setIsMenuOpen(false)}
-                    />
+        {/* Logo */}
+        <a href="#home" className="flex items-center gap-3 z-50 group">
+          <div className="w-10 h-10 bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center rounded-lg font-bold text-xl transition-transform group-hover:scale-105">
+            A
+          </div>
+          <span className="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white hidden sm:block">
+            Amarnath.
+          </span>
+        </a>
 
-                    {/* Menu Content */}
-                    <div className="md:hidden absolute top-[72px] left-0 w-full z-50">
-                        <div className="bg-white/95 dark:bg-navy/95 backdrop-blur-xl border-b border-light-border dark:border-white/10 shadow-2xl rounded-b-3xl py-8 px-6 animate-in slide-in-from-top duration-300 max-h-[85vh] overflow-y-auto">
-                            <nav className="flex flex-col space-y-2">
-                                {navLinks.map((link) => {
-                                    const isActive = activeSection === link.id;
-                                    return (
-                                        <a
-                                            key={link.id}
-                                            href={link.href}
-                                            onClick={() => {
-                                                setActiveSection(link.id);
-                                                setIsMenuOpen(false);
-                                            }}
-                                            className={`
-                                                block w-full py-3 px-6 rounded-xl text-center text-lg font-medium transition-opacity duration-300 hover:opacity-80
-                                                ${isActive
-                                                    ? "bg-accent-light/50 dark:bg-blue-500/10 text-accent-dark dark:text-blue-400 font-bold"
-                                                    : "text-light-text-secondary dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-white/5"
-                                                }
-                                            `}
-                                        >
-                                            {link.name}
-                                        </a>
-                                    );
-                                })}
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-8">
+          <div className="flex items-center gap-8 bg-white/50 dark:bg-white/5 backdrop-blur-md px-6 py-2.5 rounded-full border border-slate-200/50 dark:border-slate-800/50 shadow-sm">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-primary-blue dark:hover:text-primary-blue transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
 
-                                <div className="pt-8 flex flex-col items-center gap-6">
-                                    <hr className="w-12 border-2 border-gray-100 dark:border-white/10 rounded-full" />
+          <div className="flex items-center gap-4">
+            <button
+              onClick={toggleDarkMode}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-blue"
+              aria-label="Toggle dark mode"
+              data-testid="dark-mode-toggle"
+            >
+              {isDarkMode ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+              )}
+            </button>
 
-                                    {/* Resume Button */}
-                                    <a
-                                        href="/resume.pdf"
-                                        download="Amarnath_Resume.pdf"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="w-max mx-auto px-8 py-3 rounded-full flex items-center justify-center gap-2 bg-accent-dark dark:bg-blue-700 text-white font-bold shadow-lg shadow-blue-500/20 active:scale-95 transition-colors duration-300 text-sm"
-                                    >
-                                        <span>Download Resume</span>
-                                        <HiDownload className="text-sm" />
-                                    </a>
+            <a
+              href="#contact"
+              className="px-6 py-2.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-bold rounded-full hover:bg-primary-blue hover:text-white dark:hover:bg-primary-blue dark:hover:text-white transition-all hover:scale-105"
+            >
+              Let's Talk
+            </a>
+          </div>
+        </div>
 
-                                    {/* Footer Actions: Socials */}
-                                    <div className="flex items-center justify-center gap-8">
-                                        {/* Social Icons */}
-                                        {socialLinks.map((link) => (
-                                            <a
-                                                key={link.platform}
-                                                href={link.href}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                aria-label={link.label || link.platform}
-                                                title={link.label || link.platform}
-                                                className="text-gray-500 dark:text-slate-400 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity transform hover:scale-110 hover:opacity-80"
-                                            >
-                                                <link.icon className="text-2xl" />
-                                            </a>
-                                        ))}
-                                    </div>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-                </>
-            )}
-        </header>
-    );
+        {/* Mobile Menu Toggle */}
+        <div className="flex items-center gap-4 md:hidden z-50">
+           <button
+              onClick={toggleDarkMode}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none"
+              aria-label="Toggle dark mode mobile"
+            >
+              {isDarkMode ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+              )}
+            </button>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              <span className={`block w-6 h-0.5 bg-slate-900 dark:bg-white transition-transform duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2" : ""}`}></span>
+              <span className={`block w-6 h-0.5 bg-slate-900 dark:bg-white transition-opacity duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`}></span>
+              <span className={`block w-6 h-0.5 bg-slate-900 dark:bg-white transition-transform duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}></span>
+            </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      <div
+        className={`fixed inset-0 bg-white dark:bg-[#0a0a0a] z-40 flex flex-col justify-center items-center transition-transform duration-500 ease-in-out md:hidden ${
+          isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
+        <div className="flex flex-col items-center gap-8 w-full px-6">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-4xl font-bold text-slate-900 dark:text-white hover:text-primary-blue dark:hover:text-primary-blue transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="mt-8 px-8 py-4 w-full text-center bg-primary-blue text-white text-xl font-bold rounded-2xl hover:bg-blue-700 transition-colors"
+          >
+            Let's Talk
+          </a>
+        </div>
+      </div>
+    </nav>
+  );
 }

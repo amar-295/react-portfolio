@@ -1,15 +1,15 @@
 @config "../tailwind.config.js";
 @import "tailwindcss";
 
-/* Base styles - Light mode default */
+/* Base styles - Corporate / Minimalist */
 body {
-    @apply bg-light-bg text-light-text-primary antialiased selection:bg-accent-dark/20 selection:text-accent-dark;
+    @apply bg-light-bg text-slate-900 antialiased selection:bg-primary-blue/20 selection:text-primary-blue;
     font-family: 'Inter', sans-serif;
 }
 
 /* Dark mode overrides */
 .dark body {
-    @apply bg-midnight text-slate selection:bg-accent-teal/30 selection:text-accent-teal;
+    @apply bg-[#0a0a0a] text-white selection:bg-primary-blue/30 selection:text-primary-blue;
 }
 
 *,
@@ -30,7 +30,7 @@ html {
 
 /* Custom Scrollbar - Professional Look */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -38,75 +38,11 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 dark:bg-slate-700 rounded-full border-[2px] border-transparent bg-clip-content;
+    @apply bg-slate-300 dark:bg-slate-700 rounded-full border-[2px] border-transparent bg-clip-content;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400 dark:bg-slate-600;
-}
-
-/* Text gradient - theme aware */
-.text-gradient {
-    background: linear-gradient(90deg, #4338ca 0%, #3b82f6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.dark .text-gradient {
-    background: linear-gradient(90deg, #818cf8 0%, #2dd4bf 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* Grid background - theme aware */
-.grid-bg {
-    background-image:
-        linear-gradient(rgba(107, 114, 128, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(107, 114, 128, 0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
-}
-
-.dark .grid-bg {
-    background-image:
-        linear-gradient(rgba(148, 163, 184, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(148, 163, 184, 0.02) 1px, transparent 1px);
-    background-size: 40px 40px;
-}
-
-/* Card hover effects - theme aware */
-.card-hover {
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.card-hover:hover {
-    transform: translateY(-4px);
-}
-
-/* Light mode card shadow */
-.card-hover:hover {
-    box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.1);
-}
-
-/* Dark mode card shadow */
-.dark .card-hover:hover {
-    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.8);
-}
-
-/* Glass card - theme aware */
-.glass-card {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(229, 231, 235, 0.5);
-}
-
-.dark .glass-card {
-    background: rgba(15, 22, 35, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(30, 41, 59, 0.5);
+    @apply bg-slate-400 dark:bg-slate-600;
 }
 
 /* Custom Autofill Styles - Refined Approach */
@@ -128,23 +64,13 @@ textarea:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
 
-/* Dark mode autofill background - matching bg-[#1e293b] */
+/* Dark mode autofill background */
 .dark input:-webkit-autofill,
 .dark textarea:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #1e293b inset !important;
-}
-/* Aurora Enhancement: Hero Entrance Animation */
-@keyframes fade-in-up {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    -webkit-box-shadow: 0 0 0px 1000px #111 inset !important;
 }
 
+/* Animation utilities */
 .animate-fade-in-up {
     animation: fade-in-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }

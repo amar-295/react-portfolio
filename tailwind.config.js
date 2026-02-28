@@ -5,47 +5,42 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Light Mode Colors
+        "primary-blue": "#2563EB", // Deep, professional blue accent
         "light-bg": "#FFFFFF",
-        "light-surface": "#F9FAFB",
-        "light-text-primary": "#000000",
-        "light-text-secondary": "#4B5563",
-        "light-border": "#E5E7EB",
-        "accent-dark": "#1a1a1a", // Dark charcoal accent for light mode
-        "accent-light": "#F0FDFA", // Light teal background
-
-        // Gray scale for light mode
-        "gray-50": "#F9FAFB",
-        "gray-100": "#F3F4F6",
-        "gray-200": "#E5E7EB",
-        "gray-600": "#4B5563",
-        "gray-900": "#111827",
-        "slate-700": "#334155",
-
-        // Dark Mode Colors
-        midnight: "#020617", // Slate-950
-        navy: "#0f172a", // Slate-900
-        lightNavy: "#1e293b", // Slate-800
-        slate: "#64748b", // Slate-500
-        lightSlate: "#94a3b8", // Slate-400
-        white: "#f1f5f9", // Slate-100
-        "accent-teal": "#3b82f6", // Replacing with Blue as requested
-        "brand-bg": "#050505",
-        "card-bg": "#13161c",
-        "primary-blue": "#2563EB",
-        "text-grey": "#94A3B8",
-        "tag-bg": "#1E293B",
+        "dark-bg": "#0a0a0a",
+        "slate": {
+          50: "#f8fafc",
+          100: "#f1f5f9",
+          200: "#e2e8f0",
+          300: "#cbd5e1",
+          400: "#94a3b8",
+          500: "#64748b",
+          600: "#475569",
+          700: "#334155",
+          800: "#1e293b",
+          900: "#0f172a",
+          950: "#020617",
+        }
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Outfit", "Inter", "system-ui", "sans-serif"],
-        mono: ["Fira Code", "ui-monospace", "monospace"],
+        display: ["Inter", "system-ui", "sans-serif"],
+        mono: ["SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"],
       },
       borderRadius: {
-        md: "0.75rem",
-        lg: "1rem",
-        xl: "1.5rem",
+        lg: "0.5rem",
+        xl: "0.75rem",
+        "2xl": "1rem",
       },
+      animation: {
+        'fade-in-up': 'fade-in-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+      },
+      keyframes: {
+        'fade-in-up': {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        }
+      }
     },
   },
   plugins: [],

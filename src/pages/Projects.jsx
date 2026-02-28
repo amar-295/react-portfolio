@@ -1,57 +1,80 @@
-import { ProjectCard, ExperimentCard, CTABanner } from "../components";
-import { featuredProjects, experimentsData } from "../data/projects";
-import { HiMail } from "react-icons/hi";
+import { useMemo } from "react";
+import SectionHeading from "../components/SectionHeading";
+import ProjectCard from "../components/ProjectCard";
 
-/* ------------------------------------------------------------------ */
-/*  Projects Page                                                      */
-/* ------------------------------------------------------------------ */
+const projectsData = [
+  {
+    title: "E-commerce Analytics",
+    description: "A high-performance retail dashboard focusing on real-time data visualization and stock management. Built with modular architecture for scalability.",
+    image: null,
+    tags: ["React", "TypeScript", "Tailwind"],
+    demoLink: "#",
+    githubLink: "#",
+  },
+  {
+    title: "Fintech Mobile App",
+    description: "Seamless digital banking experience designed for modern users with biometric security integrations and real-time transaction tracking.",
+    image: null,
+    tags: ["React Native", "Redux", "Node.js"],
+    demoLink: "#",
+    githubLink: "#",
+  },
+  {
+    title: "SaaS Growth Tool",
+    description: "Enterprise-grade marketing automation platform built with server-side rendering for maximum SEO impact and rapid page loads.",
+    image: null,
+    tags: ["Next.js", "GraphQL", "Prisma"],
+    demoLink: "#",
+    githubLink: "#",
+  },
+  {
+    title: "Design System UI",
+    description: "A comprehensive component library built from the ground up focusing on accessibility, theming, and developer experience.",
+    image: null,
+    tags: ["React", "Storybook", "CSS"],
+    demoLink: "#",
+    githubLink: "#",
+  }
+];
 
 export default function Projects() {
-    return (
-        <section className="relative min-h-screen py-20 md:py-32" id="projects">
-            {/* ---- Section Header ---- */}
-            <header className="relative z-10 text-center mb-24 px-4">
-                <span className="text-xs font-bold tracking-[0.2em] text-light-text-secondary dark:text-slate-400 uppercase">
-                    My Learning Journey
-                </span>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-light-text-primary dark:text-white mt-4 tracking-tight font-display">
-                    Projects - Personal Web Development Work
-                </h2>
-                <div className="flex justify-center pt-6">
-                    <div className="w-24 h-1 bg-accent-dark dark:bg-primary-blue rounded-full"></div>
-                </div>
-            </header>
+  const renderedProjects = useMemo(() => {
+    return projectsData.map((project, index) => (
+      <ProjectCard key={project.title} project={project} index={index} />
+    ));
+  }, []);
 
-            {/* ---- Featured Projects ---- */}
-            <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12 md:space-y-16 relative z-10 mb-24">
-                {featuredProjects.map((project, index) => (
-                    <ProjectCard
-                        key={project.title}
-                        {...project}
-                        showBorder={index < featuredProjects.length - 1}
-                    />
-                ))}
-            </div>
+  return (
+    <section
+      id="projects"
+      className="py-24 md:py-32 bg-white dark:bg-[#0a0a0a] border-t border-slate-100 dark:border-slate-800/50 relative"
+    >
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <SectionHeading
+          subHeading="A curated collection of digital experiences designed for scale and performance."
+          center={false}
+        >
+          Selected Work.
+        </SectionHeading>
 
-            {/* ---- CTA Banner ---- */}
-            <CTABanner
-                heading="Building something technical? Let's connect and discuss the details."
-                buttonText="Connect with me"
-                buttonIcon={HiMail}
-                buttonHref="#contact"
-            />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
+          {renderedProjects}
+        </div>
 
-            {/* ---- Code Experiments Grid ---- */}
-            <div className="max-w-7xl mx-auto px-6 md:px-12 pt-12 border-t-2 border-light-border dark:border-slate-800/30">
-                <h3 className="text-xl font-bold text-light-text-secondary dark:text-slate-400 mb-10 tracking-wide uppercase text-center lg:text-left">
-                    Code Experiments &amp; UI Components
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {experimentsData.map((exp) => (
-                        <ExperimentCard key={exp.title} {...exp} />
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
+        <div className="mt-24 text-center md:text-left">
+           <a
+              href="https://github.com/amarnath"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-14 items-center justify-center rounded-lg border-2 border-slate-200 dark:border-slate-800 bg-transparent px-8 text-slate-900 dark:text-white text-base font-semibold hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
+            >
+              View More on GitHub
+            </a>
+        </div>
+      </div>
+
+      {/* Subtle Background Accent */}
+      <div className="absolute top-[20%] right-0 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] rounded-full bg-slate-100/50 dark:bg-slate-900/20 blur-[120px] -z-10 pointer-events-none"></div>
+    </section>
+  );
 }

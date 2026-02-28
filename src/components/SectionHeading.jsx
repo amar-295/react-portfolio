@@ -1,40 +1,20 @@
-import PropTypes from "prop-types";
+import { memo } from "react";
 
-/**
- * Section heading with a left accent border and optional badge.
- *
- * Props:
- *   title       – heading text
- *   badge       – optional badge text (e.g. "Updated 2025")
- *   borderColor – tailwind border color class (default: "border-primary-blue")
- */
-export default function SectionHeading({
-    title,
-    badge,
-    borderColor = "border-gray-900 dark:border-primary-blue",
-}) {
-    // Map border color to background color for the new bar style
-    const barColor = borderColor.replace("border-", "bg-");
+const SectionHeading = memo(({ children, subHeading, center = true }) => {
+  return (
+    <div className={`mb-16 md:mb-24 ${center ? "text-center" : "text-left"} opacity-0 animate-fade-in-up`}>
+      <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
+        {children}
+      </h2>
+      {subHeading && (
+        <p className={`text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-light max-w-2xl ${center ? "mx-auto" : ""}`}>
+          {subHeading}
+        </p>
+      )}
+    </div>
+  );
+});
 
-    return (
-        <div className="flex items-center mb-12">
-            <div className={`w-1.5 h-8 md:h-10 rounded-full ${barColor} mr-4 md:mr-6 shrink-0`}></div>
-            <div className="grow flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
-                <h2 className="text-2xl md:text-4xl font-extrabold text-light-text-primary dark:text-white font-display tracking-tight leading-none">
-                    {title}
-                </h2>
-                {badge && (
-                    <span className="self-start sm:self-center bg-light-surface dark:bg-gray-800/50 text-light-text-secondary dark:text-gray-400 text-xs px-3 py-1 rounded-full border border-light-border dark:border-gray-700/50 font-medium whitespace-nowrap">
-                        {badge}
-                    </span>
-                )}
-            </div>
-        </div>
-    );
-}
+SectionHeading.displayName = "SectionHeading";
 
-SectionHeading.propTypes = {
-    title: PropTypes.string.isRequired,
-    badge: PropTypes.string,
-    borderColor: PropTypes.string,
-};
+export default SectionHeading;
