@@ -1,102 +1,73 @@
-import { lazy, Suspense } from "react";
-const CodeWindow = lazy(() => import("../components/CodeWindow"));
+import { Suspense } from "react";
 import Button from "../components/Button";
 
+/**
+ * Render the hero section containing the primary heading, supporting blurb, CTAs, feature badges, and subtle decorative background elements.
+ *
+ * @returns {JSX.Element} A JSX element for the hero section: heading "Amarnath. Frontend Developer", descriptive paragraph, two action buttons ("Contact Me", "View Projects"), a row of feature badges ("React & JS", "3+ Projects Shipped", "Accessible"), and non-interactive blurred background shapes.
+ */
 export default function Hero() {
   return (
     <section
-      className="relative pt-32 md:pt-40 pb-20 md:pb-32 min-h-screen flex items-center grid-bg overflow-hidden"
+      className="relative flex flex-col justify-center min-h-[90vh] w-full overflow-hidden bg-white dark:bg-[#0a0a0a]"
       data-purpose="hero-section"
-      id="home">
+      id="home"
+    >
+      <main className="flex-1 flex flex-col justify-center px-6 py-20 z-10">
+        <div className="max-w-4xl mx-auto w-full space-y-10 text-center md:text-left">
 
-      <div className="w-full max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-10 md:gap-16 items-center">
-        <div className="md:col-span-7 space-y-8 text-center md:text-left order-1">
-          <div className="flex flex-col space-y-2 opacity-0 animate-fade-in-up">
-            <h1 className="tracking-tight">
-              <span className="block text-xl md:text-2xl font-mono text-accent-dark dark:text-accent-teal font-bold mb-4">
-                Hi, I'm
-              </span>
-              <span className="block text-xl sm:text-5xl md:text-8xl font-extrabold text-light-text-primary dark:text-white leading-tight font-display">
-                Amarnath.
-              </span>
+          <div className="space-y-6 opacity-0 animate-fade-in-up">
+            <h1 className="text-slate-900 dark:text-white tracking-tight text-5xl sm:text-7xl lg:text-8xl font-extrabold leading-[1.05]">
+              Amarnath.<br className="hidden md:block" />
+              <span className="text-primary-blue block mt-2 md:mt-4">Frontend Developer</span>
             </h1>
-          </div>
-
-          <div className="space-y-4">
-            <h2 className="text-xl md:text-3xl font-semibold text-slate-600 dark:text-slate-300 font-display opacity-0 animate-fade-in-up delay-100">
-              <span className="text-gradient">
-                Frontend Developer | Open to Opportunities
-              </span>
-            </h2>
-
-            <p className="max-w-3xl mx-auto md:mx-0 text-light-text-secondary dark:text-slate-300 text-lg md:text-xl leading-relaxed font-light opacity-0 animate-fade-in-up delay-200">
-              I build responsive React interfaces, manage application state, and
-              ship performant frontend projects using modern CSS.
+            <p className="text-slate-600 dark:text-slate-400 text-lg sm:text-xl md:text-2xl font-normal leading-relaxed max-w-2xl mx-auto md:mx-0">
+              I build responsive React interfaces, manage application state, and ship performant frontend projects using modern CSS.
             </p>
           </div>
 
-          <div className="opacity-0 animate-fade-in-up delay-300">
-            <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 glass-card rounded-2xl shadow-xl dark:shadow-2xl md:min-h-[140px] transform motion-safe:hover:scale-[1.02] motion-safe:transition-all motion-safe:duration-500 motion-reduce:transform-none motion-reduce:transition-none">
-              <div className="flex-1 text-center lg:text-left">
-                <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
-                  React & JS
-                </span>
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent-dark dark:text-accent-teal/80">
-                  Frontend Focused
-                </span>
-              </div>
-
-              <div className="hidden lg:block w-px h-12 bg-light-border/50 dark:bg-white/10 mx-8"></div>
-              <div className="flex lg:hidden w-16 h-px bg-light-border/50 dark:bg-white/10 mx-auto"></div>
-              <div className="flex-1 text-center lg:text-left">
-                <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
-                  3+ Projects
-                </span>
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent-dark dark:text-accent-teal/80">
-                  Shipped & Deployed
-                </span>
-              </div>
-
-              <div className="hidden lg:block w-px h-12 bg-light-border/50 dark:bg-white/10 mx-8"></div>
-              <div className="flex lg:hidden w-16 h-px bg-light-border/50 dark:bg-white/10 mx-auto"></div>
-              <div className="flex-1 text-center lg:text-left">
-                <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
-                  Accessible
-                </span>
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent-dark dark:text-accent-teal/80">
-                  WCAG Compliant
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-6 pt-4 opacity-0 animate-fade-in-up delay-500">
+          <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto pt-4 opacity-0 animate-fade-in-up delay-200">
             <Button
               href="#contact"
               variant="primary"
-              className="w-full md:w-auto text-lg px-8 py-4 shadow-xl hover:translate-y-[-2px]"
+              className="flex h-14 sm:w-[200px] items-center justify-center rounded-lg bg-primary-blue text-white text-base font-semibold hover:opacity-90 transition-opacity"
             >
               Contact Me
             </Button>
-
             <Button
               href="#projects"
               variant="outline"
-              className="w-full md:w-auto text-lg px-8 py-4 shadow-sm hover:translate-y-[-2px]"
+              className="flex h-14 sm:w-[200px] items-center justify-center rounded-lg border-2 border-slate-200 dark:border-slate-800 bg-transparent text-slate-900 dark:text-white text-base font-semibold hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
             >
               View Projects
             </Button>
           </div>
-        </div>
 
-        <div className="md:col-span-5 relative flex justify-center items-center order-2 md:order-2 mt-8 md:mt-0 min-h-[250px] md:min-h-[300px] w-full max-w-[320px] md:max-w-none mx-auto">
-          <div className="absolute w-48 md:w-64 h-48 md:h-64 bg-accent-dark/5 dark:bg-accent-teal/10 rounded-full blur-[80px] -z-10"></div>
-          <Suspense fallback={<div className="w-full h-full bg-gray-900/10 dark:bg-white/5 rounded-xl animate-pulse"></div>}>
-            <CodeWindow />
-          </Suspense>
+          <div className="pt-12 md:pt-16 opacity-0 animate-fade-in-up delay-300">
+            <div className="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4">
+              <span className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-transparent text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary-blue"></span>
+                React & JS
+              </span>
+              <span className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-transparent text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary-blue"></span>
+                3+ Projects Shipped
+              </span>
+              <span className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-transparent text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary-blue"></span>
+                Accessible
+              </span>
+            </div>
+          </div>
+
         </div>
+      </main>
+
+      {/* Subtle Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-[-10%] right-[-5%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] rounded-full bg-primary-blue/5 dark:bg-primary-blue/10 blur-[100px] md:blur-[120px]"></div>
+        <div className="absolute bottom-[-10%] left-[-5%] w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] rounded-full bg-slate-300/20 dark:bg-slate-800/30 blur-[80px] md:blur-[100px]"></div>
       </div>
-
     </section>
   );
 }
