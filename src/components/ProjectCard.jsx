@@ -45,13 +45,19 @@ export default function ProjectCard({
   // Logic: In Light Mode, show Dark Screenshot (imageDark) for contrast.
   // In Dark Mode, show Light Screenshot (image).
   // If imageDark is not provided, fall back to image.
-  const displayImage = (imageDark && !isDarkMode) ? imageDark : image;
+  const displayImage =
+    imageDark && !isDarkMode
+      ? imageDark
+      : image ||
+        "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop";
 
   return (
     <article
-      className={`flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12 ${showBorder ? "border-b-2 border-light-border dark:border-slate-800/40 pb-16 lg:pb-24" : "pb-16 lg:pb-0"
-        } ${featured ? "relative" : ""
-        }`}
+      className={`flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12 ${
+        showBorder
+          ? "border-b-2 border-light-border dark:border-slate-800/40 pb-16 lg:pb-24"
+          : "pb-16 lg:pb-0"
+      } ${featured ? "relative" : ""}`}
     >
       {/* ---- Image Column ---- */}
       <div className="w-full lg:w-5/12">
@@ -64,16 +70,20 @@ export default function ProjectCard({
             decoding="async"
             width="800"
             height="450"
-            {...(displayImage.includes("unsplash.com") ? {
-              srcSet: `
+            {...(displayImage && displayImage.includes("unsplash.com")
+              ? {
+                  srcSet: `
                 ${displayImage.replace("w=1000", "w=400")} 400w,
                 ${displayImage.replace("w=1000", "w=800")} 800w,
                 ${displayImage.replace("w=1000", "w=1000")} 1000w
               `,
-              sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
-            } : {})}
+                  sizes:
+                    "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px",
+                }
+              : {})}
             onError={(e) => {
-              e.target.src = "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop";
+              e.target.src =
+                "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop";
             }}
           />
         </div>
@@ -81,12 +91,27 @@ export default function ProjectCard({
         {/* Mobile-only buttons */}
         <div className="flex flex-col sm:flex-row gap-4 pt-6 lg:hidden">
           {liveDemoLink && (
-            <Button href={liveDemoLink} icon={HiExternalLink} fullWidth target="_blank" rel="noopener noreferrer" aria-label={`Live Demo of ${title}`}>
+            <Button
+              href={liveDemoLink}
+              icon={HiExternalLink}
+              fullWidth
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Live Demo of ${title}`}
+            >
               Live Demo
             </Button>
           )}
           {repoLink && (
-            <Button variant="outline" href={repoLink} icon={HiCode} fullWidth target="_blank" rel="noopener noreferrer" aria-label={`GitHub Repository for ${title}`}>
+            <Button
+              variant="outline"
+              href={repoLink}
+              icon={HiCode}
+              fullWidth
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`GitHub Repository for ${title}`}
+            >
               GitHub Repository
             </Button>
           )}
@@ -105,7 +130,9 @@ export default function ProjectCard({
             <span className="text-slate-400 dark:text-slate-600">|</span>
             <span>Focus: {focus}</span>
             <span className="text-slate-400 dark:text-slate-600">|</span>
-            <span className="text-accent-dark dark:text-blue-500 font-bold">Status: {status}</span>
+            <span className="text-accent-dark dark:text-blue-500 font-bold">
+              Status: {status}
+            </span>
           </div>
         </div>
 
@@ -131,18 +158,31 @@ export default function ProjectCard({
         {/* Desktop-only buttons */}
         <div className="hidden lg:flex gap-4 pt-4">
           {liveDemoLink && (
-            <Button href={liveDemoLink} icon={HiExternalLink} target="_blank" rel="noopener noreferrer" aria-label={`Live Demo of ${title}`}>
+            <Button
+              href={liveDemoLink}
+              icon={HiExternalLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Live Demo of ${title}`}
+            >
               Live Demo
             </Button>
           )}
           {repoLink && (
-            <Button variant="outline" href={repoLink} icon={HiCode} target="_blank" rel="noopener noreferrer" aria-label={`GitHub Repository for ${title}`}>
+            <Button
+              variant="outline"
+              href={repoLink}
+              icon={HiCode}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`GitHub Repository for ${title}`}
+            >
               GitHub Repository
             </Button>
           )}
         </div>
       </div>
-    </article >
+    </article>
   );
 }
 

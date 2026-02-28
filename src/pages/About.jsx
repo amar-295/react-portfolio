@@ -1,124 +1,123 @@
-import aboutMeImage from '../assets/About.svg'
-import { FaGraduationCap, FaBriefcase, FaMapMarkerAlt, FaCode } from 'react-icons/fa';
+import { memo } from "react";
+import SectionHeading from "../components/SectionHeading";
 
+// Timeline Data
+const timelineData = [
+  {
+    year: "2023 - Present",
+    title: "Senior Frontend Engineer",
+    company: "TechFlow Solutions",
+    description: "Leading UI architecture, implementing design systems, and migrating legacy codebases to modern React. Mentoring junior developers.",
+    icon: "work"
+  },
+  {
+    year: "2021 - 2023",
+    title: "React Developer",
+    company: "Digital Dynamics",
+    description: "Developed complex data visualization dashboards. Improved application performance by 40% through code splitting and memoization.",
+    icon: "code"
+  },
+  {
+    year: "2018 - 2021",
+    title: "Web Developer",
+    company: "Creative Agency",
+    description: "Built responsive, accessible websites for diverse clients using HTML, CSS, JavaScript, and CMS platforms.",
+    icon: "web"
+  },
+  {
+    year: "2014 - 2018",
+    title: "B.Tech in Computer Science",
+    company: "University of Technology",
+    description: "Foundational studies in algorithms, data structures, and software engineering principles.",
+    icon: "school"
+  }
+];
+
+// Reusable Timeline Card Component
+const TimelineCard = memo(({ item, index }) => {
+  return (
+    <div
+      className="relative pl-8 md:pl-0 opacity-0 animate-fade-in-up"
+      style={{ animationDelay: `${index * 150}ms` }}
+    >
+      {/* Desktop Timeline Line & Dot */}
+      <div className="hidden md:block absolute left-[50%] top-0 bottom-0 w-px bg-slate-200 dark:bg-slate-800 -translate-x-1/2"></div>
+
+      {/* Mobile Timeline Line */}
+      <div className="md:hidden absolute left-0 top-2 bottom-[-2rem] w-px bg-slate-200 dark:bg-slate-800"></div>
+
+      <div className={`md:flex items-center justify-between w-full ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+
+        {/* Empty space for alternating layout on desktop */}
+        <div className="hidden md:block w-5/12"></div>
+
+        {/* Central Dot */}
+        <div className="absolute left-[-5px] md:relative md:left-auto md:w-2/12 flex justify-center z-10 top-2 md:top-0">
+          <div className="w-3 h-3 bg-white dark:bg-[#0a0a0a] border-2 border-primary-blue rounded-full shadow-[0_0_0_4px_rgba(37,99,235,0.1)]"></div>
+        </div>
+
+        {/* Content Card */}
+        <div className="w-full md:w-5/12">
+          <div className="p-6 bg-white dark:bg-[#111] border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 group">
+            <div className="flex justify-between items-start mb-3">
+              <div>
+                <h4 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary-blue transition-colors">
+                  {item.title}
+                </h4>
+                <p className="text-sm font-medium text-slate-600 dark:text-slate-400 mt-1">
+                  {item.company}
+                </p>
+              </div>
+              <span className="text-xs font-bold uppercase tracking-widest text-primary-blue bg-primary-blue/10 dark:bg-primary-blue/20 px-3 py-1 rounded-full whitespace-nowrap ml-2">
+                {item.year}
+              </span>
+            </div>
+            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              {item.description}
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+});
+
+TimelineCard.displayName = "TimelineCard";
+
+/**
+ * Render the "About" section with an introductory header and a data-driven timeline of experience.
+ *
+ * @returns {JSX.Element} The About section element containing the title, descriptive paragraph, and a mapped list of TimelineCard entries.
+ */
 export default function About() {
   return (
     <section
-      className="py-20 md:py-32 bg-light-surface dark:bg-navy/50"
-      data-purpose="about-section"
-      id="about">
+      id="about"
+      className="py-24 md:py-32 bg-slate-50 dark:bg-[#050505] relative overflow-hidden"
+    >
+      <div className="max-w-6xl mx-auto px-6">
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="grid md:grid-cols-12 gap-12 md:gap-20 items-center">
-          {/* Photo Column - Right side on desktop */}
-          <div className="md:col-span-5 flex justify-center md:justify-start relative order-2 md:order-2">
-            <div className="relative group max-w-[280px] sm:max-w-sm mx-auto md:mx-0 aspect-square w-full">
-              <div className="absolute inset-0 translate-x-4 translate-y-4 border-2 border-accent-dark/30 dark:border-accent-teal/20 rounded-xl transition-transform duration-500 group-hover:translate-x-6 group-hover:translate-y-6"></div>
-              <div className="relative z-10 rounded-xl overflow-hidden shadow-md dark:shadow-2xl border-2 border-light-border dark:border-slate-700 bg-white">
-
-                <img
-                  alt="PROFILE_PICTURE"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform transition-opacity duration-700 block"
-                  src={aboutMeImage}
-                  loading="lazy"
-                  decoding="async"
-                  width="400"
-                  height="400"
-                />
-                <div className="absolute inset-0 bg-accent-teal/10 mixed-blend-multiply opacity-40 hover:opacity-0 transition-opacity duration-500 pointer-events-none dark:opacity-0"></div>
-              </div>
-            </div>
-          </div>
-
-          {/* Text Column - Left side on desktop */}
-          <div className="md:col-span-7 order-1 md:order-1">
-            <h2 className="flex items-center text-3xl md:text-4xl font-bold text-light-text-primary dark:text-white mb-10 font-display">
-              About Me
-              <span className="h-px bg-light-border dark:bg-white/10 grow ml-8 max-w-xs hidden md:block"></span>
-            </h2>
-
-            <div className="text-light-text-secondary dark:text-gray-300 space-y-6 text-lg leading-relaxed">
-              <p>
-                I'm a frontend developer focused on building clean, intuitive web interfaces with a strong emphasis on accessibility and performance. My approach centers on creating functional codebases that are both maintainable and user-centric.
-              </p>
-              <p>
-                Currently focusing on the MERN stack and exploring RESTful API architectures. I enjoy the process of translating complex requirements into reliable, component-based frontend solutions.
-              </p>
-              <p>
-                Pursuing a Bachelor of Computer Applications and dedicated to continuous learning through project-based development and research into modern web standards.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-              {/* Education Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-6 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
-                <div className="flex items-start gap-4">
-                  <div className="shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
-                      <FaGraduationCap className="text-white text-2xl" />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Education</h3>
-                    <p className="text-base text-light-text-secondary dark:text-gray-300">
-                      BCA | DAV Centenary College
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Experience Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-6 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
-                <div className="flex items-start gap-4">
-                  <div className="shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
-                      <FaBriefcase className="text-white text-2xl" />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Experience</h3>
-                    <p className="text-base text-light-text-secondary dark:text-gray-300">
-                      Project-Based Learning (Self-Driven Projects)
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Location Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-6 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
-                <div className="flex items-start gap-4">
-                  <div className="shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
-                      <FaMapMarkerAlt className="text-white text-2xl" />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Location</h3>
-                    <p className="text-base text-light-text-secondary dark:text-gray-300">India (Remote Friendly)</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Specialization Card */}
-              <div className="bg-white dark:bg-lightNavy/40 p-6 rounded-xl border-2 border-light-border dark:border-white/10 hover:border-accent-dark dark:hover:border-accent-teal/40 transition-transform hover:-translate-y-1 duration-300 shadow-sm dark:shadow-lg group">
-                <div className="flex items-start gap-4">
-                  <div className="shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-accent-dark dark:bg-linear-to-br dark:from-accent-teal dark:to-accent-teal/80 flex items-center justify-center transition-transform group-hover:scale-110">
-                      <FaCode className="text-white text-2xl" />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-light-text-primary dark:text-white font-bold text-xl mb-1">Specialization</h3>
-                    <p className="text-base text-light-text-secondary dark:text-gray-300">Frontend Web Development</p>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
+        {/* Section Header */}
+        <div className="mb-16 md:mb-24 text-center md:text-left max-w-3xl opacity-0 animate-fade-in-up">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">
+            About Me.
+          </h2>
+          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-light">
+            I'm a frontend developer focused on building scalable, performant web applications.
+            I bridge the gap between design and engineering, ensuring interfaces are not just visually
+            stunning, but architecturally sound and accessible.
+          </p>
         </div>
-      </div>
 
+        {/* Timeline Container */}
+        <div className="relative space-y-8 md:space-y-12">
+          {timelineData.map((item, index) => (
+            <TimelineCard key={index} item={item} index={index} />
+          ))}
+        </div>
+
+      </div>
     </section>
   );
 }
