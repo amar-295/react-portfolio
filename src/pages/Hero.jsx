@@ -1,14 +1,5 @@
-<<<<<<< HEAD
-=======
-import { Suspense } from "react";
->>>>>>> a9d6ba74e05597ac8525b7741cc4048dc2cbbb4c
 import Button from "../components/Button";
 
-/**
- * Render the hero section containing the primary heading, supporting blurb, CTAs, feature badges, and subtle decorative background elements.
- *
- * @returns {JSX.Element} A JSX element for the hero section: heading "Amarnath. Frontend Developer", descriptive paragraph, two action buttons ("Contact Me", "View Projects"), a row of feature badges ("React & JS", "3+ Projects Shipped", "Accessible"), and non-interactive blurred background shapes.
- */
 export default function Hero() {
   const badges = ["React & JS", "3+ Projects Shipped", "Accessible"];
 
@@ -20,11 +11,7 @@ export default function Hero() {
     >
       <main className="flex-1 flex flex-col justify-center px-6 py-20 z-10">
         <div className="max-w-4xl mx-auto w-full space-y-10 text-center md:text-left">
-<<<<<<< HEAD
 
-=======
-
->>>>>>> a9d6ba74e05597ac8525b7741cc4048dc2cbbb4c
           <div className="space-y-6 opacity-0 animate-fade-in-up">
             <h1 className="text-slate-900 dark:text-white tracking-tight text-5xl sm:text-7xl lg:text-8xl font-extrabold leading-[1.05]">
               Amarnath.<br className="hidden md:block" />
@@ -54,7 +41,6 @@ export default function Hero() {
 
           <div className="pt-12 md:pt-16 opacity-0 animate-fade-in-up delay-300">
             <div className="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4">
-<<<<<<< HEAD
               {badges.map((text) => (
                 <span key={text} className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-transparent text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-primary-blue"></span>
@@ -64,23 +50,6 @@ export default function Hero() {
             </div>
           </div>
 
-=======
-              <span className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-transparent text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary-blue"></span>
-                React & JS
-              </span>
-              <span className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-transparent text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary-blue"></span>
-                3+ Projects Shipped
-              </span>
-              <span className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-transparent text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary-blue"></span>
-                Accessible
-              </span>
-            </div>
-          </div>
-
->>>>>>> a9d6ba74e05597ac8525b7741cc4048dc2cbbb4c
         </div>
       </main>
 
