@@ -1,7 +1,8 @@
-import { Suspense } from "react";
 import Button from "../components/Button";
 
 export default function Hero() {
+  const badges = ["React & JS", "3+ Projects Shipped", "Accessible"];
+
   return (
     <section
       className="relative flex flex-col justify-center min-h-[90vh] w-full overflow-hidden bg-white dark:bg-[#0a0a0a]"
@@ -40,18 +41,12 @@ export default function Hero() {
 
           <div className="pt-12 md:pt-16 opacity-0 animate-fade-in-up delay-300">
             <div className="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4">
-              <span className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-transparent text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary-blue"></span>
-                React & JS
-              </span>
-              <span className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-transparent text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary-blue"></span>
-                3+ Projects Shipped
-              </span>
-              <span className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-transparent text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary-blue"></span>
-                Accessible
-              </span>
+              {badges.map((text) => (
+                <span key={text} className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-transparent text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-primary-blue"></span>
+                  {text}
+                </span>
+              ))}
             </div>
           </div>
 

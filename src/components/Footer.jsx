@@ -1,11 +1,6 @@
 import { memo } from "react";
 import Logo from "./Logo";
-
-const socialLinks = [
-  { name: "LinkedIn", url: "https://linkedin.com/in/amarnath" },
-  { name: "GitHub", url: "https://github.com/amarnath" },
-  { name: "Twitter", url: "https://twitter.com/amarnath" },
-];
+import { socialLinks } from "../data/contact";
 
 const Footer = memo(() => {
   return (
@@ -29,13 +24,14 @@ const Footer = memo(() => {
         <div className="flex flex-wrap justify-center gap-6 mb-12 opacity-0 animate-fade-in-up delay-100">
           {socialLinks.map((link) => (
             <a
-              key={link.name}
-              href={link.url}
+              key={link.platform || link.label}
+              href={link.href}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={link.label}
               className="text-sm font-bold text-slate-500 hover:text-primary-blue dark:text-slate-400 dark:hover:text-primary-blue uppercase tracking-widest transition-colors"
             >
-              {link.name}
+              {link.platform || link.label}
             </a>
           ))}
         </div>
@@ -45,8 +41,8 @@ const Footer = memo(() => {
             © {new Date().getFullYear()} Amarnath Kumar. All rights reserved.
           </p>
           <div className="flex gap-4">
-             <span className="text-slate-400 dark:text-slate-500 text-xs font-semibold hover:text-slate-900 dark:hover:text-white cursor-pointer transition-colors">Privacy</span>
-             <span className="text-slate-400 dark:text-slate-500 text-xs font-semibold hover:text-slate-900 dark:hover:text-white cursor-pointer transition-colors">Terms</span>
+             <a href="#privacy" className="text-slate-400 dark:text-slate-500 text-xs font-semibold hover:text-slate-900 dark:hover:text-white cursor-pointer transition-colors focus-visible:ring-2 focus-visible:ring-primary-blue focus:outline-none rounded-sm">Privacy</a>
+             <a href="#terms" className="text-slate-400 dark:text-slate-500 text-xs font-semibold hover:text-slate-900 dark:hover:text-white cursor-pointer transition-colors focus-visible:ring-2 focus-visible:ring-primary-blue focus:outline-none rounded-sm">Terms</a>
           </div>
         </div>
       </div>
