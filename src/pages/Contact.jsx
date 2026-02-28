@@ -54,8 +54,9 @@ export default function Contact() {
                                         rel="noopener noreferrer"
                                         className="w-10 h-10 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800/50 hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 border border-gray-200 dark:border-slate-700/50 shadow-sm dark:shadow-none"
                                         aria-label={link.label || link.platform}
+                                        title={link.label || link.platform}
                                     >
-                                        <link.icon className="text-lg" />
+                                        <link.icon className="text-lg" aria-hidden="true" focusable="false" />
                                     </a>
                                 ))}
                             </div>
