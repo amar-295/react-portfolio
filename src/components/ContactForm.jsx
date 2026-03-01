@@ -4,6 +4,13 @@ import { HiArrowRight, HiCheck, HiUser, HiMail, HiFolder, HiOutlineRefresh } fro
 import Button from "./Button";
 
 /**
+ * Loading spinner icon component.
+ */
+const LoadingIcon = (props) => (
+    <HiOutlineRefresh {...props} className={`animate-spin ${props.className || ""}`.trim()} />
+);
+
+/**
  * Contact form component with custom validation and Formspree hook integration.
  */
 
@@ -258,7 +265,7 @@ export default function ContactForm({ onSubmit }) {
                         type="submit"
                         disabled={status.submitting}
                         className={status.submitting ? "opacity-75 cursor-not-allowed" : ""}
-                        icon={status.submitting ? () => <HiOutlineRefresh className="animate-spin text-[1.25em]" /> : HiArrowRight}
+                        icon={status.submitting ? LoadingIcon : HiArrowRight}
                         aria-live="polite"
                     >
                         {status.submitting ? "Sending..." : "Send Message"}
