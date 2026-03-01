@@ -9,6 +9,12 @@ export default function Hero() {
       data-purpose="hero-section"
       id="home">
 
+      {/* Aurora Enhancement: Ambient Background Glows */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-accent-dark/10 dark:bg-blue-500/10 blur-[120px]"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-400/10 dark:bg-teal-500/10 blur-[120px]"></div>
+      </div>
+
       <div className="w-full max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-10 md:gap-16 items-center">
         <div className="md:col-span-7 space-y-8 text-center md:text-left order-1">
           <div className="flex flex-col space-y-2 opacity-0 animate-fade-in-up">
@@ -89,7 +95,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="md:col-span-5 relative flex justify-center items-center order-2 md:order-2 mt-8 md:mt-0 min-h-[250px] md:min-h-[300px] w-full max-w-[320px] md:max-w-none mx-auto">
+        <div className="md:col-span-5 relative flex justify-center items-center order-2 md:order-2 mt-8 md:mt-0 min-h-[250px] md:min-h-[300px] w-full max-w-[320px] md:max-w-none mx-auto animate-float">
           <div className="absolute w-48 md:w-64 h-48 md:h-64 bg-accent-dark/5 dark:bg-accent-teal/10 rounded-full blur-[80px] -z-10"></div>
           <Suspense fallback={<div className="w-full h-full bg-gray-900/10 dark:bg-white/5 rounded-xl animate-pulse"></div>}>
             <CodeWindow />
