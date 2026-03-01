@@ -154,11 +154,29 @@ textarea:-webkit-autofill {
 .delay-300 { animation-delay: 300ms; }
 .delay-500 { animation-delay: 500ms; }
 
+/* Aurora Enhancement: Floating Element Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
 /* Respect User Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
     .animate-fade-in-up {
         animation: none;
         opacity: 1;
+        transform: none;
+    }
+    .animate-float {
+        animation: none;
         transform: none;
     }
 }
