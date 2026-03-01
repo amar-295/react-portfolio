@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { HiArrowRight, HiCheck, HiUser, HiMail, HiFolder } from "react-icons/hi";
+import { HiArrowRight, HiCheck, HiUser, HiMail, HiFolder, HiOutlineRefresh } from "react-icons/hi";
 import Button from "./Button";
 
 /**
@@ -258,7 +258,8 @@ export default function ContactForm({ onSubmit }) {
                         type="submit"
                         disabled={status.submitting}
                         className={status.submitting ? "opacity-75 cursor-not-allowed" : ""}
-                        icon={!status.submitting ? HiArrowRight : null}
+                        icon={status.submitting ? () => <HiOutlineRefresh className="animate-spin text-[1.25em]" /> : HiArrowRight}
+                        aria-live="polite"
                     >
                         {status.submitting ? "Sending..." : "Send Message"}
                     </Button>
