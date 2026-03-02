@@ -146,7 +146,7 @@ export default function ContactForm({ onSubmit }) {
                             className="block text-sm font-bold dark:font-medium text-gray-700 dark:text-slate-400"
                             htmlFor="name"
                         >
-                            Full Name
+                            Full Name <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -158,6 +158,7 @@ export default function ContactForm({ onSubmit }) {
                                 name="name"
                                 placeholder="Full Name"
                                 type="text"
+                                required
                                 aria-invalid={!!errors.name}
                                 aria-describedby={errors.name ? "name-error" : undefined}
                                 onChange={() => {
@@ -176,7 +177,7 @@ export default function ContactForm({ onSubmit }) {
                             className="block text-sm font-bold dark:font-medium text-gray-700 dark:text-slate-400"
                             htmlFor="email"
                         >
-                            Email Address
+                            Email Address <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -188,6 +189,7 @@ export default function ContactForm({ onSubmit }) {
                                 name="email"
                                 placeholder="hello@yourcompany.com"
                                 type="email"
+                                required
                                 aria-invalid={!!errors.email}
                                 aria-describedby={errors.email ? "email-error" : undefined}
                                 onChange={() => {
@@ -207,7 +209,7 @@ export default function ContactForm({ onSubmit }) {
                         className="block text-sm font-bold dark:font-medium text-gray-700 dark:text-slate-400"
                         htmlFor="subject"
                     >
-                        Subject
+                        Subject <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
                     </label>
 
                     <div className="relative rounded-md shadow-sm">
@@ -220,6 +222,7 @@ export default function ContactForm({ onSubmit }) {
                             name="_subject"
                             placeholder="How can I help you today?"
                             type="text"
+                            required
                             aria-invalid={!!errors._subject}
                             aria-describedby={errors._subject ? "subject-error" : undefined}
                             onChange={() => {
@@ -238,7 +241,7 @@ export default function ContactForm({ onSubmit }) {
                         className="block text-sm font-bold dark:font-medium text-gray-700 dark:text-slate-400"
                         htmlFor="message"
                     >
-                        Your Message
+                        Your Message <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
                     </label>
                     <textarea
                         className={`${getInputClass("message").replace("pl-10", "px-4")}`}
@@ -246,6 +249,7 @@ export default function ContactForm({ onSubmit }) {
                         name="message"
                         placeholder="Share some details about your vision, goals, or just say hello..."
                         rows="4"
+                        required
                         aria-invalid={!!errors.message}
                         aria-describedby={errors.message ? "message-error" : undefined}
                         onChange={() => {
