@@ -31,18 +31,22 @@ export default function ContactInfoCard({
     const ContentWrapper = href ? "a" : "span";
     const contentProps = href ? { href, className: "text-gray-900 dark:text-white text-xl hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-opacity hover:opacity-80 font-bold block" } : { className: "text-gray-900 dark:text-white text-lg font-medium" };
 
+    const wrapperClasses = [
+        "flex items-start space-x-5",
+        isPrimary
+            ? "p-4 rounded-xl bg-white dark:bg-blue-500/5 border border-gray-200 dark:border-blue-500/20 shadow-md dark:shadow-lg dark:shadow-blue-500/5 transition-transform hover:-translate-y-1 duration-300 cursor-pointer group"
+            : "px-4"
+    ].filter(Boolean).join(" ");
+
+    const iconWrapperClasses = [
+        "shrink-0 w-14 h-14 rounded-xl flex items-center justify-center shadow-md",
+        isPrimary ? iconBg : "bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50",
+        isPrimary ? "text-gray-900 dark:text-white" : "text-gray-700 dark:text-blue-500"
+    ].filter(Boolean).join(" ");
+
     return (
-        <div
-            className={`flex items-start space-x-5 ${isPrimary
-                ? "p-4 rounded-xl bg-white dark:bg-blue-500/5 border border-gray-200 dark:border-blue-500/20 shadow-md dark:shadow-lg dark:shadow-blue-500/5 transition-transform hover:-translate-y-1 duration-300 cursor-pointer group"
-                : "px-4"
-                }`}
-        >
-            <div
-                className={`shrink-0 w-14 h-14 ${isPrimary ? iconBg : "bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50"
-                    } rounded-xl flex items-center justify-center ${isPrimary ? "text-gray-900 dark:text-white" : "text-gray-700 dark:text-blue-500"
-                    } shadow-md`}
-            >
+        <div className={wrapperClasses}>
+            <div className={iconWrapperClasses}>
                 <Icon className="text-2xl" />
             </div>
             <div className="pt-1">
