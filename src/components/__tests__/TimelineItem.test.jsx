@@ -10,88 +10,73 @@ describe('TimelineItem', () => {
         description: 'Studying at university.',
     };
 
+    /**
+     * Helper to verify layout classes based on side
+     */
+    const verifyAlignment = (side, expectedDateClasses, expectedContentClasses) => {
+        render(<TimelineItem {...defaultProps} side={side} />);
+
+        const dateInfoContainer = screen.getByText(defaultProps.period).closest('div').parentElement;
+        expectedDateClasses.forEach(cls => expect(dateInfoContainer).toHaveClass(cls));
+
+        const contentCardContainer = screen.getByText(defaultProps.title).closest('.w-full.md\\:w-5\\/12');
+        expectedContentClasses.forEach(cls => expect(contentCardContainer).toHaveClass(cls));
+    };
+
     it('renders basic content correctly', () => {
         render(<TimelineItem {...defaultProps} />);
 
-        expect(screen.getByText(defaultProps.period)).toBeInTheDocument();
-        expect(screen.getByText(defaultProps.subtitle)).toBeInTheDocument();
-        expect(screen.getByText(defaultProps.title)).toBeInTheDocument();
-        expect(screen.getByText(defaultProps.description)).toBeInTheDocument();
+        [defaultProps.period, defaultProps.subtitle, defaultProps.title, defaultProps.description].forEach(text => {
+            expect(screen.getByText(text)).toBeInTheDocument();
+        });
     });
 
-    it('renders optional emoji and badge', () => {
-        render(<TimelineItem {...defaultProps} emoji="🎓" badge="Graduated" />);
+    it('renders optional emoji, badge, and institution', () => {
+        render(<TimelineItem {...defaultProps} emoji="🎓" badge="Graduated" institution="Tech University" />);
 
-        expect(screen.getByText('🎓')).toBeInTheDocument();
-        expect(screen.getByText('Graduated')).toBeInTheDocument();
-    });
-
-    it('renders institution when provided', () => {
-        render(<TimelineItem {...defaultProps} institution="Tech University" />);
-
-        expect(screen.getByText('Tech University')).toBeInTheDocument();
+        ['🎓', 'Graduated', 'Tech University'].forEach(text => {
+            expect(screen.getByText(text)).toBeInTheDocument();
+        });
     });
 
     it('applies correct classes for right alignment (default)', () => {
-        render(<TimelineItem {...defaultProps} side="right" />);
-
-        // Date info container
-        const dateText = screen.getByText(defaultProps.period);
-        const dateInfoContainer = dateText.closest('div').parentElement;
-        expect(dateInfoContainer).toHaveClass('md:text-right');
-        expect(dateInfoContainer).toHaveClass('pr-0 md:pr-12');
-        expect(dateInfoContainer).toHaveClass('order-1');
-
-        // Content card container
-        const titleText = screen.getByText(defaultProps.title);
-        const contentCardContainer = titleText.closest('.w-full.md\\:w-5\\/12');
-        expect(contentCardContainer).toHaveClass('pl-0 md:pl-12');
-        expect(contentCardContainer).toHaveClass('order-3');
+        verifyAlignment(
+            "right",
+            ['md:text-right', 'pr-0', 'md:pr-12', 'order-1'],
+            ['pl-0', 'md:pl-12', 'order-3']
+        );
     });
 
     it('applies correct classes for left alignment', () => {
-        render(<TimelineItem {...defaultProps} side="left" />);
-
-        // Date info container
-        const dateText = screen.getByText(defaultProps.period);
-        const dateInfoContainer = dateText.closest('div').parentElement;
-        expect(dateInfoContainer).toHaveClass('md:text-left');
-        expect(dateInfoContainer).toHaveClass('pl-0 md:pl-12');
-        expect(dateInfoContainer).toHaveClass('order-1');
-        expect(dateInfoContainer).toHaveClass('md:order-3');
-
-        // Content card container
-        const titleText = screen.getByText(defaultProps.title);
-        const contentCardContainer = titleText.closest('.w-full.md\\:w-5\\/12');
-        expect(contentCardContainer).toHaveClass('pr-0 md:pr-12');
-        expect(contentCardContainer).toHaveClass('order-3');
-        expect(contentCardContainer).toHaveClass('md:order-1');
+        verifyAlignment(
+            "left",
+            ['md:text-left', 'pl-0', 'md:pl-12', 'order-1', 'md:order-3'],
+            ['pr-0', 'md:pr-12', 'order-3', 'md:order-1']
+        );
     });
 
     it('applies correct badge colors', () => {
-        const { rerender } = render(<TimelineItem {...defaultProps} emoji="🎓" badge="Badge" badgeColor="green" />);
-        let badge = screen.getByText('Badge');
-        expect(badge).toHaveClass('dark:bg-green-900/30');
+        const testCases = [
+            { color: "green", expected: "dark:bg-green-900/30" },
+            { color: "blue", expected: "dark:bg-blue-900/30" }
+        ];
 
-        rerender(<TimelineItem {...defaultProps} emoji="🎓" badge="Badge" badgeColor="blue" />);
-        badge = screen.getByText('Badge');
-        expect(badge).toHaveClass('dark:bg-blue-900/30');
+        testCases.forEach(({ color, expected }) => {
+            const { unmount } = render(<TimelineItem {...defaultProps} emoji="🎓" badge="Badge" badgeColor={color} />);
+            expect(screen.getByText('Badge')).toHaveClass(expected);
+            unmount();
+        });
     });
 
     it('applies active styles to the dot when isActive is true', () => {
         const { container } = render(<TimelineItem {...defaultProps} isActive={true} />);
-        // The dot is the middle element with order-2
-        const dot = container.querySelector('.order-2');
-        expect(dot).toHaveClass('ring-4');
+        expect(container.querySelector('.order-2')).toHaveClass('ring-4');
     });
 
     it('handles missing optional fields gracefully', () => {
         render(<TimelineItem {...defaultProps} />);
-        expect(screen.queryByText('🎓')).not.toBeInTheDocument();
-        // Badge is only rendered if emoji is present in the current implementation
-        // Let's verify that behavior or if it's a bug.
-        // Current code: {emoji && (... {badge && (...)})}
-        expect(screen.queryByText('Graduated')).not.toBeInTheDocument();
-        expect(screen.queryByText('Tech University')).not.toBeInTheDocument();
+        ['🎓', 'Graduated', 'Tech University'].forEach(text => {
+            expect(screen.queryByText(text)).not.toBeInTheDocument();
+        });
     });
 });
