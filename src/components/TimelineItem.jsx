@@ -18,11 +18,13 @@ import PropTypes from "prop-types";
  *   isActive    – whether the dot gets a ring effect (default: false)
  */
 
-const badgeBase = "bg-blue-100 text-blue-700 border-blue-200 font-bold dark:font-normal";
-
-const badgeColors = {
-    green: `${badgeBase} dark:bg-green-900/30 dark:text-green-400 dark:border-green-800`,
-    blue: `${badgeBase} dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800`,
+const getBadgeColorClass = (color) => {
+    const base = "bg-blue-100 text-blue-700 border-blue-200 font-bold dark:font-normal";
+    const variants = {
+        blue: "dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800",
+        green: "dark:bg-green-900/30 dark:text-green-400 dark:border-green-800"
+    };
+    return `${base} ${color === "blue" ? variants.blue : variants.green}`;
 };
 
 const dotColors = {
@@ -92,8 +94,7 @@ export default function TimelineItem({
                             <span className="text-4xl">{emoji}</span>
                             {badge && (
                                 <span
-                                    className={`text-xs px-3 py-1 rounded-full border ${badgeColors[badgeColor] || badgeColors.green
-                                        }`}
+                                    className={`text-xs px-3 py-1 rounded-full border ${getBadgeColorClass(badgeColor)}`}
                                 >
                                     {badge}
                                 </span>
