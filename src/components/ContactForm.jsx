@@ -10,7 +10,7 @@ const LoadingIcon = (props) => (
     <HiOutlineRefresh {...props} className={`animate-spin ${props.className || ""}`.trim()} />
 );
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 const INPUT_CLASSES = {
     base: [
