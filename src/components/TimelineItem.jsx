@@ -18,21 +18,11 @@ import PropTypes from "prop-types";
  *   isActive    – whether the dot gets a ring effect (default: false)
  */
 
-const badgeBaseClasses = ["bg-blue-100", "text-blue-700", "border-blue-200", "font-bold", "dark:font-normal"];
+const badgeBase = "bg-blue-100 text-blue-700 border-blue-200 font-bold dark:font-normal";
 
 const badgeColors = {
-    green: [
-        ...badgeBaseClasses,
-        "dark:bg-green-900/30",
-        "dark:text-green-400",
-        "dark:border-green-800",
-    ].join(" "),
-    blue: [
-        ...badgeBaseClasses,
-        "dark:bg-blue-900/30",
-        "dark:text-blue-400",
-        "dark:border-blue-800",
-    ].join(" "),
+    green: `${badgeBase} dark:bg-green-900/30 dark:text-green-400 dark:border-green-800`,
+    blue: `${badgeBase} dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800`,
 };
 
 const dotColors = {
