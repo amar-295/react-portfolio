@@ -39,13 +39,18 @@ export default function About() {
 
             <div className="text-light-text-secondary dark:text-gray-300 space-y-6 text-lg leading-relaxed">
               <p>
-                I'm a frontend developer focused on building clean, intuitive web interfaces with a strong emphasis on accessibility and performance. My approach centers on creating functional codebases that are both maintainable and user-centric.
+                I'm a frontend developer focused on building clean, intuitive web interfaces
+                with a strong emphasis on accessibility and performance. My approach centers
+                on creating functional codebases that are both maintainable and user-centric.
               </p>
               <p>
-                Currently focusing on the MERN stack and exploring RESTful API architectures. I enjoy the process of translating complex requirements into reliable, component-based frontend solutions.
+                Currently focusing on the MERN stack and exploring RESTful API architectures.
+                I enjoy the process of translating complex requirements into reliable,
+                component-based frontend solutions.
               </p>
               <p>
-                Pursuing a Bachelor of Computer Applications and dedicated to continuous learning through project-based development and research into modern web standards.
+                Pursuing a Bachelor of Computer Applications and dedicated to continuous learning
+                through project-based development and research into modern web standards.
               </p>
             </div>
 
