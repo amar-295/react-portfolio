@@ -10,6 +10,24 @@ const LoadingIcon = (props) => (
     <HiOutlineRefresh {...props} className={`animate-spin ${props.className || ""}`.trim()} />
 );
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const INPUT_CLASSES = {
+    base: [
+        "block w-full rounded-lg bg-white dark:bg-[#1e293b]/50 py-3 pl-10",
+        "text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500",
+        "sm:text-sm transition-opacity transition-transform duration-300 focus:ring-4"
+    ].join(" "),
+    valid: [
+        "border-gray-300 dark:border-slate-700 focus:border-blue-500",
+        "dark:focus:border-blue-400 focus:ring-blue-500/10 dark:focus:ring-blue-400/10"
+    ].join(" "),
+    error: [
+        "border-rose-500 dark:border-rose-500 focus:border-rose-500",
+        "focus:ring-rose-500/10"
+    ].join(" ")
+};
+
 /**
  * Contact form component with custom validation and Formspree hook integration.
  */
@@ -25,7 +43,6 @@ export default function ContactForm({ onSubmit }) {
 
     const validateForm = (formData) => {
         const newErrors = {};
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         const name = formData.get("name")?.toString().trim();
         if (!name) {
@@ -35,7 +52,7 @@ export default function ContactForm({ onSubmit }) {
         const email = formData.get("email")?.toString().trim();
         if (!email) {
             newErrors.email = "Email is required";
-        } else if (!emailRegex.test(email)) {
+        } else if (!EMAIL_REGEX.test(email)) {
             newErrors.email = "Please enter a valid email address";
         }
 
@@ -103,11 +120,10 @@ export default function ContactForm({ onSubmit }) {
 
     // Helper to get input classes based on error state
     const getInputClass = (fieldName) => {
-        const baseClass = "block w-full rounded-lg bg-white dark:bg-[#1e293b]/50 py-3 pl-10 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 sm:text-sm transition-opacity transition-transform duration-300 focus:ring-4";
-        const validClass = "border-gray-300 dark:border-slate-700 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500/10 dark:focus:ring-blue-400/10";
-        const errorClass = "border-rose-500 dark:border-rose-500 focus:border-rose-500 focus:ring-rose-500/10";
-
-        return `${baseClass} ${errors[fieldName] ? errorClass : validClass}`;
+        return [
+            INPUT_CLASSES.base,
+            errors[fieldName] ? INPUT_CLASSES.error : INPUT_CLASSES.valid
+        ].filter(Boolean).join(" ");
     };
 
     // Success UI
@@ -244,7 +260,7 @@ export default function ContactForm({ onSubmit }) {
                         Your Message <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
                     </label>
                     <textarea
-                        className={`${getInputClass("message").replace("pl-10", "px-4")}`}
+                        className={`${getInputClass("message").replaceAll("pl-10", "px-4")}`}
                         id="message"
                         name="message"
                         placeholder="Share some details about your vision, goals, or just say hello..."
