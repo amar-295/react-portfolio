@@ -14,6 +14,27 @@ const LoadingIcon = (props) => (
  * Contact form component with custom validation and Formspree hook integration.
  */
 
+
+const BASE_INPUT_CLASS = [
+    "block w-full rounded-lg bg-white",
+    "dark:bg-[#1e293b]/50 py-3 pl-10",
+    "text-gray-900 dark:text-white",
+    "placeholder-gray-400 dark:placeholder-slate-500",
+    "sm:text-sm transition-opacity transition-transform",
+    "duration-300 focus:ring-4"
+].join(" ");
+
+const VALID_INPUT_CLASS = [
+    "border-gray-300 dark:border-slate-700",
+    "focus:border-blue-500 dark:focus:border-blue-400",
+    "focus:ring-blue-500/10 dark:focus:ring-blue-400/10"
+].join(" ");
+
+const ERROR_INPUT_CLASS = [
+    "border-rose-500 dark:border-rose-500",
+    "focus:border-rose-500 focus:ring-rose-500/10"
+].join(" ");
+
 export default function ContactForm({ onSubmit }) {
     const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID || "xeelgjya";
     const [status, setStatus] = useState({
@@ -103,11 +124,7 @@ export default function ContactForm({ onSubmit }) {
 
     // Helper to get input classes based on error state
     const getInputClass = (fieldName) => {
-        const baseClass = "block w-full rounded-lg bg-white dark:bg-[#1e293b]/50 py-3 pl-10 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 sm:text-sm transition-opacity transition-transform duration-300 focus:ring-4";
-        const validClass = "border-gray-300 dark:border-slate-700 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500/10 dark:focus:ring-blue-400/10";
-        const errorClass = "border-rose-500 dark:border-rose-500 focus:border-rose-500 focus:ring-rose-500/10";
-
-        return `${baseClass} ${errors[fieldName] ? errorClass : validClass}`;
+        return `${BASE_INPUT_CLASS} ${errors[fieldName] ? ERROR_INPUT_CLASS : VALID_INPUT_CLASS}`;
     };
 
     // Success UI
@@ -244,7 +261,7 @@ export default function ContactForm({ onSubmit }) {
                         Your Message <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
                     </label>
                     <textarea
-                        className={`${getInputClass("message").replace("pl-10", "px-4")}`}
+                        className={`${getInputClass("message").replaceAll("pl-10", "px-4")}`}
                         id="message"
                         name="message"
                         placeholder="Share some details about your vision, goals, or just say hello..."
