@@ -55,7 +55,7 @@ export default function ProjectCard({
     >
       {/* ---- Image Column ---- */}
       <div className="w-full lg:w-5/12">
-        <div className="relative group bg-light-surface dark:bg-card-bg rounded-xl overflow-hidden border-2 border-light-border dark:border-slate-800/50 shadow-sm aspect-video">
+        <div className="relative group bg-light-surface dark:bg-card-bg rounded-xl overflow-hidden border-2 border-light-border dark:border-slate-800/50 shadow-sm aspect-video card-hover">
           <img
             alt={imageAlt || title}
             className="w-full h-full object-contain bg-gray-50 dark:bg-slate-900/50 transform group-hover:scale-105 transition-transform duration-500"
