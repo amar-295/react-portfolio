@@ -1,5 +1,29 @@
 import PropTypes from "prop-types";
 
+/* ---- variant class maps ---- */
+const base = [
+    "group font-bold rounded-xl text-base transition-opacity transition-transform duration-300",
+    "inline-flex items-center justify-center gap-2.5 active:scale-95 hover:opacity-90",
+    "focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400",
+    "focus-visible:outline-none focus-visible:ring-offset-2",
+    "focus-visible:ring-offset-light-surface dark:focus-visible:ring-offset-midnight"
+].join(" ");
+
+const variants = {
+    primary: [
+        "px-8 py-3.5 bg-gray-900 dark:bg-blue-600",
+        "hover:bg-black dark:hover:bg-blue-500",
+        "text-white shadow-lg hover:shadow-xl dark:shadow-blue-500/30",
+        "dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:-translate-y-0.5"
+    ].join(" "),
+    outline: [
+        "px-8 py-3.5 bg-transparent border-2 border-gray-900 dark:border-slate-600",
+        "hover:border-gray-900 dark:hover:border-blue-500",
+        "hover:bg-gray-50 dark:hover:bg-blue-500/10",
+        "text-gray-900 dark:text-white"
+    ].join(" "),
+};
+
 /**
  * Reusable Button / Link component extracted from the Projects section.
  *
@@ -25,20 +49,10 @@ export default function Button({
     children,
     ...rest
 }) {
-    /* ---- variant class maps ---- */
-    const base =
-        "group font-bold rounded-xl text-base transition-opacity transition-transform duration-300 inline-flex items-center justify-center gap-2.5 active:scale-95 hover:opacity-90 focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-light-surface dark:focus-visible:ring-offset-midnight";
-
-    const variants = {
-        primary:
-            "px-8 py-3.5 bg-gray-900 dark:bg-blue-600 hover:bg-black dark:hover:bg-blue-500 text-white shadow-lg hover:shadow-xl dark:shadow-blue-500/30 dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:-translate-y-0.5",
-        outline:
-            "px-8 py-3.5 bg-transparent border-2 border-gray-900 dark:border-slate-600 hover:border-gray-900 dark:hover:border-blue-500 hover:bg-gray-50 dark:hover:bg-blue-500/10 text-gray-900 dark:text-white",
-    };
-
     const widthClass = fullWidth ? "w-full" : "";
 
-    const classes = `${base} ${variants[variant] || variants.primary} ${widthClass} ${className}`.trim();
+    const selectedVariant = variants[variant] || variants.primary;
+    const classes = [base, selectedVariant, widthClass, className].filter(Boolean).join(" ");
 
     /* ---- icon element ---- */
     const Icon = icon;
