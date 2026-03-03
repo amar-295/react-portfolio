@@ -38,12 +38,16 @@ describe("ScrollToTop component", () => {
         render(<ScrollToTop />);
         const button = screen.getByRole("button", { hidden: true });
 
+        // Wait a tiny bit for throttle initial timer context if needed, though we mock scrollY
+        await new Promise((r) => setTimeout(r, 110));
+
         // Simulate scroll
         setWindowScrollY(301);
         fireEvent.scroll(window);
 
         // Wait for re-render
-        await waitFor(() => {
+        await waitFor(async () => {
+            await new Promise((r) => setTimeout(r, 110)); // allow throttle to pass
             expect(button).toHaveClass("opacity-100");
         });
 
@@ -60,12 +64,16 @@ describe("ScrollToTop component", () => {
         render(<ScrollToTop />);
         const button = screen.getByRole("button", { hidden: true });
 
+        await new Promise((r) => setTimeout(r, 110));
+
         // Scroll down
         setWindowScrollY(400);
         fireEvent.scroll(window);
         await waitFor(() => {
              expect(button).toHaveClass("opacity-100");
         });
+
+        await new Promise((r) => setTimeout(r, 110));
 
         // Scroll up
         setWindowScrollY(200);
