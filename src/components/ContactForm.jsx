@@ -1,55 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { HiArrowRight, HiCheck, HiUser, HiMail, HiFolder, HiOutlineRefresh } from "react-icons/hi";
-
-/**
- * Reusable form field component to reduce duplication.
- */
-function FormField({ id, label, type, placeholder, icon, error, valueClass, onChange }) {
-    const FormIcon = icon;
-    return (
-        <div className="space-y-2">
-            <label
-                className="block text-sm font-bold dark:font-medium text-gray-700 dark:text-slate-400"
-                htmlFor={id}
-            >
-                {label} <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
-            </label>
-            <div className="relative rounded-md shadow-sm">
-                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                    <FormIcon className={`text-lg ${error ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`} />
-                </div>
-                <input
-                    className={valueClass}
-                    id={id}
-                    name={id === "subject" ? "_subject" : id}
-                    placeholder={placeholder}
-                    type={type}
-                    required
-                    aria-invalid={!!error}
-                    aria-describedby={error ? `${id}-error` : undefined}
-                    onChange={onChange}
-                />
-            </div>
-            {error && (
-                <p id={`${id}-error`} className="text-xs text-rose-500 mt-1 ml-1" role="alert">{error}</p>
-            )}
-        </div>
-    );
-}
-
-
-FormField.propTypes = {
-    id: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    placeholder: PropTypes.string.isRequired,
-    icon: PropTypes.elementType.isRequired,
-    error: PropTypes.string,
-    valueClass: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-};
-
 import Button from "./Button";
 
 /**
@@ -206,38 +157,100 @@ export default function ContactForm({ onSubmit }) {
                     </div>
                 )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <FormField
-                        id="name"
-                        label="Full Name"
-                        type="text"
-                        placeholder="Full Name"
-                        icon={HiUser}
-                        error={errors.name}
-                        valueClass={getInputClass("name")}
-                        onChange={() => { if (errors.name) setErrors({ ...errors, name: null }); }}
-                    />
-                    <FormField
-                        id="email"
-                        label="Email Address"
-                        type="email"
-                        placeholder="hello@yourcompany.com"
-                        icon={HiMail}
-                        error={errors.email}
-                        valueClass={getInputClass("email")}
-                        onChange={() => { if (errors.email) setErrors({ ...errors, email: null }); }}
-                    />
+                    {/* Full Name */}
+                    <div className="space-y-2">
+                        <label
+                            className="block text-sm font-bold dark:font-medium text-gray-700 dark:text-slate-400"
+                            htmlFor="name"
+                        >
+                            Full Name <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
+                        </label>
+                        <div className="relative rounded-md shadow-sm">
+                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <HiUser className={`text-lg ${errors.name ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`} />
+                            </div>
+                            <input
+                                className={getInputClass("name")}
+                                id="name"
+                                name="name"
+                                placeholder="Full Name"
+                                type="text"
+                                required
+                                aria-invalid={!!errors.name}
+                                aria-describedby={errors.name ? "name-error" : undefined}
+                                onChange={() => {
+                                    if (errors.name) setErrors({ ...errors, name: null });
+                                }}
+                            />
+                        </div>
+                        {errors.name && (
+                            <p id="name-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.name}</p>
+                        )}
+                    </div>
+
+                    {/* Email */}
+                    <div className="space-y-2">
+                        <label
+                            className="block text-sm font-bold dark:font-medium text-gray-700 dark:text-slate-400"
+                            htmlFor="email"
+                        >
+                            Email Address <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
+                        </label>
+                        <div className="relative rounded-md shadow-sm">
+                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <HiMail className={`text-lg ${errors.email ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`} />
+                            </div>
+                            <input
+                                className={getInputClass("email")}
+                                id="email"
+                                name="email"
+                                placeholder="hello@yourcompany.com"
+                                type="email"
+                                required
+                                aria-invalid={!!errors.email}
+                                aria-describedby={errors.email ? "email-error" : undefined}
+                                onChange={() => {
+                                    if (errors.email) setErrors({ ...errors, email: null });
+                                }}
+                            />
+                        </div>
+                        {errors.email && (
+                            <p id="email-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors.email}</p>
+                        )}
+                    </div>
                 </div>
 
-                <FormField
-                    id="subject"
-                    label="Subject"
-                    type="text"
-                    placeholder="How can I help you today?"
-                    icon={HiFolder}
-                    error={errors._subject}
-                    valueClass={getInputClass("_subject")}
-                    onChange={() => { if (errors._subject) setErrors({ ...errors, _subject: null }); }}
-                />
+                {/* Subject */}
+                <div className="space-y-2">
+                    <label
+                        className="block text-sm font-bold dark:font-medium text-gray-700 dark:text-slate-400"
+                        htmlFor="subject"
+                    >
+                        Subject <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
+                    </label>
+
+                    <div className="relative rounded-md shadow-sm">
+                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <HiFolder className={`text-lg ${errors._subject ? "text-rose-500" : "text-gray-400 dark:text-slate-500"}`} />
+                        </div>
+                        <input
+                            className={getInputClass("_subject")}
+                            id="subject"
+                            name="_subject"
+                            placeholder="How can I help you today?"
+                            type="text"
+                            required
+                            aria-invalid={!!errors._subject}
+                            aria-describedby={errors._subject ? "subject-error" : undefined}
+                            onChange={() => {
+                                if (errors._subject) setErrors({ ...errors, _subject: null });
+                            }}
+                        />
+                    </div>
+                    {errors._subject && (
+                        <p id="subject-error" className="text-xs text-rose-500 mt-1 ml-1" role="alert">{errors._subject}</p>
+                    )}
+                </div>
 
                 {/* Message */}
                 <div className="space-y-2">

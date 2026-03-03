@@ -42,10 +42,9 @@ describe("Navbar Component", () => {
     it("renders navigation links", () => {
         renderNavbar();
         // Check for desktop links (hidden md:flex might still be in DOM)
-        expect(screen.getAllByText("About").length).toBeGreaterThan(0);
-        expect(screen.getAllByText("Projects").length).toBeGreaterThan(0);
-        expect(screen.getAllByText("Skills").length).toBeGreaterThan(0);
-        expect(screen.getAllByText("Contact").length).toBeGreaterThan(0);
+        ["About", "Projects", "Skills", "Contact"].forEach(link => {
+            expect(screen.getAllByText(link).length).toBeGreaterThan(0);
+        });
     });
 
     it("toggles the theme when the theme button is clicked", () => {
