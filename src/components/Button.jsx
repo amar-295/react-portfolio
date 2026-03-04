@@ -39,10 +39,10 @@ export default function Button({
     const variants = {
         primary: [
             "px-8 py-3.5",
-            "bg-gray-900 dark:bg-blue-600",
-            "hover:bg-black dark:hover:bg-blue-500",
+            "bg-gray-900 dark:bg-gradient-to-r dark:from-blue-600 dark:to-blue-500",
+            "hover:bg-black dark:hover:from-blue-500 dark:hover:to-blue-400",
             "text-white shadow-lg hover:shadow-xl",
-            "dark:shadow-blue-500/30 dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]",
+            "dark:shadow-[0_0_15px_rgba(59,130,246,0.3)] dark:hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]",
             "hover:-translate-y-0.5"
         ].join(" "),
         outline: [
