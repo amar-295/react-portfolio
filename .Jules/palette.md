@@ -5,3 +5,7 @@
 ## 2025-02-18 - Missing Visible Focus on Interactive Icon Links
 **Learning:** Interactive elements like social links and secondary buttons often miss visible focus states, hindering keyboard navigation.
 **Action:** Always add consistent `focus-visible` ring utilities to interactive link components to ensure a seamless and accessible experience for all users.
+
+## 2025-03-04 - Screen Reader Feedback on Form States
+**Learning:** Form success/error messages implemented via React state do not automatically alert screen readers, leading to confusing silence on submission.
+**Action:** Add `role="status"` and `aria-live="polite"` to success message containers, and `role="alert"` to inline error summaries for immediate accessibility feedback without page reloads.

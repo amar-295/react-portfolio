@@ -130,7 +130,11 @@ export default function ContactForm({ onSubmit }) {
     // Success UI
     if (status.succeeded) {
         return (
-            <div className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-sm dark:shadow-none backdrop-blur-sm flex flex-col items-center justify-center min-h-[400px] text-center">
+            <div
+                className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-sm dark:shadow-none backdrop-blur-sm flex flex-col items-center justify-center min-h-[400px] text-center"
+                role="status"
+                aria-live="polite"
+            >
                 <div className="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-500/20 border-2 border-blue-200 dark:border-blue-500 flex items-center justify-center mb-6">
                     <HiCheck className="text-blue-600 dark:text-blue-500 text-3xl" />
                 </div>
@@ -152,7 +156,10 @@ export default function ContactForm({ onSubmit }) {
         <div className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-lg shadow-gray-100/50 dark:shadow-none backdrop-blur-sm">
             <form onSubmit={handleLocalSubmit} className="space-y-6" noValidate>
                 {status.errors.length > 0 && (
-                    <div className="p-4 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-lg text-rose-600 dark:text-rose-300 text-sm">
+                    <div
+                        className="p-4 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-lg text-rose-600 dark:text-rose-300 text-sm"
+                        role="alert"
+                    >
                         {status.errors.join(", ")}
                     </div>
                 )}
