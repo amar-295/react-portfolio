@@ -52,7 +52,7 @@ export default function Contact() {
                                         href={link.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-10 h-10 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800/50 hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 border border-gray-200 dark:border-slate-700/50 shadow-sm dark:shadow-none"
+                                        className="w-10 h-10 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800/50 hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 border border-gray-200 dark:border-slate-700/50 shadow-sm dark:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50 dark:focus-visible:ring-offset-[#020617]"
                                         aria-label={link.label || link.platform}
                                         title={link.label || link.platform}
                                     >
