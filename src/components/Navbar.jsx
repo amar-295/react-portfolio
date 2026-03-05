@@ -11,11 +11,11 @@ const NAV_LINKS = [
     { name: "Contact", href: "#contact", id: "contact" },
 ];
 
-const DESKTOP_LINK_BASE = "relative text-sm font-semibold transition-opacity duration-300 group";
+const DESKTOP_LINK_BASE = "relative text-sm font-semibold transition-opacity duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-navy rounded-md";
 const DESKTOP_LINK_ACTIVE = "text-accent-dark dark:text-blue-400";
 const DESKTOP_LINK_INACTIVE = "text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 hover:opacity-80";
 
-const MOBILE_LINK_BASE = "block w-full py-3 px-6 rounded-xl text-center text-lg font-medium transition-opacity duration-300 hover:opacity-80";
+const MOBILE_LINK_BASE = "block w-full py-3 px-6 rounded-xl text-center text-lg font-medium transition-opacity duration-300 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-navy";
 const MOBILE_LINK_ACTIVE = "bg-accent-light/50 dark:bg-blue-500/10 text-accent-dark dark:text-blue-400 font-bold";
 const MOBILE_LINK_INACTIVE = "text-light-text-secondary dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-white/5";
 
@@ -110,7 +110,7 @@ export default function Navbar() {
                 {/* Logo */}
                 <a
                     href="#home"
-                    className="flex items-center gap-2 group transition-colors transition-transform duration-300 font-display"
+                    className="flex items-center gap-2 group transition-colors transition-transform duration-300 font-display focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-navy rounded-lg p-1"
                     onClick={() => setActiveSection("home")}
                 >
                     <Logo className={`w-8 h-8 transition-transform duration-300 group-hover:rotate-12 ${activeSection === "home" ? "text-accent-dark dark:text-blue-500 scale-105" : "text-accent-dark dark:text-blue-500"
@@ -139,7 +139,7 @@ export default function Navbar() {
                     <button
                         aria-label="Toggle Theme"
                         onClick={toggleTheme}
-                        className="text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity flex items-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 hover:opacity-80"
+                        className="text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity flex items-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-navy"
                     >
                         {isDarkMode ? (
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -155,7 +155,7 @@ export default function Navbar() {
                     </button>
 
                     <a
-                        className="inline-flex items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-accent-dark dark:bg-blue-600 rounded-lg hover:bg-black dark:hover:bg-blue-700 transition-opacity transition-transform duration-300 shadow-sm hover:opacity-90 active:scale-95"
+                        className="inline-flex items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-accent-dark dark:bg-blue-600 rounded-lg hover:bg-black dark:hover:bg-blue-700 transition-opacity transition-transform duration-300 shadow-sm hover:opacity-90 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-navy"
                         href="/resume.pdf"
                         download="Amarnath_Resume.pdf"
                         target="_blank"
@@ -169,7 +169,7 @@ export default function Navbar() {
                 <div className="md:hidden flex items-center gap-6">
                     <button
                         onClick={toggleTheme}
-                        className="text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity p-2 hover:opacity-80"
+                        className="text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity p-2 hover:opacity-80 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-navy"
                         aria-label="Toggle Theme"
                     >
                         {isDarkMode ? (
@@ -187,7 +187,7 @@ export default function Navbar() {
                     </button>
 
                     <button
-                        className="text-accent-dark dark:text-blue-400 focus:outline-none p-2"
+                        className="text-accent-dark dark:text-blue-400 focus:outline-none p-2 rounded-lg focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-navy"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         aria-label="Toggle Menu"
                     >
@@ -242,7 +242,7 @@ export default function Navbar() {
                                         download="Amarnath_Resume.pdf"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-max mx-auto px-8 py-3 rounded-full flex items-center justify-center gap-2 bg-accent-dark dark:bg-blue-700 text-white font-bold shadow-lg shadow-blue-500/20 active:scale-95 transition-colors duration-300 text-sm"
+                                        className="w-max mx-auto px-8 py-3 rounded-full flex items-center justify-center gap-2 bg-accent-dark dark:bg-blue-700 text-white font-bold shadow-lg shadow-blue-500/20 active:scale-95 transition-colors duration-300 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-navy"
                                     >
                                         <span>Download Resume</span>
                                         <HiDownload className="text-sm" />
@@ -259,7 +259,7 @@ export default function Navbar() {
                                                 rel="noopener noreferrer"
                                                 aria-label={link.label || link.platform}
                                                 title={link.label || link.platform}
-                                                className="text-gray-500 dark:text-slate-400 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity transform hover:scale-110 hover:opacity-80"
+                                                className="text-gray-500 dark:text-slate-400 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity transform hover:scale-110 hover:opacity-80 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-navy"
                                             >
                                                 <link.icon className="text-2xl" />
                                             </a>
