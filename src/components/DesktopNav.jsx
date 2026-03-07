@@ -14,6 +14,7 @@ export default function DesktopNav({
                     className={getLinkClass(link.id)}
                     href={link.href}
                     onClick={() => setActiveSection(link.id)}
+                    aria-current={activeSection === link.id ? "page" : undefined}
                 >
                     {link.name}
                     <span className={`absolute -bottom-1 left-0 w-full h-[2px] bg-accent-dark dark:bg-blue-400 transition-transform duration-300 origin-left ${activeSection === link.id ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
