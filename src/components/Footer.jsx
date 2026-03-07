@@ -44,7 +44,7 @@ export default function Footer({
                             {quickLinks.map((link) => (
                                 <li key={link.label}>
                                     <a
-                                        className="text-gray-700 dark:text-slate-300 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-opacity text-sm font-medium hover:opacity-80"
+                                        className="text-gray-700 dark:text-slate-300 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-opacity text-sm font-medium hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 rounded-sm"
                                         href={link.href}
                                     >
                                         {link.label}
@@ -63,7 +63,7 @@ export default function Footer({
                             {socialLinks.map((social) => (
                                 <li key={social.platform}>
                                     <a
-                                        className="text-gray-700 dark:text-slate-300 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-opacity text-sm flex items-center gap-2 font-medium hover:opacity-80"
+                                        className="text-gray-700 dark:text-slate-300 hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-opacity text-sm flex items-center gap-2 font-medium hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 rounded-sm w-max"
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"

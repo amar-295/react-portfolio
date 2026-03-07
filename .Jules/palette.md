@@ -9,3 +9,7 @@
 ## 2025-03-04 - Screen Reader Feedback on Form States
 **Learning:** Form success/error messages implemented via React state do not automatically alert screen readers, leading to confusing silence on submission.
 **Action:** Add `role="status"` and `aria-live="polite"` to success message containers, and `role="alert"` to inline error summaries for immediate accessibility feedback without page reloads.
+
+## 2025-03-05 - Missing Skip-to-Content Links
+**Learning:** Missing skip-to-content links break keyboard accessibility for screen reader users and those unable to use a mouse, particularly on long-scrolling portfolios with complex navigation. Users are forced to tab through all navigation elements before reaching the actual content.
+**Action:** Always include a visually hidden, focusable link at the very top of the DOM (e.g., in `App.jsx`) that jumps to the main content container.

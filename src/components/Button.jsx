@@ -16,6 +16,7 @@ import PropTypes from "prop-types";
  *   children   – button label text
  *   ...rest    – any other native attributes (onClick, target, rel, etc.)
  */
+
 export default function Button({
   variant = "primary",
   href,
