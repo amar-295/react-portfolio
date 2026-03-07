@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { HiDownload } from "react-icons/hi";
 import { socialLinks } from "../data/contact";
 
@@ -75,3 +76,17 @@ export default function MobileMenu({
         </>
     );
 }
+
+MobileMenu.propTypes = {
+    isMenuOpen: PropTypes.bool.isRequired,
+    setIsMenuOpen: PropTypes.func.isRequired,
+    navLinks: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            href: PropTypes.string.isRequired,
+        })
+    ).isRequired,
+    setActiveSection: PropTypes.func.isRequired,
+    getMobileLinkClass: PropTypes.func.isRequired,
+};

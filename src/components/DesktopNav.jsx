@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function DesktopNav({
     navLinks,
     getLinkClass,
@@ -21,3 +23,16 @@ export default function DesktopNav({
         </nav>
     );
 }
+
+DesktopNav.propTypes = {
+    navLinks: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            href: PropTypes.string.isRequired,
+        })
+    ).isRequired,
+    getLinkClass: PropTypes.func.isRequired,
+    activeSection: PropTypes.string.isRequired,
+    setActiveSection: PropTypes.func.isRequired,
+};

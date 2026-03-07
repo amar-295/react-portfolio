@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useTheme } from "../context/ThemeContext";
 
 export default function ThemeToggle({ className = "" }) {
@@ -25,3 +26,7 @@ export default function ThemeToggle({ className = "" }) {
         </button>
     );
 }
+
+ThemeToggle.propTypes = {
+    className: PropTypes.string,
+};
