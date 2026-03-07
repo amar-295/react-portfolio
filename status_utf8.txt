@@ -1,0 +1,43 @@
+﻿On branch refactor-timeline-badge-colors-14633068476677742348
+Your branch is up to date with 'origin/refactor-timeline-badge-colors-14633068476677742348'.
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Changes to be committed:
+	modified:   .Jules/palette.md
+	new file:   revert.sh
+	modified:   src/components/Button.jsx
+	modified:   src/components/CTABanner.jsx
+	modified:   src/components/CodeWindow.jsx
+	modified:   src/components/ContactForm.jsx
+	modified:   src/components/ExperimentCard.jsx
+	modified:   src/components/Navbar.jsx
+	modified:   src/components/ProjectCard.jsx
+	modified:   src/components/ScrollToTop.jsx
+	modified:   src/components/SectionHeading.jsx
+	new file:   src/components/SectionHeading.test.jsx
+	modified:   src/components/SkillCard.jsx
+	modified:   src/components/SocialLink.jsx
+	modified:   src/components/TimelineItem.jsx
+	new file:   src/components/__tests__/ContactForm.test.jsx
+	new file:   src/components/__tests__/Footer.test.jsx
+	new file:   src/components/__tests__/Navbar.test.jsx
+	modified:   src/components/__tests__/ScrollToTop.test.jsx
+	new file:   src/components/__tests__/SocialLink.test.jsx
+	modified:   src/pages/About.jsx
+	modified:   src/tests/setup.js
+	new file:   test_script.js
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+	both added:      src/components/__tests__/TimelineItem.test.jsx
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	prs.json
+	prs.txt
+	status.txt
+	status_utf8.txt
+
