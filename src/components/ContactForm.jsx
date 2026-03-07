@@ -6,9 +6,10 @@ import Button from "./Button";
 /**
  * Loading spinner icon component.
  */
-const LoadingIcon = ({ className }) => (
-    <HiOutlineRefresh className={`animate-spin ${className || ""}`.trim()} />
-);
+function LoadingIcon({ className }) {
+    const iconClass = ["animate-spin", className].filter(Boolean).join(" ");
+    return <HiOutlineRefresh className={iconClass} />;
+}
 
 /**
  * Contact form component with custom validation and Formspree hook integration.
