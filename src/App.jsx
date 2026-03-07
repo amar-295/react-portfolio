@@ -14,8 +14,14 @@ const Contact = lazy(() => import("./pages/Contact"));
 function App() {
   return (
     <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[60] bg-gray-900 dark:bg-blue-600 text-white px-6 py-3 rounded-lg font-bold shadow-xl transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-blue-400"
+      >
+        Skip to main content
+      </a>
       <Navbar />
-      <main>
+      <main id="main-content" tabIndex="-1" className="focus:outline-none">
         <Hero />
         <About />
         <Suspense fallback={<div className="h-40" />}>

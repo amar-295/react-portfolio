@@ -29,7 +29,7 @@ export default function ContactInfoCard({
     const isPrimary = variant === "primary";
 
     const ContentWrapper = href ? "a" : "span";
-    const contentProps = href ? { href, className: "text-gray-900 dark:text-white text-xl hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-opacity hover:opacity-80 font-bold block" } : { className: "text-gray-900 dark:text-white text-lg font-medium" };
+    const contentProps = href ? { href, className: "text-gray-900 dark:text-white text-xl hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-opacity hover:opacity-80 font-bold block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 rounded-sm w-max" } : { className: "text-gray-900 dark:text-white text-lg font-medium" };
 
     const wrapperClasses = [
         "flex",

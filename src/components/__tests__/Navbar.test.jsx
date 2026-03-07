@@ -6,18 +6,18 @@ import { ThemeProvider } from "../../context/ThemeContext";
 // Mock IntersectionObserver
 const mockObserve = vi.fn();
 const mockDisconnect = vi.fn();
-globalThis.IntersectionObserver = vi.fn(() => ({
+vi.stubGlobal('IntersectionObserver', vi.fn(() => ({
     observe: mockObserve,
     disconnect: mockDisconnect,
     unobserve: vi.fn(),
-}));
+})));
 
 // Mock ResizeObserver
-globalThis.ResizeObserver = vi.fn().mockImplementation(() => ({
+vi.stubGlobal('ResizeObserver', vi.fn().mockImplementation(() => ({
     observe: vi.fn(),
     unobserve: vi.fn(),
     disconnect: vi.fn(),
-}));
+})));
 
 describe("Navbar Component", () => {
     beforeEach(() => {
@@ -42,9 +42,10 @@ describe("Navbar Component", () => {
     it("renders navigation links", () => {
         renderNavbar();
         // Check for desktop links (hidden md:flex might still be in DOM)
-        ["About", "Projects", "Skills", "Contact"].forEach(link => {
-            expect(screen.getAllByText(link).length).toBeGreaterThan(0);
-        });
+        expect(screen.getAllByText("About").length).toBeGreaterThan(0);
+        expect(screen.getAllByText("Projects").length).toBeGreaterThan(0);
+        expect(screen.getAllByText("Skills").length).toBeGreaterThan(0);
+        expect(screen.getAllByText("Contact").length).toBeGreaterThan(0);
     });
 
     it("toggles the theme when the theme button is clicked", () => {
