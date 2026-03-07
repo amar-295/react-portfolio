@@ -15,8 +15,16 @@ export default function MobileMenu({
         <>
             {/* Backdrop */}
             <div
+                role="button"
+                tabIndex={0}
+                aria-label="Close menu"
                 className="fixed inset-0 top-[72px] bg-black/20 dark:bg-black/50 backdrop-blur-[2px] md:hidden z-40"
                 onClick={() => setIsMenuOpen(false)}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        setIsMenuOpen(false);
+                    }
+                }}
             />
 
             {/* Menu Content */}
