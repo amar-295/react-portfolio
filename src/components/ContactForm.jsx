@@ -6,8 +6,8 @@ import Button from "./Button";
 /**
  * Loading spinner icon component.
  */
-const LoadingIcon = (props) => (
-    <HiOutlineRefresh {...props} className={`animate-spin ${props.className || ""}`.trim()} />
+const LoadingIcon = ({ className }) => (
+    <HiOutlineRefresh className={`animate-spin ${className || ""}`.trim()} />
 );
 
 /**

@@ -36,7 +36,7 @@ describe('TimelineItem', () => {
         render(<TimelineItem {...defaultProps} side="right" />);
 
         const dateInfoContainer = screen.getByText(defaultProps.period).closest('div').parentElement;
-        const contentCardContainer = screen.getByText(defaultProps.title).closest('.w-full.md\\:w-5\\/12');
+        const contentCardContainer = screen.getByText(defaultProps.title).closest('div[class*="md:w-5/12"]');
 
         ['md:text-right', 'pr-0', 'md:pr-12', 'order-1'].forEach(cls => expect(dateInfoContainer).toHaveClass(cls));
         ['pl-0', 'md:pl-12', 'order-3'].forEach(cls => expect(contentCardContainer).toHaveClass(cls));
@@ -46,7 +46,7 @@ describe('TimelineItem', () => {
         render(<TimelineItem {...defaultProps} side="left" />);
 
         const dateInfoContainer = screen.getByText(defaultProps.period).closest('div').parentElement;
-        const contentCardContainer = screen.getByText(defaultProps.title).closest('.w-full.md\\:w-5\\/12');
+        const contentCardContainer = screen.getByText(defaultProps.title).closest('div[class*="md:w-5/12"]');
 
         ['md:text-left', 'pl-0', 'md:pl-12', 'order-1', 'md:order-3'].forEach(cls => expect(dateInfoContainer).toHaveClass(cls));
         ['pr-0', 'md:pr-12', 'order-3', 'md:order-1'].forEach(cls => expect(contentCardContainer).toHaveClass(cls));
