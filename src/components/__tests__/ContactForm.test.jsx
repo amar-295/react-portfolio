@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, cleanup } from "@testing-library/react";
 import ContactForm from "../ContactForm";
 
 describe("ContactForm", () => {
@@ -223,4 +223,101 @@ describe("ContactForm", () => {
             expect(fetchMock).toHaveBeenCalledWith("https://formspree.io/f/xeelgjya", expect.any(Object));
         });
     });
+
+    describe("Form Validation Edge Cases", () => {
+        it("fails validation when fields contain only whitespace", async () => {
+            render(<ContactForm />);
+
+            fillForm({
+                name: "   ",
+                email: "   ",
+                subject: "   ",
+                message: "   "
+            });
+
+            fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
+
+            await waitFor(() => {
+                expect(screen.getByText("Name is required")).toBeInTheDocument();
+                expect(screen.getByText("Email is required")).toBeInTheDocument();
+                expect(screen.getByText("Subject is required")).toBeInTheDocument();
+                expect(screen.getByText("Message is required")).toBeInTheDocument();
+            });
+
+            expect(fetchMock).not.toHaveBeenCalled();
+        });
+
+        it("fails validation for specific invalid email formats", async () => {
+            const invalidEmails = [
+                "plainaddress",
+                "@missingusername.com",
+                "missingdomain@.com",
+                "missingat.com",
+                "multiple@at@signs.com",
+                "space in@email.com"
+            ];
+
+            for (const email of invalidEmails) {
+                render(<ContactForm />);
+
+                fillForm({
+                    name: "Valid Name",
+                    email: email,
+                    subject: "Valid Subject",
+                    message: "Valid Message"
+                });
+
+                fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
+
+                await waitFor(() => {
+                    expect(screen.getByText("Please enter a valid email address")).toBeInTheDocument();
+                });
+
+                cleanup();
+            }
+        });
+
+
+        it("clears specific field error when user starts typing in it", async () => {
+            render(<ContactForm />);
+
+            fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
+
+            await waitFor(() => {
+                expect(screen.getByText("Name is required")).toBeInTheDocument();
+                expect(screen.getByText("Email is required")).toBeInTheDocument();
+            });
+
+            const nameInput = screen.getByLabelText(/Full Name/i);
+            fireEvent.change(nameInput, { target: { value: "A" } });
+
+            await waitFor(() => {
+                expect(screen.queryByText("Name is required")).not.toBeInTheDocument();
+                // Email error should still be there
+                expect(screen.getByText("Email is required")).toBeInTheDocument();
+            });
+        });
+    });
+
+
+        it("passes validation for valid inputs with varying formats", async () => {
+            render(<ContactForm />);
+
+            fillForm({
+                name: "  Jane Doe  ", // test trimming
+                email: " jane.doe+test@example.co.uk ", // test valid complex email
+                subject: " Hello ",
+                message: " Valid message "
+            });
+
+            fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
+
+            await waitFor(() => {
+                expect(screen.queryByText("Name is required")).not.toBeInTheDocument();
+                expect(screen.queryByText("Please enter a valid email address")).not.toBeInTheDocument();
+                expect(screen.queryByText("Subject is required")).not.toBeInTheDocument();
+                expect(screen.queryByText("Message is required")).not.toBeInTheDocument();
+            });
+        });
+
 });
