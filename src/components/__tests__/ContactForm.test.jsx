@@ -1,323 +1,375 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, fireEvent, waitFor, cleanup } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  cleanup,
+} from "@testing-library/react";
 import ContactForm from "../ContactForm";
 
 describe("ContactForm", () => {
-    const defaultEnv = "xeelgjya"; // Fallback ID from component
+  const defaultEnv = "xeelgjya"; // Fallback ID from component
 
-    // Mock global fetch
-    const fetchMock = vi.fn();
-    globalThis.fetch = fetchMock;
+  // Mock global fetch
+  const fetchMock = vi.fn();
+  globalThis.fetch = fetchMock;
 
-    // Mock window.alert
-    const alertMock = vi.fn();
-    globalThis.alert = alertMock;
+  // Mock window.alert
+  const alertMock = vi.fn();
+  globalThis.alert = alertMock;
 
-    beforeEach(() => {
-        vi.clearAllMocks();
-        vi.stubEnv("VITE_CONTACT_SERVICE_ID", defaultEnv);
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.stubEnv("VITE_CONTACT_SERVICE_ID", defaultEnv);
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  const fillForm = (data) => {
+    if (data.name !== undefined)
+      fireEvent.change(screen.getByLabelText(/Full Name/i), {
+        target: { value: data.name },
+      });
+    if (data.email !== undefined)
+      fireEvent.change(screen.getByLabelText(/Email Address/i), {
+        target: { value: data.email },
+      });
+    if (data.subject !== undefined)
+      fireEvent.change(screen.getByLabelText(/Subject/i), {
+        target: { value: data.subject },
+      });
+    if (data.message !== undefined)
+      fireEvent.change(screen.getByLabelText(/Your Message/i), {
+        target: { value: data.message },
+      });
+  };
+
+  it("renders all form fields and submit button", () => {
+    render(<ContactForm />);
+
+    expect(screen.getByLabelText(/Full Name/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Email Address/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Subject/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Your Message/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Send Message/i }),
+    ).toBeInTheDocument();
+  });
+
+  it("shows validation errors for empty fields on submit", async () => {
+    render(<ContactForm />);
+
+    fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Name is required")).toBeInTheDocument();
+      expect(screen.getByText("Email is required")).toBeInTheDocument();
+      expect(screen.getByText("Subject is required")).toBeInTheDocument();
+      expect(screen.getByText("Message is required")).toBeInTheDocument();
     });
 
-    afterEach(() => {
-        vi.unstubAllEnvs();
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("shows validation error for invalid email", async () => {
+    render(<ContactForm />);
+
+    fillForm({
+      name: "John Doe",
+      email: "invalid-email",
+      subject: "Test Subject",
+      message: "Test Message",
     });
 
-    const fillForm = (data) => {
-        if (data.name !== undefined) fireEvent.change(screen.getByLabelText(/Full Name/i), { target: { value: data.name } });
-        if (data.email !== undefined) fireEvent.change(screen.getByLabelText(/Email Address/i), { target: { value: data.email } });
-        if (data.subject !== undefined) fireEvent.change(screen.getByLabelText(/Subject/i), { target: { value: data.subject } });
-        if (data.message !== undefined) fireEvent.change(screen.getByLabelText(/Your Message/i), { target: { value: data.message } });
-    };
+    fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
 
-    it("renders all form fields and submit button", () => {
+    await waitFor(() => {
+      expect(
+        screen.getByText("Please enter a valid email address"),
+      ).toBeInTheDocument();
+    });
+
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("submits the form successfully and displays success message", async () => {
+    const mockOnSubmit = vi.fn();
+    fetchMock.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ next: "/thanks" }),
+    });
+
+    render(<ContactForm onSubmit={mockOnSubmit} />);
+
+    fillForm({
+      name: "John Doe",
+      email: "john@example.com",
+      subject: "Hello",
+      message: "World",
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
+
+    expect(
+      screen.getByRole("button", { name: /Sending.../i }),
+    ).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledWith(
+        `https://formspree.io/f/${defaultEnv}`,
+        expect.objectContaining({
+          method: "POST",
+          headers: { Accept: "application/json" },
+        }),
+      );
+      expect(screen.getByText("Message Sent!")).toBeInTheDocument();
+    });
+
+    expect(mockOnSubmit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        name: "John Doe",
+        email: "john@example.com",
+        _subject: "Hello",
+        message: "World",
+      }),
+    );
+  });
+
+  it("displays error message when API returns an error", async () => {
+    fetchMock.mockResolvedValueOnce({
+      ok: false,
+      json: async () => ({
+        errors: [{ message: "Formspree API Error" }],
+      }),
+    });
+
+    render(<ContactForm />);
+
+    fillForm({
+      name: "John Doe",
+      email: "john@example.com",
+      subject: "Hello",
+      message: "World",
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Formspree API Error")).toBeInTheDocument();
+    });
+  });
+
+  it("displays generic network error message on fetch failure and resets button state", async () => {
+    // We delay the rejection slightly so we can assert the 'submitting' state
+    fetchMock.mockImplementationOnce(
+      () =>
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Network Failure")), 50),
+        ),
+    );
+
+    render(<ContactForm />);
+
+    fillForm({
+      name: "John Doe",
+      email: "john@example.com",
+      subject: "Hello",
+      message: "World",
+    });
+
+    const submitButton = screen.getByRole("button", { name: /Send Message/i });
+    fireEvent.click(submitButton);
+
+    // Verify the component enters the submitting state
+    expect(
+      screen.getByRole("button", { name: /Sending.../i }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Sending.../i })).toBeDisabled();
+
+    // Wait for the fetch to fail and the component to update with the error message
+    const errorMessage = await screen.findByText(
+      "Network error. Please try again later.",
+    );
+    expect(errorMessage).toBeInTheDocument();
+
+    // Ensure the error is rendered within an alert role
+    const alertBox = screen.getByRole("alert");
+    expect(alertBox).toContainElement(errorMessage);
+
+    // Verify the component state correctly exits the submitting state
+    const restoredButton = screen.getByRole("button", {
+      name: /Send Message/i,
+    });
+    expect(restoredButton).toBeInTheDocument();
+    expect(restoredButton).not.toBeDisabled();
+    expect(
+      screen.queryByRole("button", { name: /Sending.../i }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("resets the form when 'Send another' is clicked after success", async () => {
+    fetchMock.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ next: "/thanks" }),
+    });
+
+    render(<ContactForm />);
+
+    fillForm({
+      name: "Jane Doe",
+      email: "jane@example.com",
+      subject: "Hello",
+      message: "World",
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Message Sent!")).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /Send another/i }));
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: /Send Message/i }),
+      ).toBeInTheDocument();
+      // In React, input uncontrolled values stay unless we specifically test for it, but the form gets reset using form.reset()
+    });
+  });
+
+  it("uses default fallback ID when VITE_CONTACT_SERVICE_ID is missing", async () => {
+    // Stub to empty string
+    vi.stubEnv("VITE_CONTACT_SERVICE_ID", "");
+
+    // Temporarily redefine import.meta.env for this test since the component hardcodes the fallback
+    // The component does: `const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID || "xeelgjya";`
+    // We cannot override the fallback.
+    // Thus, this branch `if (!contactServiceId)` is actually dead code right now.
+    // Let's assert that the default fallback is used.
+
+    fetchMock.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({}),
+    });
+
+    render(<ContactForm />);
+
+    fillForm({
+      name: "Test",
+      email: "test@test.com",
+      subject: "Test",
+      message: "Test",
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledWith(
+        "https://formspree.io/f/xeelgjya",
+        expect.any(Object),
+      );
+    });
+  });
+
+  describe("Form Validation Edge Cases", () => {
+    it("fails validation when fields contain only whitespace", async () => {
+      render(<ContactForm />);
+
+      fillForm({
+        name: "   ",
+        email: "   ",
+        subject: "   ",
+        message: "   ",
+      });
+
+      fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
+
+      await waitFor(() => {
+        expect(screen.getByText("Name is required")).toBeInTheDocument();
+        expect(screen.getByText("Email is required")).toBeInTheDocument();
+        expect(screen.getByText("Subject is required")).toBeInTheDocument();
+        expect(screen.getByText("Message is required")).toBeInTheDocument();
+      });
+
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it("fails validation for specific invalid email formats", async () => {
+      const invalidEmails = [
+        "plainaddress",
+        "@missingusername.com",
+        "missingdomain@.com",
+        "missingat.com",
+        "multiple@at@signs.com",
+        "space in@email.com",
+      ];
+
+      for (const email of invalidEmails) {
         render(<ContactForm />);
 
-        expect(screen.getByLabelText(/Full Name/i)).toBeInTheDocument();
-        expect(screen.getByLabelText(/Email Address/i)).toBeInTheDocument();
-        expect(screen.getByLabelText(/Subject/i)).toBeInTheDocument();
-        expect(screen.getByLabelText(/Your Message/i)).toBeInTheDocument();
-        expect(screen.getByRole("button", { name: /Send Message/i })).toBeInTheDocument();
-    });
-
-    it("shows validation errors for empty fields on submit", async () => {
-        render(<ContactForm />);
+        fillForm({
+          name: "Valid Name",
+          email: email,
+          subject: "Valid Subject",
+          message: "Valid Message",
+        });
 
         fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
 
         await waitFor(() => {
-            expect(screen.getByText("Name is required")).toBeInTheDocument();
-            expect(screen.getByText("Email is required")).toBeInTheDocument();
-            expect(screen.getByText("Subject is required")).toBeInTheDocument();
-            expect(screen.getByText("Message is required")).toBeInTheDocument();
+          expect(
+            screen.getByText("Please enter a valid email address"),
+          ).toBeInTheDocument();
         });
 
-        expect(fetchMock).not.toHaveBeenCalled();
+        cleanup();
+      }
     });
 
-    it("shows validation error for invalid email", async () => {
-        render(<ContactForm />);
+    it("clears specific field error when user starts typing in it", async () => {
+      render(<ContactForm />);
 
-        fillForm({
-            name: "John Doe",
-            email: "invalid-email",
-            subject: "Test Subject",
-            message: "Test Message"
-        });
+      fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
 
-        fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
+      await waitFor(() => {
+        expect(screen.getByText("Name is required")).toBeInTheDocument();
+        expect(screen.getByText("Email is required")).toBeInTheDocument();
+      });
 
-        await waitFor(() => {
-            expect(screen.getByText("Please enter a valid email address")).toBeInTheDocument();
-        });
+      const nameInput = screen.getByLabelText(/Full Name/i);
+      fireEvent.change(nameInput, { target: { value: "A" } });
 
-        expect(fetchMock).not.toHaveBeenCalled();
+      await waitFor(() => {
+        expect(screen.queryByText("Name is required")).not.toBeInTheDocument();
+        // Email error should still be there
+        expect(screen.getByText("Email is required")).toBeInTheDocument();
+      });
+    });
+  });
+
+  it("passes validation for valid inputs with varying formats", async () => {
+    render(<ContactForm />);
+
+    fillForm({
+      name: "  Jane Doe  ", // test trimming
+      email: " jane.doe+test@example.co.uk ", // test valid complex email
+      subject: " Hello ",
+      message: " Valid message ",
     });
 
-    it("submits the form successfully and displays success message", async () => {
-        const mockOnSubmit = vi.fn();
-        fetchMock.mockResolvedValueOnce({
-            ok: true,
-            json: async () => ({ next: "/thanks" })
-        });
+    fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
 
-        render(<ContactForm onSubmit={mockOnSubmit} />);
-
-        fillForm({
-            name: "John Doe",
-            email: "john@example.com",
-            subject: "Hello",
-            message: "World"
-        });
-
-        fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
-
-        expect(screen.getByRole("button", { name: /Sending.../i })).toBeInTheDocument();
-
-        await waitFor(() => {
-            expect(fetchMock).toHaveBeenCalledWith(`https://formspree.io/f/${defaultEnv}`, expect.objectContaining({
-                method: "POST",
-                headers: { 'Accept': 'application/json' }
-            }));
-            expect(screen.getByText("Message Sent!")).toBeInTheDocument();
-        });
-
-        expect(mockOnSubmit).toHaveBeenCalledWith(expect.objectContaining({
-            name: "John Doe",
-            email: "john@example.com",
-            _subject: "Hello",
-            message: "World"
-        }));
+    await waitFor(() => {
+      expect(screen.queryByText("Name is required")).not.toBeInTheDocument();
+      expect(
+        screen.queryByText("Please enter a valid email address"),
+      ).not.toBeInTheDocument();
+      expect(screen.queryByText("Subject is required")).not.toBeInTheDocument();
+      expect(screen.queryByText("Message is required")).not.toBeInTheDocument();
     });
-
-    it("displays error message when API returns an error", async () => {
-        fetchMock.mockResolvedValueOnce({
-            ok: false,
-            json: async () => ({
-                errors: [{ message: "Formspree API Error" }]
-            })
-        });
-
-        render(<ContactForm />);
-
-        fillForm({
-            name: "John Doe",
-            email: "john@example.com",
-            subject: "Hello",
-            message: "World"
-        });
-
-        fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
-
-        await waitFor(() => {
-            expect(screen.getByText("Formspree API Error")).toBeInTheDocument();
-        });
-    });
-
-    it("displays generic network error message on fetch failure and resets button state", async () => {
-        fetchMock.mockRejectedValueOnce(new Error("Network Failure"));
-
-        render(<ContactForm />);
-
-        fillForm({
-            name: "John Doe",
-            email: "john@example.com",
-            subject: "Hello",
-            message: "World"
-        });
-
-        const submitButton = screen.getByRole("button", { name: /Send Message/i });
-        fireEvent.click(submitButton);
-
-        // Verify button indicates submitting state
-        expect(screen.getByRole("button", { name: /Sending.../i })).toBeInTheDocument();
-
-        // Wait for error to appear and verify alert role
-        const errorMessage = await screen.findByText("Network error. Please try again later.");
-        expect(errorMessage).toBeInTheDocument();
-
-        // Ensure the error is rendered within an alert role
-        const alertBox = screen.getByRole("alert");
-        expect(alertBox).toContainElement(errorMessage);
-
-        // Verify submitting state is set back to false
-        expect(screen.getByRole("button", { name: /Send Message/i })).toBeInTheDocument();
-        expect(screen.queryByRole("button", { name: /Sending.../i })).not.toBeInTheDocument();
-    });
-
-    it("resets the form when 'Send another' is clicked after success", async () => {
-        fetchMock.mockResolvedValueOnce({
-            ok: true,
-            json: async () => ({ next: "/thanks" })
-        });
-
-        render(<ContactForm />);
-
-        fillForm({
-            name: "Jane Doe",
-            email: "jane@example.com",
-            subject: "Hello",
-            message: "World"
-        });
-
-        fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
-
-        await waitFor(() => {
-            expect(screen.getByText("Message Sent!")).toBeInTheDocument();
-        });
-
-        fireEvent.click(screen.getByRole("button", { name: /Send another/i }));
-
-        await waitFor(() => {
-            expect(screen.getByRole("button", { name: /Send Message/i })).toBeInTheDocument();
-            // In React, input uncontrolled values stay unless we specifically test for it, but the form gets reset using form.reset()
-        });
-    });
-
-    it("uses default fallback ID when VITE_CONTACT_SERVICE_ID is missing", async () => {
-        // Stub to empty string
-        vi.stubEnv("VITE_CONTACT_SERVICE_ID", "");
-
-        // Temporarily redefine import.meta.env for this test since the component hardcodes the fallback
-        // The component does: `const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID || "xeelgjya";`
-        // We cannot override the fallback.
-        // Thus, this branch `if (!contactServiceId)` is actually dead code right now.
-        // Let's assert that the default fallback is used.
-
-        fetchMock.mockResolvedValueOnce({
-            ok: true,
-            json: async () => ({})
-        });
-
-        render(<ContactForm />);
-
-        fillForm({
-            name: "Test",
-            email: "test@test.com",
-            subject: "Test",
-            message: "Test"
-        });
-
-        fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
-
-        await waitFor(() => {
-            expect(fetchMock).toHaveBeenCalledWith("https://formspree.io/f/xeelgjya", expect.any(Object));
-        });
-    });
-
-    describe("Form Validation Edge Cases", () => {
-        it("fails validation when fields contain only whitespace", async () => {
-            render(<ContactForm />);
-
-            fillForm({
-                name: "   ",
-                email: "   ",
-                subject: "   ",
-                message: "   "
-            });
-
-            fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
-
-            await waitFor(() => {
-                expect(screen.getByText("Name is required")).toBeInTheDocument();
-                expect(screen.getByText("Email is required")).toBeInTheDocument();
-                expect(screen.getByText("Subject is required")).toBeInTheDocument();
-                expect(screen.getByText("Message is required")).toBeInTheDocument();
-            });
-
-            expect(fetchMock).not.toHaveBeenCalled();
-        });
-
-        it("fails validation for specific invalid email formats", async () => {
-            const invalidEmails = [
-                "plainaddress",
-                "@missingusername.com",
-                "missingdomain@.com",
-                "missingat.com",
-                "multiple@at@signs.com",
-                "space in@email.com"
-            ];
-
-            for (const email of invalidEmails) {
-                render(<ContactForm />);
-
-                fillForm({
-                    name: "Valid Name",
-                    email: email,
-                    subject: "Valid Subject",
-                    message: "Valid Message"
-                });
-
-                fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
-
-                await waitFor(() => {
-                    expect(screen.getByText("Please enter a valid email address")).toBeInTheDocument();
-                });
-
-                cleanup();
-            }
-        });
-
-
-        it("clears specific field error when user starts typing in it", async () => {
-            render(<ContactForm />);
-
-            fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
-
-            await waitFor(() => {
-                expect(screen.getByText("Name is required")).toBeInTheDocument();
-                expect(screen.getByText("Email is required")).toBeInTheDocument();
-            });
-
-            const nameInput = screen.getByLabelText(/Full Name/i);
-            fireEvent.change(nameInput, { target: { value: "A" } });
-
-            await waitFor(() => {
-                expect(screen.queryByText("Name is required")).not.toBeInTheDocument();
-                // Email error should still be there
-                expect(screen.getByText("Email is required")).toBeInTheDocument();
-            });
-        });
-    });
-
-
-        it("passes validation for valid inputs with varying formats", async () => {
-            render(<ContactForm />);
-
-            fillForm({
-                name: "  Jane Doe  ", // test trimming
-                email: " jane.doe+test@example.co.uk ", // test valid complex email
-                subject: " Hello ",
-                message: " Valid message "
-            });
-
-            fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
-
-            await waitFor(() => {
-                expect(screen.queryByText("Name is required")).not.toBeInTheDocument();
-                expect(screen.queryByText("Please enter a valid email address")).not.toBeInTheDocument();
-                expect(screen.queryByText("Subject is required")).not.toBeInTheDocument();
-                expect(screen.queryByText("Message is required")).not.toBeInTheDocument();
-            });
-        });
-
+  });
 });
