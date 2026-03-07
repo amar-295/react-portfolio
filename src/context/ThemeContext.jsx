@@ -26,13 +26,29 @@ export function ThemeProvider({ children }) {
                 root.classList.remove("dark");
             }
         }
-
-        // Save to localStorage
-        localStorage.setItem("theme", theme);
     }, [theme]);
 
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const handleChange = (e) => {
+            // Only dynamically update if there's no saved user preference
+            if (!localStorage.getItem("theme")) {
+                setTheme(e.matches ? "dark" : "light");
+            }
+        };
+
+        // Listen for system preference changes
+        mediaQuery.addEventListener("change", handleChange);
+        return () => mediaQuery.removeEventListener("change", handleChange);
+    }, []);
+
     const toggleTheme = useCallback(() => {
-        setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+        setTheme((prevTheme) => {
+            const nextTheme = prevTheme === "light" ? "dark" : "light";
+            // Save to localStorage when the user EXPLICITLY toggles it
+            localStorage.setItem("theme", nextTheme);
+            return nextTheme;
+        });
     }, []);
 
     const value = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);

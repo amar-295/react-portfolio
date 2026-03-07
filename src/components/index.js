@@ -13,3 +13,6 @@ export { default as SocialLink } from "./SocialLink";
 export { default as Logo } from "./Logo";
 export { default as Footer } from "./Footer";
 export { default as ScrollToTop } from "./ScrollToTop";
+export { default as ThemeToggle } from "./ThemeToggle";
+export { default as MobileMenu } from "./MobileMenu";
+export { default as DesktopNav } from "./DesktopNav";
