@@ -63,7 +63,7 @@ export default function ExperimentCard({
                 <div className="flex gap-2">
                     {repoLink && (
                         <a
-                            className="text-slate-400 hover:text-accent-dark dark:hover:text-white transition-colors"
+                            className="text-slate-400 hover:text-accent-dark dark:hover:text-white transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-card-bg"
                             href={repoLink}
                             title="GitHub"
                             target="_blank"
@@ -75,7 +75,7 @@ export default function ExperimentCard({
                     )}
                     {demoLink && (
                         <a
-                            className="text-slate-400 hover:text-accent-dark dark:hover:text-white transition-colors"
+                            className="text-slate-400 hover:text-accent-dark dark:hover:text-white transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-card-bg"
                             href={demoLink}
                             title="Live Demo"
                             target="_blank"
