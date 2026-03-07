@@ -133,7 +133,7 @@ describe("ContactForm", () => {
         });
     });
 
-    it("displays generic network error message on fetch failure", async () => {
+    it("displays generic network error message on fetch failure and resets button state", async () => {
         fetchMock.mockRejectedValueOnce(new Error("Network Failure"));
 
         render(<ContactForm />);
@@ -145,11 +145,23 @@ describe("ContactForm", () => {
             message: "World"
         });
 
-        fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
+        const submitButton = screen.getByRole("button", { name: /Send Message/i });
+        fireEvent.click(submitButton);
 
-        await waitFor(() => {
-            expect(screen.getByText("Network error. Please try again later.")).toBeInTheDocument();
-        });
+        // Verify button indicates submitting state
+        expect(screen.getByRole("button", { name: /Sending.../i })).toBeInTheDocument();
+
+        // Wait for error to appear and verify alert role
+        const errorMessage = await screen.findByText("Network error. Please try again later.");
+        expect(errorMessage).toBeInTheDocument();
+
+        // Ensure the error is rendered within an alert role
+        const alertBox = screen.getByRole("alert");
+        expect(alertBox).toContainElement(errorMessage);
+
+        // Verify submitting state is set back to false
+        expect(screen.getByRole("button", { name: /Send Message/i })).toBeInTheDocument();
+        expect(screen.queryByRole("button", { name: /Sending.../i })).not.toBeInTheDocument();
     });
 
     it("resets the form when 'Send another' is clicked after success", async () => {
