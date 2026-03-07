@@ -66,6 +66,8 @@ describe("ThemeContext", () => {
         mockMatchMedia.mockImplementation((query) => ({
             matches: query === "(prefers-color-scheme: dark)",
             media: query,
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
         }));
 
         render(
@@ -75,13 +77,16 @@ describe("ThemeContext", () => {
         );
         expect(screen.getByTestId("theme-value")).toHaveTextContent("dark");
         expect(document.documentElement).toHaveClass("dark");
-        expect(localStorage.getItem("theme")).toBe("dark");
+        // We no longer set localStorage on mount when falling back to system preference
+        expect(localStorage.getItem("theme")).toBeNull();
     });
 
     it("should fall back to system preference (light) if no localStorage", () => {
          mockMatchMedia.mockImplementation((query) => ({
             matches: false,
             media: query,
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
         }));
 
         render(
@@ -91,7 +96,8 @@ describe("ThemeContext", () => {
         );
         expect(screen.getByTestId("theme-value")).toHaveTextContent("light");
         expect(document.documentElement).not.toHaveClass("dark");
-        expect(localStorage.getItem("theme")).toBe("light");
+        // We no longer set localStorage on mount when falling back to system preference
+        expect(localStorage.getItem("theme")).toBeNull();
     });
 
     it("should toggle theme between light and dark when toggleTheme is called", async () => {
@@ -126,6 +132,79 @@ describe("ThemeContext", () => {
         expect(screen.getByTestId("theme-value")).toHaveTextContent("light");
         expect(document.documentElement).not.toHaveClass("dark");
         expect(localStorage.getItem("theme")).toBe("light");
+    });
+
+    it("should dynamically update theme when system preference changes and no localStorage is set", () => {
+        let changeListener = null;
+
+        mockMatchMedia.mockImplementation((query) => ({
+            matches: false, // Start with light mode
+            media: query,
+            addEventListener: (event, callback) => {
+                if (event === "change") changeListener = callback;
+            },
+            removeEventListener: vi.fn(),
+        }));
+
+        render(
+            <ThemeProvider>
+                <TestConsumer />
+            </ThemeProvider>
+        );
+
+        // Initial state is light
+        expect(screen.getByTestId("theme-value")).toHaveTextContent("light");
+
+        // Simulate system preference changing to dark
+        act(() => {
+            changeListener({ matches: true });
+        });
+
+        expect(screen.getByTestId("theme-value")).toHaveTextContent("dark");
+        expect(document.documentElement).toHaveClass("dark");
+
+        // Ensure localStorage remains empty
+        expect(localStorage.getItem("theme")).toBeNull();
+    });
+
+    it("should not dynamically update theme when system preference changes if localStorage is set", async () => {
+        const user = userEvent.setup();
+        let changeListener = null;
+
+        mockMatchMedia.mockImplementation((query) => ({
+            matches: false, // Start with light mode
+            media: query,
+            addEventListener: (event, callback) => {
+                if (event === "change") changeListener = callback;
+            },
+            removeEventListener: vi.fn(),
+        }));
+
+        render(
+            <ThemeProvider>
+                <TestConsumer />
+            </ThemeProvider>
+        );
+
+        // Initial state is light
+        expect(screen.getByTestId("theme-value")).toHaveTextContent("light");
+
+        // User explicitly toggles to dark
+        await act(async () => {
+            await user.click(screen.getByTestId("toggle-btn"));
+        });
+
+        expect(screen.getByTestId("theme-value")).toHaveTextContent("dark");
+        expect(localStorage.getItem("theme")).toBe("dark");
+
+        // Simulate system preference changing back to light
+        act(() => {
+            changeListener({ matches: false });
+        });
+
+        // Theme should remain dark because user explicitly set it
+        expect(screen.getByTestId("theme-value")).toHaveTextContent("dark");
+        expect(document.documentElement).toHaveClass("dark");
     });
 
     it("should throw an error when useTheme is used outside of ThemeProvider", () => {
