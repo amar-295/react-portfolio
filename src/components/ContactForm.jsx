@@ -4,21 +4,11 @@ import { HiArrowRight, HiCheck, HiUser, HiMail, HiFolder, HiOutlineRefresh } fro
 import Button from "./Button";
 
 /**
- * Loading spinner icon component.
- *
- * @param {object} props - Component props
- * @param {string} [props.className] - Additional CSS classes
- */
-const LoadingIcon = ({ className }) => (
-    <HiOutlineRefresh className={`animate-spin ${className || ""}`.trim()} />
-);
-
-/**
  * Contact form component with custom validation and Formspree hook integration.
  */
 
 export default function ContactForm({ onSubmit }) {
-    const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID;
+    const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID || "xeelgjya";
     const [status, setStatus] = useState({
         submitting: false,
         succeeded: false,
@@ -268,7 +258,7 @@ export default function ContactForm({ onSubmit }) {
                         type="submit"
                         disabled={status.submitting}
                         className={status.submitting ? "opacity-75 cursor-not-allowed" : ""}
-                        icon={status.submitting ? LoadingIcon : HiArrowRight}
+                        icon={status.submitting ? Spinner : HiArrowRight}
                         aria-live="polite"
                     >
                         {status.submitting ? "Sending..." : "Send Message"}
@@ -281,4 +271,20 @@ export default function ContactForm({ onSubmit }) {
 
 ContactForm.propTypes = {
     onSubmit: PropTypes.func,
+};
+
+/**
+ * Loading spinner icon component.
+ */
+function Spinner({ className, ...props }) {
+    return (
+        <HiOutlineRefresh
+            {...props}
+            className={`animate-spin ${className || ""}`.trim()}
+        />
+    );
+}
+
+Spinner.propTypes = {
+    className: PropTypes.string,
 };

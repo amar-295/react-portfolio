@@ -69,6 +69,7 @@ export default function TimelineItem({
 
             {/* ---- Center Dot ---- */}
             <div
+                data-testid="timeline-dot"
                 className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center justify-center w-6 h-6 border-2 rounded-full z-10 bg-white dark:bg-gray-900 order-2 ${dotColors[dotColor] || dotColors.blue
                     } ${isActive ? "ring-4 ring-white dark:ring-gray-900 shadow-sm" : ""}`}
             >
