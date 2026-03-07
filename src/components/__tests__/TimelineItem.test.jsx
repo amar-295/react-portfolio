@@ -26,20 +26,20 @@ describe('TimelineItem component', () => {
                 name: 'right alignment layout',
                 props: { ...defaultProps, side: 'right' },
                 assertions: () => {
-                    const dateParent = screen.getByText(defaultProps.period).closest('div').parentElement;
-                    ['md:text-right', 'pr-0', 'md:pr-12', 'order-1'].forEach(c => expect(dateParent).toHaveClass(c));
-                    const cardParent = screen.getByText(defaultProps.title).closest('.w-full.md\\:w-5\\/12');
-                    ['pl-0', 'md:pl-12', 'order-3'].forEach(c => expect(cardParent).toHaveClass(c));
+                    const dateInfo = screen.getByTestId('timeline-date-info');
+                    ['md:text-right', 'pr-0', 'md:pr-12', 'order-1'].forEach(c => expect(dateInfo).toHaveClass(c));
+                    const contentCard = screen.getByTestId('timeline-content-card');
+                    ['pl-0', 'md:pl-12', 'order-3'].forEach(c => expect(contentCard).toHaveClass(c));
                 }
             },
             {
                 name: 'left alignment layout',
                 props: { ...defaultProps, side: 'left' },
                 assertions: () => {
-                    const dateParent = screen.getByText(defaultProps.period).closest('div').parentElement;
-                    ['md:text-left', 'pl-0', 'md:pl-12', 'order-1', 'md:order-3'].forEach(c => expect(dateParent).toHaveClass(c));
-                    const cardParent = screen.getByText(defaultProps.title).closest('.w-full.md\\:w-5\\/12');
-                    ['pr-0', 'md:pr-12', 'order-3', 'md:order-1'].forEach(c => expect(cardParent).toHaveClass(c));
+                    const dateInfo = screen.getByTestId('timeline-date-info');
+                    ['md:text-left', 'pl-0', 'md:pl-12', 'order-1', 'md:order-3'].forEach(c => expect(dateInfo).toHaveClass(c));
+                    const contentCard = screen.getByTestId('timeline-content-card');
+                    ['pr-0', 'md:pr-12', 'order-3', 'md:order-1'].forEach(c => expect(contentCard).toHaveClass(c));
                 }
             },
             {

@@ -5,9 +5,12 @@ import Button from "./Button";
 
 /**
  * Loading spinner icon component.
+ *
+ * @param {object} props - Component props
+ * @param {string} [props.className] - Additional CSS classes
  */
-const LoadingIcon = (props) => (
-    <HiOutlineRefresh {...props} className={`animate-spin ${props.className || ""}`.trim()} />
+const LoadingIcon = ({ className }) => (
+    <HiOutlineRefresh className={`animate-spin ${className || ""}`.trim()} />
 );
 
 /**
@@ -15,7 +18,7 @@ const LoadingIcon = (props) => (
  */
 
 export default function ContactForm({ onSubmit }) {
-    const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID || "xeelgjya";
+    const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID;
     const [status, setStatus] = useState({
         submitting: false,
         succeeded: false,

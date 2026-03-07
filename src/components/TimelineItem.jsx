@@ -50,6 +50,7 @@ export default function TimelineItem({
         <div className="flex flex-col md:flex-row items-center justify-between w-full mb-12 relative">
             {/* ---- Date Info ---- */}
             <div
+                data-testid="timeline-date-info"
                 className={`w-full md:w-5/12 mb-4 md:mb-0 ${isRight
                     ? "text-center md:text-right pr-0 md:pr-12 order-1"
                     : "text-center md:text-left pl-0 md:pl-12 order-1 md:order-3"
@@ -79,6 +80,7 @@ export default function TimelineItem({
 
             {/* ---- Content Card ---- */}
             <div
+                data-testid="timeline-content-card"
                 className={`w-full md:w-5/12 ${isRight
                     ? "pl-0 md:pl-12 order-3"
                     : "pr-0 md:pr-12 order-3 md:order-1"
