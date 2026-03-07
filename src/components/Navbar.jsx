@@ -1,23 +1,8 @@
 import { useTheme } from "../context/ThemeContext";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Logo } from "./index";
 import { socialLinks } from "../data/contact";
 import { HiDownload } from "react-icons/hi";
-
-const NAV_LINKS = [
-    { name: "About", href: "#about", id: "about" },
-    { name: "Projects", href: "#projects", id: "projects" },
-    { name: "Skills", href: "#skills", id: "skills" },
-    { name: "Contact", href: "#contact", id: "contact" },
-];
-
-const DESKTOP_LINK_BASE = "relative text-sm font-semibold transition-opacity duration-300 group";
-const DESKTOP_LINK_ACTIVE = "text-accent-dark dark:text-blue-400";
-const DESKTOP_LINK_INACTIVE = "text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 hover:opacity-80";
-
-const MOBILE_LINK_BASE = "block w-full py-3 px-6 rounded-xl text-center text-lg font-medium transition-opacity duration-300 hover:opacity-80";
-const MOBILE_LINK_ACTIVE = "bg-accent-light/50 dark:bg-blue-500/10 text-accent-dark dark:text-blue-400 font-bold";
-const MOBILE_LINK_INACTIVE = "text-light-text-secondary dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-white/5";
 
 export default function Navbar() {
     const { theme, toggleTheme } = useTheme();
@@ -91,15 +76,20 @@ export default function Navbar() {
         };
     }, []);
 
-    const getLinkClass = useCallback((id) => {
-        const isActive = activeSection === id;
-        return `${DESKTOP_LINK_BASE} ${isActive ? DESKTOP_LINK_ACTIVE : DESKTOP_LINK_INACTIVE}`;
-    }, [activeSection]);
+    const navLinks = [
+        { name: "About", href: "#about", id: "about" },
+        { name: "Projects", href: "#projects", id: "projects" },
+        { name: "Skills", href: "#skills", id: "skills" },
+        { name: "Contact", href: "#contact", id: "contact" },
+    ];
 
-    const getMobileLinkClass = useCallback((id) => {
+    const getLinkClass = (id) => {
         const isActive = activeSection === id;
-        return `${MOBILE_LINK_BASE} ${isActive ? MOBILE_LINK_ACTIVE : MOBILE_LINK_INACTIVE}`;
-    }, [activeSection]);
+        return `relative text-sm font-semibold transition-opacity duration-300 group ${isActive
+            ? "text-accent-dark dark:text-blue-400"
+            : "text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 hover:opacity-80"
+            }`;
+    };
 
     return (
         <header
@@ -121,7 +111,7 @@ export default function Navbar() {
                 </a>
 
                 <nav className="hidden md:flex items-center space-x-10">
-                    {NAV_LINKS.map((link) => (
+                    {navLinks.map((link) => (
                         <a
                             key={link.id}
                             className={getLinkClass(link.id)}
@@ -219,19 +209,28 @@ export default function Navbar() {
                     <div className="md:hidden absolute top-[72px] left-0 w-full z-50">
                         <div className="bg-white/95 dark:bg-navy/95 backdrop-blur-xl border-b border-light-border dark:border-white/10 shadow-2xl rounded-b-3xl py-8 px-6 animate-in slide-in-from-top duration-300 max-h-[85vh] overflow-y-auto">
                             <nav className="flex flex-col space-y-2">
-                                {NAV_LINKS.map((link) => (
-                                    <a
-                                        key={link.id}
-                                        href={link.href}
-                                        onClick={() => {
-                                            setActiveSection(link.id);
-                                            setIsMenuOpen(false);
-                                        }}
-                                        className={getMobileLinkClass(link.id)}
-                                    >
-                                        {link.name}
-                                    </a>
-                                ))}
+                                {navLinks.map((link) => {
+                                    const isActive = activeSection === link.id;
+                                    return (
+                                        <a
+                                            key={link.id}
+                                            href={link.href}
+                                            onClick={() => {
+                                                setActiveSection(link.id);
+                                                setIsMenuOpen(false);
+                                            }}
+                                            className={`
+                                                block w-full py-3 px-6 rounded-xl text-center text-lg font-medium transition-opacity duration-300 hover:opacity-80
+                                                ${isActive
+                                                    ? "bg-accent-light/50 dark:bg-blue-500/10 text-accent-dark dark:text-blue-400 font-bold"
+                                                    : "text-light-text-secondary dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-white/5"
+                                                }
+                                            `}
+                                        >
+                                            {link.name}
+                                        </a>
+                                    );
+                                })}
 
                                 <div className="pt-8 flex flex-col items-center gap-6">
                                     <hr className="w-12 border-2 border-gray-100 dark:border-white/10 rounded-full" />
