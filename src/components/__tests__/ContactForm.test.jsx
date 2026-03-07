@@ -134,7 +134,10 @@ describe("ContactForm", () => {
     });
 
     it("displays generic network error message on fetch failure", async () => {
-        fetchMock.mockRejectedValueOnce(new Error("Network Failure"));
+        // We delay the rejection slightly so we can assert the 'submitting' state
+        fetchMock.mockImplementationOnce(() =>
+            new Promise((_, reject) => setTimeout(() => reject(new Error("Network Failure")), 50))
+        );
 
         render(<ContactForm />);
 
@@ -145,11 +148,22 @@ describe("ContactForm", () => {
             message: "World"
         });
 
-        fireEvent.click(screen.getByRole("button", { name: /Send Message/i }));
+        const submitButton = screen.getByRole("button", { name: /Send Message/i });
+        fireEvent.click(submitButton);
 
+        // Verify the component enters the submitting state
+        expect(screen.getByRole("button", { name: /Sending.../i })).toBeInTheDocument();
+        expect(screen.getByRole("button", { name: /Sending.../i })).toBeDisabled();
+
+        // Wait for the fetch to fail and the component to update with the error message
         await waitFor(() => {
             expect(screen.getByText("Network error. Please try again later.")).toBeInTheDocument();
         });
+
+        // Verify the component state correctly exits the submitting state
+        const restoredButton = screen.getByRole("button", { name: /Send Message/i });
+        expect(restoredButton).toBeInTheDocument();
+        expect(restoredButton).not.toBeDisabled();
     });
 
     it("resets the form when 'Send another' is clicked after success", async () => {
