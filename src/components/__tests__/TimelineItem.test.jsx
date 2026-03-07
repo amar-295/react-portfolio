@@ -1,113 +1,74 @@
-import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
-import TimelineItem from "../TimelineItem";
+import { render, screen } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import TimelineItem from '../TimelineItem';
 
-describe("TimelineItem", () => {
-  const defaultProps = {
-    period: "2023 - Present",
-    subtitle: "Education",
-    title: "Computer Science",
-    description: "Studying at university.",
-  };
+describe('TimelineItem component', () => {
+    const defaultProps = {
+        period: '2023 - Present',
+        subtitle: 'Education',
+        title: 'Computer Science',
+        description: 'Studying at university.',
+    };
 
-  it("renders basic content correctly", () => {
-    render(<TimelineItem {...defaultProps} />);
+    it('handles rendering and layout permutations correctly', () => {
+        const scenarios = [
+            {
+                name: 'basic content',
+                props: { ...defaultProps },
+                find: [defaultProps.period, defaultProps.subtitle, defaultProps.title, defaultProps.description],
+            },
+            {
+                name: 'optional fields',
+                props: { ...defaultProps, emoji: '🎓', badge: 'Graduated', institution: 'Tech University' },
+                find: ['🎓', 'Graduated', 'Tech University'],
+            },
+            {
+                name: 'right alignment layout',
+                props: { ...defaultProps, side: 'right' },
+                assertions: () => {
+                    const dateParent = screen.getByText(defaultProps.period).closest('div').parentElement;
+                    ['md:text-right', 'pr-0', 'md:pr-12', 'order-1'].forEach(c => expect(dateParent).toHaveClass(c));
+                    const cardParent = screen.getByText(defaultProps.title).closest('.w-full.md\\:w-5\\/12');
+                    ['pl-0', 'md:pl-12', 'order-3'].forEach(c => expect(cardParent).toHaveClass(c));
+                }
+            },
+            {
+                name: 'left alignment layout',
+                props: { ...defaultProps, side: 'left' },
+                assertions: () => {
+                    const dateParent = screen.getByText(defaultProps.period).closest('div').parentElement;
+                    ['md:text-left', 'pl-0', 'md:pl-12', 'order-1', 'md:order-3'].forEach(c => expect(dateParent).toHaveClass(c));
+                    const cardParent = screen.getByText(defaultProps.title).closest('.w-full.md\\:w-5\\/12');
+                    ['pr-0', 'md:pr-12', 'order-3', 'md:order-1'].forEach(c => expect(cardParent).toHaveClass(c));
+                }
+            },
+            {
+                name: 'green badge color',
+                props: { ...defaultProps, emoji: '🎓', badge: 'B', badgeColor: 'green' },
+                assertions: () => expect(screen.getByText('B')).toHaveClass('dark:bg-green-900/30')
+            },
+            {
+                name: 'blue badge color',
+                props: { ...defaultProps, emoji: '🎓', badge: 'B', badgeColor: 'blue' },
+                assertions: () => expect(screen.getByText('B')).toHaveClass('dark:bg-blue-900/30')
+            },
+            {
+                name: 'active state',
+                props: { ...defaultProps, isActive: true },
+                assertions: (container) => expect(container.querySelector('.order-2')).toHaveClass('ring-4')
+            }
+        ];
 
-    expect(screen.getByText(defaultProps.period)).toBeInTheDocument();
-    expect(screen.getByText(defaultProps.subtitle)).toBeInTheDocument();
-    expect(screen.getByText(defaultProps.title)).toBeInTheDocument();
-    expect(screen.getByText(defaultProps.description)).toBeInTheDocument();
-  });
+        scenarios.forEach(({ props, find = [], assertions }) => {
+            const { container, unmount } = render(<TimelineItem {...props} />);
+            find.forEach(text => expect(screen.getByText(text)).toBeInTheDocument());
+            if (assertions) assertions(container);
+            unmount();
+        });
+    });
 
-  it("renders optional emoji and badge", () => {
-    render(<TimelineItem {...defaultProps} emoji="🎓" badge="Graduated" />);
-
-    expect(screen.getByText("🎓")).toBeInTheDocument();
-    expect(screen.getByText("Graduated")).toBeInTheDocument();
-  });
-
-  it("renders institution when provided", () => {
-    render(<TimelineItem {...defaultProps} institution="Tech University" />);
-
-    expect(screen.getByText("Tech University")).toBeInTheDocument();
-  });
-
-  it("applies correct classes for right alignment (default)", () => {
-    render(<TimelineItem {...defaultProps} side="right" />);
-
-    // Date info container
-    const dateText = screen.getByText(defaultProps.period);
-    const dateInfoContainer = dateText.closest("div").parentElement;
-    expect(dateInfoContainer).toHaveClass("md:text-right");
-    expect(dateInfoContainer).toHaveClass("pr-0 md:pr-12");
-    expect(dateInfoContainer).toHaveClass("order-1");
-
-    // Content card container
-    const titleText = screen.getByText(defaultProps.title);
-    const contentCardContainer = titleText.closest(".w-full.md\\:w-5\\/12");
-    expect(contentCardContainer).toHaveClass("pl-0 md:pl-12");
-    expect(contentCardContainer).toHaveClass("order-3");
-  });
-
-  it("applies correct classes for left alignment", () => {
-    render(<TimelineItem {...defaultProps} side="left" />);
-
-    // Date info container
-    const dateText = screen.getByText(defaultProps.period);
-    const dateInfoContainer = dateText.closest("div").parentElement;
-    expect(dateInfoContainer).toHaveClass("md:text-left");
-    expect(dateInfoContainer).toHaveClass("pl-0 md:pl-12");
-    expect(dateInfoContainer).toHaveClass("order-1");
-    expect(dateInfoContainer).toHaveClass("md:order-3");
-
-    // Content card container
-    const titleText = screen.getByText(defaultProps.title);
-    const contentCardContainer = titleText.closest(".w-full.md\\:w-5\\/12");
-    expect(contentCardContainer).toHaveClass("pr-0 md:pr-12");
-    expect(contentCardContainer).toHaveClass("order-3");
-    expect(contentCardContainer).toHaveClass("md:order-1");
-  });
-
-  it("applies correct badge colors", () => {
-    const { rerender } = render(
-      <TimelineItem
-        {...defaultProps}
-        emoji="🎓"
-        badge="Badge"
-        badgeColor="green"
-      />,
-    );
-    let badge = screen.getByText("Badge");
-    expect(badge).toHaveClass("dark:bg-green-900/30");
-
-    rerender(
-      <TimelineItem
-        {...defaultProps}
-        emoji="🎓"
-        badge="Badge"
-        badgeColor="blue"
-      />,
-    );
-    badge = screen.getByText("Badge");
-    expect(badge).toHaveClass("dark:bg-blue-900/30");
-  });
-
-  it("applies active styles to the dot when isActive is true", () => {
-    const { container } = render(
-      <TimelineItem {...defaultProps} isActive={true} />,
-    );
-    // The dot is the middle element with order-2
-    const dot = container.querySelector(".order-2");
-    expect(dot).toHaveClass("ring-4");
-  });
-
-  it("handles missing optional fields gracefully", () => {
-    render(<TimelineItem {...defaultProps} />);
-    expect(screen.queryByText("🎓")).not.toBeInTheDocument();
-    // Badge is only rendered if emoji is present in the current implementation
-    // Let's verify that behavior or if it's a bug.
-    // Current code: {emoji && (... {badge && (...)})}
-    expect(screen.queryByText("Graduated")).not.toBeInTheDocument();
-    expect(screen.queryByText("Tech University")).not.toBeInTheDocument();
-  });
+    it('omits optional fields when not provided', () => {
+        render(<TimelineItem {...defaultProps} />);
+        ['🎓', 'Graduated', 'Tech University'].forEach(t => expect(screen.queryByText(t)).not.toBeInTheDocument());
+    });
 });

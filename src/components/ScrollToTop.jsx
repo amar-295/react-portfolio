@@ -1,28 +1,17 @@
 import { useState, useEffect } from "react";
 import { HiArrowUp } from "react-icons/hi";
 
-const throttle = (func, delay) => {
-    let lastCall = 0;
-    return (...args) => {
-        const now = Date.now();
-        if (now - lastCall >= delay) {
-            lastCall = now;
-            func(...args);
-        }
-    };
-};
-
 export default function ScrollToTop() {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        const toggleVisibility = throttle(() => {
+        const toggleVisibility = () => {
             if (window.scrollY > 300) {
                 setIsVisible(true);
             } else {
                 setIsVisible(false);
             }
-        }, 100);
+        };
 
         // Check initial scroll position
         toggleVisibility();

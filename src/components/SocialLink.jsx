@@ -28,15 +28,13 @@ export default function SocialLink({
     const isButton = variant === "button";
     const baseStyles = platformStyles[platform] || platformStyles.custom;
 
-    const focusClasses = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900";
-
     if (isButton && label) {
         return (
             <a
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center justify-center px-6 py-3 rounded-xl text-white transition-opacity transition-transform duration-200 font-bold shadow-lg active:scale-95 hover:opacity-90 ${focusClasses} ${baseStyles}`}
+                className={`flex items-center justify-center px-6 py-3 rounded-xl text-white transition-opacity transition-transform duration-200 font-bold shadow-lg active:scale-95 hover:opacity-90 ${baseStyles}`}
             >
                 <Icon className="text-xl mr-2" aria-hidden="true" focusable="false" /> {label}
             </a>
@@ -50,7 +48,7 @@ export default function SocialLink({
             rel="noopener noreferrer"
             aria-label={label || platform}
             title={label || platform}
-            className={`w-12 h-12 flex items-center justify-center rounded-xl text-slate-400 hover:text-white transition-opacity transition-transform duration-200 active:scale-95 hover:opacity-90 ${focusClasses} ${baseStyles}`}
+            className={`w-12 h-12 flex items-center justify-center rounded-xl text-slate-400 hover:text-white transition-opacity transition-transform duration-200 active:scale-95 hover:opacity-90 ${baseStyles}`}
         >
             <Icon className="text-xl" aria-hidden="true" focusable="false" />
         </a>
