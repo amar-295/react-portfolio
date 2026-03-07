@@ -1,7 +1,5 @@
-import { useTheme } from "../context/ThemeContext";
 import { useState, useEffect, useCallback } from "react";
-import { Logo } from "./index";
-import { socialLinks } from "../data/contact";
+import { Logo, ThemeToggle, MobileMenu, DesktopNav } from "./index";
 import { HiDownload } from "react-icons/hi";
 
 const NAV_LINKS = [
@@ -20,8 +18,6 @@ const MOBILE_LINK_ACTIVE = "bg-accent-light/50 dark:bg-blue-500/10 text-accent-d
 const MOBILE_LINK_INACTIVE = "text-light-text-secondary dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-white/5";
 
 export default function Navbar() {
-    const { theme, toggleTheme } = useTheme();
-    const isDarkMode = theme === "dark";
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
 
@@ -120,39 +116,17 @@ export default function Navbar() {
                     </span>
                 </a>
 
-                <nav className="hidden md:flex items-center space-x-10">
-                    {NAV_LINKS.map((link) => (
-                        <a
-                            key={link.id}
-                            className={getLinkClass(link.id)}
-                            href={link.href}
-                            onClick={() => setActiveSection(link.id)}
-                        >
-                            {link.name}
-                            <span className={`absolute -bottom-1 left-0 w-full h-[2px] bg-accent-dark dark:bg-blue-400 transition-transform duration-300 origin-left ${activeSection === link.id ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                                }`} />
-                        </a>
-                    ))}
-                </nav>
+                {/* Desktop Navigation */}
+                <DesktopNav
+                    navLinks={NAV_LINKS}
+                    getLinkClass={getLinkClass}
+                    activeSection={activeSection}
+                    setActiveSection={setActiveSection}
+                />
 
                 <div className="hidden md:flex items-center space-x-6">
-                    <button
-                        aria-label="Toggle Theme"
-                        onClick={toggleTheme}
-                        className="text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity flex items-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-navy"
-                    >
-                        {isDarkMode ? (
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                        ) : (
-                            // Contrast Icon (Professional Theme Toggle)
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" />
-                                <path d="M12 3v18a9 9 0 0 0 0-18z" fill="currentColor" stroke="none" />
-                            </svg>
-                        )}
-                    </button>
+                    {/* Theme Toggle Desktop */}
+                    <ThemeToggle />
 
                     <a
                         className="inline-flex items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-accent-dark dark:bg-blue-600 rounded-lg hover:bg-black dark:hover:bg-blue-700 transition-opacity transition-transform duration-300 shadow-sm hover:opacity-90 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-navy"
@@ -167,27 +141,11 @@ export default function Navbar() {
                 </div>
 
                 <div className="md:hidden flex items-center gap-6">
-                    <button
-                        onClick={toggleTheme}
-                        className="text-light-text-secondary dark:text-slate-300 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity p-2 hover:opacity-80 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-navy"
-                        aria-label="Toggle Theme"
-                    >
-                        {isDarkMode ? (
-                            // Sun Icon
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                        ) : (
-                            // Contrast Icon (Professional Theme Toggle)
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" />
-                                <path d="M12 3v18a9 9 0 0 0 0-18z" fill="currentColor" stroke="none" />
-                            </svg>
-                        )}
-                    </button>
+                    {/* Theme Toggle Mobile */}
+                    <ThemeToggle className="w-10 h-10 flex items-center justify-center" />
 
                     <button
-                        className="text-accent-dark dark:text-blue-400 focus:outline-none p-2 rounded-lg focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-navy"
+                        className="text-accent-dark dark:text-blue-400 focus:outline-none p-2 rounded-lg focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-navy w-10 h-10 flex items-center justify-center"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         aria-label="Toggle Menu"
                     >
@@ -207,70 +165,13 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Menu Overlay */}
-            {isMenuOpen && (
-                <>
-                    {/* Backdrop */}
-                    <div
-                        className="fixed inset-0 top-[72px] bg-black/20 dark:bg-black/50 backdrop-blur-[2px] md:hidden z-40"
-                        onClick={() => setIsMenuOpen(false)}
-                    />
-
-                    {/* Menu Content */}
-                    <div className="md:hidden absolute top-[72px] left-0 w-full z-50">
-                        <div className="bg-white/95 dark:bg-navy/95 backdrop-blur-xl border-b border-light-border dark:border-white/10 shadow-2xl rounded-b-3xl py-8 px-6 animate-in slide-in-from-top duration-300 max-h-[85vh] overflow-y-auto">
-                            <nav className="flex flex-col space-y-2">
-                                {NAV_LINKS.map((link) => (
-                                    <a
-                                        key={link.id}
-                                        href={link.href}
-                                        onClick={() => {
-                                            setActiveSection(link.id);
-                                            setIsMenuOpen(false);
-                                        }}
-                                        className={getMobileLinkClass(link.id)}
-                                    >
-                                        {link.name}
-                                    </a>
-                                ))}
-
-                                <div className="pt-8 flex flex-col items-center gap-6">
-                                    <hr className="w-12 border-2 border-gray-100 dark:border-white/10 rounded-full" />
-
-                                    {/* Resume Button */}
-                                    <a
-                                        href="/resume.pdf"
-                                        download="Amarnath_Resume.pdf"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="w-max mx-auto px-8 py-3 rounded-full flex items-center justify-center gap-2 bg-accent-dark dark:bg-blue-700 text-white font-bold shadow-lg shadow-blue-500/20 active:scale-95 transition-colors duration-300 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-navy"
-                                    >
-                                        <span>Download Resume</span>
-                                        <HiDownload className="text-sm" />
-                                    </a>
-
-                                    {/* Footer Actions: Socials */}
-                                    <div className="flex items-center justify-center gap-8">
-                                        {/* Social Icons */}
-                                        {socialLinks.map((link) => (
-                                            <a
-                                                key={link.platform}
-                                                href={link.href}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                aria-label={link.label || link.platform}
-                                                title={link.label || link.platform}
-                                                className="text-gray-500 dark:text-slate-400 hover:text-accent-dark dark:hover:text-blue-400 transition-opacity transform hover:scale-110 hover:opacity-80 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-navy"
-                                            >
-                                                <link.icon className="text-2xl" />
-                                            </a>
-                                        ))}
-                                    </div>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-                </>
-            )}
+            <MobileMenu
+                isMenuOpen={isMenuOpen}
+                setIsMenuOpen={setIsMenuOpen}
+                navLinks={NAV_LINKS}
+                setActiveSection={setActiveSection}
+                getMobileLinkClass={getMobileLinkClass}
+            />
         </header>
     );
 }
