@@ -14,6 +14,27 @@ const LoadingIcon = (props) => (
  * Contact form component with custom validation and Formspree hook integration.
  */
 
+
+const BASE_INPUT_CLASS = [
+    "block w-full rounded-lg bg-white",
+    "dark:bg-[#1e293b]/50 py-3 pl-10",
+    "text-gray-900 dark:text-white",
+    "placeholder-gray-400 dark:placeholder-slate-500",
+    "sm:text-sm transition-opacity transition-transform",
+    "duration-300 focus:ring-4"
+].join(" ");
+
+const VALID_INPUT_CLASS = [
+    "border-gray-300 dark:border-slate-700",
+    "focus:border-blue-500 dark:focus:border-blue-400",
+    "focus:ring-blue-500/10 dark:focus:ring-blue-400/10"
+].join(" ");
+
+const ERROR_INPUT_CLASS = [
+    "border-rose-500 dark:border-rose-500",
+    "focus:border-rose-500 focus:ring-rose-500/10"
+].join(" ");
+
 export default function ContactForm({ onSubmit }) {
     const contactServiceId = import.meta.env.VITE_CONTACT_SERVICE_ID || "xeelgjya";
     const [status, setStatus] = useState({
@@ -103,17 +124,17 @@ export default function ContactForm({ onSubmit }) {
 
     // Helper to get input classes based on error state
     const getInputClass = (fieldName) => {
-        const baseClass = "block w-full rounded-lg bg-white dark:bg-[#1e293b]/50 py-3 pl-10 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 sm:text-sm transition-opacity transition-transform duration-300 focus:ring-4";
-        const validClass = "border-gray-300 dark:border-slate-700 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500/10 dark:focus:ring-blue-400/10";
-        const errorClass = "border-rose-500 dark:border-rose-500 focus:border-rose-500 focus:ring-rose-500/10";
-
-        return `${baseClass} ${errors[fieldName] ? errorClass : validClass}`;
+        return `${BASE_INPUT_CLASS} ${errors[fieldName] ? ERROR_INPUT_CLASS : VALID_INPUT_CLASS}`;
     };
 
     // Success UI
     if (status.succeeded) {
         return (
-            <div className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-sm dark:shadow-none backdrop-blur-sm flex flex-col items-center justify-center min-h-[400px] text-center">
+            <div
+                className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-sm dark:shadow-none backdrop-blur-sm flex flex-col items-center justify-center min-h-[400px] text-center"
+                role="status"
+                aria-live="polite"
+            >
                 <div className="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-500/20 border-2 border-blue-200 dark:border-blue-500 flex items-center justify-center mb-6">
                     <HiCheck className="text-blue-600 dark:text-blue-500 text-3xl" />
                 </div>
@@ -135,7 +156,10 @@ export default function ContactForm({ onSubmit }) {
         <div className="bg-white dark:bg-[#0f172a]/60 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-slate-800/50 shadow-lg shadow-gray-100/50 dark:shadow-none backdrop-blur-sm">
             <form onSubmit={handleLocalSubmit} className="space-y-6" noValidate>
                 {status.errors.length > 0 && (
-                    <div className="p-4 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-lg text-rose-600 dark:text-rose-300 text-sm">
+                    <div
+                        className="p-4 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-lg text-rose-600 dark:text-rose-300 text-sm"
+                        role="alert"
+                    >
                         {status.errors.join(", ")}
                     </div>
                 )}
@@ -146,7 +170,7 @@ export default function ContactForm({ onSubmit }) {
                             className="block text-sm font-bold dark:font-medium text-gray-700 dark:text-slate-400"
                             htmlFor="name"
                         >
-                            Full Name
+                            Full Name <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -158,6 +182,7 @@ export default function ContactForm({ onSubmit }) {
                                 name="name"
                                 placeholder="Full Name"
                                 type="text"
+                                required
                                 aria-invalid={!!errors.name}
                                 aria-describedby={errors.name ? "name-error" : undefined}
                                 onChange={() => {
@@ -176,7 +201,7 @@ export default function ContactForm({ onSubmit }) {
                             className="block text-sm font-bold dark:font-medium text-gray-700 dark:text-slate-400"
                             htmlFor="email"
                         >
-                            Email Address
+                            Email Address <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -188,6 +213,7 @@ export default function ContactForm({ onSubmit }) {
                                 name="email"
                                 placeholder="hello@yourcompany.com"
                                 type="email"
+                                required
                                 aria-invalid={!!errors.email}
                                 aria-describedby={errors.email ? "email-error" : undefined}
                                 onChange={() => {
@@ -207,7 +233,7 @@ export default function ContactForm({ onSubmit }) {
                         className="block text-sm font-bold dark:font-medium text-gray-700 dark:text-slate-400"
                         htmlFor="subject"
                     >
-                        Subject
+                        Subject <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
                     </label>
 
                     <div className="relative rounded-md shadow-sm">
@@ -220,6 +246,7 @@ export default function ContactForm({ onSubmit }) {
                             name="_subject"
                             placeholder="How can I help you today?"
                             type="text"
+                            required
                             aria-invalid={!!errors._subject}
                             aria-describedby={errors._subject ? "subject-error" : undefined}
                             onChange={() => {
@@ -238,14 +265,15 @@ export default function ContactForm({ onSubmit }) {
                         className="block text-sm font-bold dark:font-medium text-gray-700 dark:text-slate-400"
                         htmlFor="message"
                     >
-                        Your Message
+                        Your Message <span className="text-rose-500 ml-1" aria-hidden="true">*</span>
                     </label>
                     <textarea
-                        className={`${getInputClass("message").replace("pl-10", "px-4")}`}
+                        className={`${getInputClass("message").replaceAll("pl-10", "px-4")}`}
                         id="message"
                         name="message"
                         placeholder="Share some details about your vision, goals, or just say hello..."
                         rows="4"
+                        required
                         aria-invalid={!!errors.message}
                         aria-describedby={errors.message ? "message-error" : undefined}
                         onChange={() => {
