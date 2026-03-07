@@ -13,3 +13,7 @@
 ## 2025-03-05 - Missing Skip-to-Content Links
 **Learning:** Missing skip-to-content links break keyboard accessibility for screen reader users and those unable to use a mouse, particularly on long-scrolling portfolios with complex navigation. Users are forced to tab through all navigation elements before reaching the actual content.
 **Action:** Always include a visually hidden, focusable link at the very top of the DOM (e.g., in `App.jsx`) that jumps to the main content container.
+
+## 2025-03-07 - Add `aria-current` to active navigation links
+**Learning:** Adding visual distinction to an active navigation link is good for sighted users, but screen reader users lack this context if semantic HTML isn't used.
+**Action:** Always apply `aria-current="page"` (or another appropriate value) dynamically to the currently active link within a navigation menu.
