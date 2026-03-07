@@ -35,37 +35,21 @@ describe('TimelineItem', () => {
     it('applies correct classes for right alignment (default)', () => {
         render(<TimelineItem {...defaultProps} side="right" />);
 
-        // Date info container
-        const dateText = screen.getByText(defaultProps.period);
-        const dateInfoContainer = dateText.closest('div').parentElement;
-        expect(dateInfoContainer).toHaveClass('md:text-right');
-        expect(dateInfoContainer).toHaveClass('pr-0 md:pr-12');
-        expect(dateInfoContainer).toHaveClass('order-1');
+        const dateInfoContainer = screen.getByText(defaultProps.period).closest('div').parentElement;
+        const contentCardContainer = screen.getByText(defaultProps.title).closest('div[class*="md:w-5/12"]');
 
-        // Content card container
-        const titleText = screen.getByText(defaultProps.title);
-        const contentCardContainer = titleText.closest('.w-full.md\\:w-5\\/12');
-        expect(contentCardContainer).toHaveClass('pl-0 md:pl-12');
-        expect(contentCardContainer).toHaveClass('order-3');
+        ['md:text-right', 'pr-0', 'md:pr-12', 'order-1'].forEach(cls => expect(dateInfoContainer).toHaveClass(cls));
+        ['pl-0', 'md:pl-12', 'order-3'].forEach(cls => expect(contentCardContainer).toHaveClass(cls));
     });
 
     it('applies correct classes for left alignment', () => {
         render(<TimelineItem {...defaultProps} side="left" />);
 
-        // Date info container
-        const dateText = screen.getByText(defaultProps.period);
-        const dateInfoContainer = dateText.closest('div').parentElement;
-        expect(dateInfoContainer).toHaveClass('md:text-left');
-        expect(dateInfoContainer).toHaveClass('pl-0 md:pl-12');
-        expect(dateInfoContainer).toHaveClass('order-1');
-        expect(dateInfoContainer).toHaveClass('md:order-3');
+        const dateInfoContainer = screen.getByText(defaultProps.period).closest('div').parentElement;
+        const contentCardContainer = screen.getByText(defaultProps.title).closest('div[class*="md:w-5/12"]');
 
-        // Content card container
-        const titleText = screen.getByText(defaultProps.title);
-        const contentCardContainer = titleText.closest('.w-full.md\\:w-5\\/12');
-        expect(contentCardContainer).toHaveClass('pr-0 md:pr-12');
-        expect(contentCardContainer).toHaveClass('order-3');
-        expect(contentCardContainer).toHaveClass('md:order-1');
+        ['md:text-left', 'pl-0', 'md:pl-12', 'order-1', 'md:order-3'].forEach(cls => expect(dateInfoContainer).toHaveClass(cls));
+        ['pr-0', 'md:pr-12', 'order-3', 'md:order-1'].forEach(cls => expect(contentCardContainer).toHaveClass(cls));
     });
 
     it('applies correct badge colors', () => {

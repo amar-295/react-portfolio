@@ -6,18 +6,18 @@ import { ThemeProvider } from "../../context/ThemeContext";
 // Mock IntersectionObserver
 const mockObserve = vi.fn();
 const mockDisconnect = vi.fn();
-global.IntersectionObserver = vi.fn(() => ({
+vi.stubGlobal('IntersectionObserver', vi.fn(() => ({
     observe: mockObserve,
     disconnect: mockDisconnect,
     unobserve: vi.fn(),
-}));
+})));
 
 // Mock ResizeObserver
-global.ResizeObserver = vi.fn().mockImplementation(() => ({
+vi.stubGlobal('ResizeObserver', vi.fn().mockImplementation(() => ({
     observe: vi.fn(),
     unobserve: vi.fn(),
     disconnect: vi.fn(),
-}));
+})));
 
 describe("Navbar Component", () => {
     beforeEach(() => {
