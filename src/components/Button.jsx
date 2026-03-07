@@ -1,29 +1,5 @@
 import PropTypes from "prop-types";
 
-/* ---- variant class maps ---- */
-const base = [
-    "group font-bold rounded-xl text-base transition-opacity transition-transform duration-300",
-    "inline-flex items-center justify-center gap-2.5 active:scale-95 hover:opacity-90",
-    "focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400",
-    "focus-visible:outline-none focus-visible:ring-offset-2",
-    "focus-visible:ring-offset-light-surface dark:focus-visible:ring-offset-midnight"
-].join(" ");
-
-const variants = {
-    primary: [
-        "px-8 py-3.5 bg-gray-900 dark:bg-blue-600",
-        "hover:bg-black dark:hover:bg-blue-500",
-        "text-white shadow-lg hover:shadow-xl dark:shadow-blue-500/30",
-        "dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:-translate-y-0.5"
-    ].join(" "),
-    outline: [
-        "px-8 py-3.5 bg-transparent border-2 border-gray-900 dark:border-slate-600",
-        "hover:border-gray-900 dark:hover:border-blue-500",
-        "hover:bg-gray-50 dark:hover:bg-blue-500/10",
-        "text-gray-900 dark:text-white"
-    ].join(" "),
-};
-
 /**
  * Reusable Button / Link component extracted from the Projects section.
  *
@@ -41,48 +17,83 @@ const variants = {
  *   ...rest    – any other native attributes (onClick, target, rel, etc.)
  */
 export default function Button({
-    variant = "primary",
-    href,
-    icon,
-    fullWidth = false,
-    className = "",
-    children,
-    ...rest
+  variant = "primary",
+  href,
+  icon,
+  fullWidth = false,
+  className = "",
+  children,
+  ...rest
 }) {
-    const widthClass = fullWidth ? "w-full" : "";
+  /* ---- variant class maps ---- */
+  const base = [
+    "group font-bold rounded-xl text-base",
+    "transition-opacity transition-transform duration-300",
+    "inline-flex items-center justify-center gap-2.5",
+    "active:scale-95 hover:opacity-90",
+    "focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400",
+    "focus-visible:outline-none",
+    "focus-visible:ring-offset-2 focus-visible:ring-offset-light-surface dark:focus-visible:ring-offset-midnight",
+  ].join(" ");
 
-    const selectedVariant = variants[variant] || variants.primary;
-    const classes = [base, selectedVariant, widthClass, className].filter(Boolean).join(" ");
+  const variants = {
+    primary: [
+      "px-8 py-3.5",
+      "bg-gray-900 dark:bg-gradient-to-r dark:from-blue-600 dark:to-blue-500",
+      "hover:bg-black dark:hover:from-blue-500 dark:hover:to-blue-400",
+      "text-white shadow-lg hover:shadow-xl",
+      "dark:shadow-[0_0_15px_rgba(59,130,246,0.3)] dark:hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]",
+      "hover:-translate-y-0.5",
+    ].join(" "),
+    outline: [
+      "px-8 py-3.5 bg-transparent",
+      "border-2 border-gray-900 dark:border-slate-600",
+      "hover:border-gray-900 dark:hover:border-blue-500",
+      "hover:bg-gray-50 dark:hover:bg-blue-500/10",
+      "text-gray-900 dark:text-white",
+    ].join(" "),
+  };
 
-    /* ---- icon element ---- */
-    const Icon = icon;
-    const iconEl = Icon ? (
-        <Icon className="text-[1.25em] leading-none text-current" />
-    ) : null;
+  const widthClass = fullWidth ? "w-full" : "";
 
-    /* ---- render as <a> or <button> ---- */
-    if (href) {
-        return (
-            <a href={href} className={classes} {...rest}>
-                {children}
-                {iconEl}
-            </a>
-        );
-    }
+  const classes = [
+    base,
+    variants[variant] || variants.primary,
+    widthClass,
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
+  /* ---- icon element ---- */
+  const Icon = icon;
+  const iconEl = Icon ? (
+    <Icon className="text-[1.25em] leading-none text-current" />
+  ) : null;
+
+  /* ---- render as <a> or <button> ---- */
+  if (href) {
     return (
-        <button className={classes} {...rest}>
-            {children}
-            {iconEl}
-        </button>
+      <a href={href} className={classes} {...rest}>
+        {children}
+        {iconEl}
+      </a>
     );
+  }
+
+  return (
+    <button className={classes} {...rest}>
+      {children}
+      {iconEl}
+    </button>
+  );
 }
 
 Button.propTypes = {
-    variant: PropTypes.oneOf(["primary", "outline"]),
-    href: PropTypes.string,
-    icon: PropTypes.elementType,
-    fullWidth: PropTypes.bool,
-    className: PropTypes.string,
-    children: PropTypes.node.isRequired,
+  variant: PropTypes.oneOf(["primary", "outline"]),
+  href: PropTypes.string,
+  icon: PropTypes.elementType,
+  fullWidth: PropTypes.bool,
+  className: PropTypes.string,
+  children: PropTypes.node.isRequired,
 };

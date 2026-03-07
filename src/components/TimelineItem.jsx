@@ -19,8 +19,18 @@ import PropTypes from "prop-types";
  */
 
 const badgeColors = {
-    green: "bg-blue-100 dark:bg-green-900/30 text-blue-700 dark:text-green-400 border-blue-200 dark:border-green-800 font-bold dark:font-normal",
-    blue: "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-800 font-bold dark:font-normal",
+    green: [
+        "bg-blue-100 dark:bg-green-900/30",
+        "text-blue-700 dark:text-green-400",
+        "border-blue-200 dark:border-green-800",
+        "font-bold dark:font-normal",
+    ].join(" "),
+    blue: [
+        "bg-blue-100 dark:bg-blue-900/30",
+        "text-blue-700 dark:text-blue-400",
+        "border-blue-200 dark:border-blue-800",
+        "font-bold dark:font-normal",
+    ].join(" "),
 };
 
 const dotColors = {
