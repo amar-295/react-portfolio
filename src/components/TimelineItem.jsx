@@ -60,6 +60,7 @@ export default function TimelineItem({
     <div className="flex flex-col md:flex-row items-center justify-between w-full mb-12 relative">
       {/* ---- Date Info ---- */}
       <div
+        data-testid="timeline-date-info"
         className={`w-full md:w-5/12 mb-4 md:mb-0 ${
           isRight
             ? "text-center md:text-right pr-0 md:pr-12 order-1"
@@ -85,6 +86,7 @@ export default function TimelineItem({
 
       {/* ---- Center Dot ---- */}
       <div
+        data-testid="timeline-dot"
         className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center justify-center w-6 h-6 border-2 rounded-full z-10 bg-white dark:bg-gray-900 order-2 ${
           dotColors[dotColor] || dotColors.blue
         } ${isActive ? "ring-4 ring-white dark:ring-gray-900 shadow-sm" : ""}`}
@@ -98,6 +100,7 @@ export default function TimelineItem({
 
       {/* ---- Content Card ---- */}
       <div
+        data-testid="timeline-content-card"
         className={`w-full md:w-5/12 ${
           isRight ? "pl-0 md:pl-12 order-3" : "pr-0 md:pr-12 order-3 md:order-1"
         }`}
