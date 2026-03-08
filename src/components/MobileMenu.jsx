@@ -6,6 +6,7 @@ export default function MobileMenu({
     isMenuOpen,
     setIsMenuOpen,
     navLinks,
+    activeSection,
     setActiveSection,
     getMobileLinkClass
 }) {
@@ -40,6 +41,7 @@ export default function MobileMenu({
                                     setIsMenuOpen(false);
                                 }}
                                 className={getMobileLinkClass(link.id)}
+                                aria-current={activeSection === link.id ? "page" : undefined}
                             >
                                 {link.name}
                             </a>
@@ -95,6 +97,7 @@ MobileMenu.propTypes = {
             href: PropTypes.string.isRequired,
         })
     ).isRequired,
+    activeSection: PropTypes.string.isRequired,
     setActiveSection: PropTypes.func.isRequired,
     getMobileLinkClass: PropTypes.func.isRequired,
 };

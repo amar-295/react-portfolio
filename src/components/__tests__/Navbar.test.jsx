@@ -19,10 +19,24 @@ vi.stubGlobal('ResizeObserver', vi.fn().mockImplementation(() => ({
     disconnect: vi.fn(),
 })));
 
+// Mock matchMedia
+vi.stubGlobal('matchMedia', vi.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+})));
+
+// Mock scrollTo
+window.scrollTo = vi.fn();
+
 describe("Navbar Component", () => {
     beforeEach(() => {
         vi.clearAllMocks();
-        window.scrollTo(0, 0);
         document.body.innerHTML = "";
     });
 

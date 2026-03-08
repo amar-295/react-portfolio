@@ -169,6 +169,7 @@ export default function Navbar() {
                 isMenuOpen={isMenuOpen}
                 setIsMenuOpen={setIsMenuOpen}
                 navLinks={NAV_LINKS}
+                activeSection={activeSection}
                 setActiveSection={setActiveSection}
                 getMobileLinkClass={getMobileLinkClass}
             />
