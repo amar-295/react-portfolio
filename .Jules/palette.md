@@ -17,3 +17,7 @@
 ## 2025-03-07 - Add `aria-current` to active navigation links
 **Learning:** Adding visual distinction to an active navigation link is good for sighted users, but screen reader users lack this context if semantic HTML isn't used.
 **Action:** Always apply `aria-current="page"` (or another appropriate value) dynamically to the currently active link within a navigation menu.
+
+## 2026-03-10 - Screen Reader Menu Feedback
+**Learning:** Hamburger menus on mobile devices often toggle visual states without informing screen readers if the menu is open (`aria-expanded`) and what content it controls (`aria-controls`), leading to a confusing navigation experience.
+**Action:** Always link mobile menu toggle buttons to their corresponding content containers using `aria-controls="[id]"` and dynamically update `aria-expanded={isOpen}` to ensure state changes are announced properly.

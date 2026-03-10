@@ -29,7 +29,7 @@ export default function MobileMenu({
             />
 
             {/* Menu Content */}
-            <div className="md:hidden absolute top-[72px] left-0 w-full z-50">
+            <div id="mobile-menu-content" className="md:hidden absolute top-[72px] left-0 w-full z-50">
                 <div className="bg-white/95 dark:bg-navy/95 backdrop-blur-xl border-b border-light-border dark:border-white/10 shadow-2xl rounded-b-3xl py-8 px-6 animate-in slide-in-from-top duration-300 max-h-[85vh] overflow-y-auto">
                     <nav className="flex flex-col space-y-2">
                         {navLinks.map((link) => (

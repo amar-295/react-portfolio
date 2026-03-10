@@ -148,6 +148,8 @@ export default function Navbar() {
                         className="text-accent-dark dark:text-blue-400 focus:outline-none p-2 rounded-lg focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-navy w-10 h-10 flex items-center justify-center"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         aria-label="Toggle Menu"
+                        aria-expanded={isMenuOpen}
+                        aria-controls="mobile-menu-content"
                     >
                         {isMenuOpen ? (
                             // Close Icon (X)
