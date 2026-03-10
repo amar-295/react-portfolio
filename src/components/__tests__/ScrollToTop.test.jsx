@@ -40,12 +40,16 @@ describe("ScrollToTop component", () => {
 
         // Simulate scroll
         setWindowScrollY(301);
+
+        // Wait a bit to ensure throttle condition is met
+        await new Promise(resolve => setTimeout(resolve, 150));
+
         fireEvent.scroll(window);
 
-        // Wait for throttle duration and re-render
+        // Wait for re-render
         await waitFor(() => {
             expect(button).toHaveClass("opacity-100");
-        }, { timeout: 2000, interval: 100 });
+        });
 
         expect(button).not.toHaveClass("pointer-events-none");
         expect(button).toHaveAttribute("aria-hidden", "false");
@@ -62,19 +66,23 @@ describe("ScrollToTop component", () => {
 
         // Scroll down
         setWindowScrollY(400);
+
+        await new Promise(resolve => setTimeout(resolve, 150));
         fireEvent.scroll(window);
 
         await waitFor(() => {
              expect(button).toHaveClass("opacity-100");
-        }, { timeout: 2000, interval: 100 });
+        });
 
         // Scroll up
         setWindowScrollY(200);
+
+        await new Promise(resolve => setTimeout(resolve, 150));
         fireEvent.scroll(window);
 
         await waitFor(() => {
             expect(button).toHaveClass("opacity-0");
-        }, { timeout: 2000, interval: 100 });
+        });
 
         expect(button).toHaveAttribute("aria-hidden", "true");
         expect(button).toHaveAttribute("tabindex", "-1");
