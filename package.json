@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/vite": "^4.1.18",
+    "playwright": "^1.58.2",
     "prop-types": "^15.8.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

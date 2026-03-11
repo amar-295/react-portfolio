@@ -42,8 +42,10 @@ export default function Hero() {
           </div>
 
           <div className="opacity-0 animate-fade-in-up delay-300">
-            <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 glass-card rounded-2xl shadow-xl dark:shadow-2xl md:min-h-[140px] transform motion-safe:hover:scale-[1.02] motion-safe:transition-all motion-safe:duration-500 motion-reduce:transform-none motion-reduce:transition-none">
-              <div className="flex-1 text-center lg:text-left">
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-accent-dark/20 to-accent-dark/20 dark:from-primary-blue/30 dark:to-teal-400/30 rounded-2xl blur opacity-0 group-hover:opacity-40 transition duration-1000 group-hover:duration-300"></div>
+              <div className="relative flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-0 py-8 px-6 md:px-10 glass-card rounded-2xl shadow-xl dark:shadow-2xl md:min-h-[140px] transform motion-safe:hover:scale-[1.02] motion-safe:transition-all motion-safe:duration-500 motion-reduce:transform-none motion-reduce:transition-none bg-white/50 dark:bg-card-bg/80 backdrop-blur-md">
+                <div className="flex-1 text-center lg:text-left">
                 <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
                   React & JS
                 </span>
@@ -65,13 +67,14 @@ export default function Hero() {
 
               <div className="hidden lg:block w-px h-12 bg-light-border/50 dark:bg-white/10 mx-8"></div>
               <div className="flex lg:hidden w-16 h-px bg-light-border/50 dark:bg-white/10 mx-auto"></div>
-              <div className="flex-1 text-center lg:text-left">
-                <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
-                  Accessible
-                </span>
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent-dark dark:text-accent-teal/80">
-                  WCAG Compliant
-                </span>
+                <div className="flex-1 text-center lg:text-left">
+                  <span className="block text-2xl font-bold text-light-text-primary dark:text-white font-display mb-2">
+                    Accessible
+                  </span>
+                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent-dark dark:text-accent-teal/80">
+                    WCAG Compliant
+                  </span>
+                </div>
               </div>
             </div>
           </div>
