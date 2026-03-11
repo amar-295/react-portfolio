@@ -21,3 +21,6 @@
 ## 2026-03-10 - Screen Reader Menu Feedback
 **Learning:** Hamburger menus on mobile devices often toggle visual states without informing screen readers if the menu is open (`aria-expanded`) and what content it controls (`aria-controls`), leading to a confusing navigation experience.
 **Action:** Always link mobile menu toggle buttons to their corresponding content containers using `aria-controls="[id]"` and dynamically update `aria-expanded={isOpen}` to ensure state changes are announced properly.
+## 2026-03-11 - Improve Profile Picture Alt Text
+**Learning:** The `alt` text on the profile picture was originally a code constant (`PROFILE_PICTURE`), which is not user-friendly for screen readers.
+**Action:** Converted the code-like constant into natural, human-readable sentence case (`Profile picture`) for better a11y.
