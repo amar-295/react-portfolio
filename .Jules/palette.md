@@ -21,3 +21,7 @@
 ## 2026-03-10 - Screen Reader Menu Feedback
 **Learning:** Hamburger menus on mobile devices often toggle visual states without informing screen readers if the menu is open (`aria-expanded`) and what content it controls (`aria-controls`), leading to a confusing navigation experience.
 **Action:** Always link mobile menu toggle buttons to their corresponding content containers using `aria-controls="[id]"` and dynamically update `aria-expanded={isOpen}` to ensure state changes are announced properly.
+
+## 2026-03-12 - Natural Language in Alt Text
+**Learning:** Found images using code-like constants (e.g., `PROFILE_PICTURE`) for `alt` attributes. Screen readers announce these exactly as written, which sounds robotic and confusing.
+**Action:** Always use natural, human-readable sentence-case phrasing for alt text to ensure a smooth and conversational screen reader experience.
