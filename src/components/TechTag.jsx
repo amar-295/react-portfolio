@@ -12,9 +12,11 @@ import PropTypes from "prop-types";
 const sizes = {
     default: "px-2.5 py-1 text-xs font-semibold text-light-text-primary " +
              "dark:text-slate-300 bg-light-surface dark:bg-slate-800 " +
-             "border border-light-border dark:border-slate-700 rounded",
+             "border border-light-border dark:border-slate-700 rounded " +
+             "hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors duration-300 cursor-default",
     sm: "px-1.5 py-0.5 text-[10px] text-light-text-secondary " +
-        "dark:text-slate-400 bg-light-surface dark:bg-slate-800 rounded",
+        "dark:text-slate-400 bg-light-surface dark:bg-slate-800 rounded " +
+        "hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors duration-300 cursor-default",
 };
 
 export default function TechTag({ size = "default", className = "", children }) {
