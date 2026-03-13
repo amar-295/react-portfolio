@@ -17,7 +17,7 @@ export default function About() {
               <div className="relative z-10 rounded-xl overflow-hidden shadow-md dark:shadow-2xl border-2 border-light-border dark:border-slate-700 bg-white">
 
                 <img
-                  alt="PROFILE_PICTURE"
+                  alt="Amarnath"
                   className="w-full h-full object-cover hover:scale-105 transition-transform transition-opacity duration-700 block"
                   src={aboutMeImage}
                   loading="lazy"
