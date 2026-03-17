@@ -55,7 +55,10 @@ export default function ProjectCard({
     >
       {/* ---- Image Column ---- */}
       <div className="w-full lg:w-5/12">
-        <div className="relative group bg-light-surface dark:bg-card-bg rounded-xl overflow-hidden border-2 border-light-border dark:border-slate-800/50 shadow-sm aspect-video">
+        {/* Glow scoped to image only, kept non-interactive and decorative */}
+        <div className="relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-accent-dark/20 to-accent-dark/20 dark:from-primary-blue/30 dark:to-teal-400/30 rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-300 pointer-events-none" aria-hidden="true"></div>
+          <div className="relative bg-light-surface dark:bg-card-bg rounded-xl overflow-hidden border-2 border-light-border dark:border-slate-800/50 shadow-sm aspect-video">
           <img
             alt={imageAlt || title}
             className="w-full h-full object-contain bg-gray-50 dark:bg-slate-900/50 transform group-hover:scale-105 transition-transform duration-500"
@@ -76,6 +79,7 @@ export default function ProjectCard({
               e.target.src = "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop";
             }}
           />
+          </div>
         </div>
 
         {/* Mobile-only buttons */}
