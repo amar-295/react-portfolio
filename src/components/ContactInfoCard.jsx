@@ -32,10 +32,8 @@ export default function ContactInfoCard({
     const contentProps = href ? { href, className: "text-gray-900 dark:text-white text-xl hover:text-accent-dark dark:hover:text-accent-teal hover:underline transition-opacity hover:opacity-80 font-bold block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 rounded-sm w-max" } : { className: "text-gray-900 dark:text-white text-lg font-medium" };
 
     const wrapperClasses = [
-        "flex",
-        "items-start",
-        "space-x-5",
-        isPrimary ? "p-4 rounded-xl bg-white dark:bg-blue-500/5 border border-gray-200 dark:border-blue-500/20 shadow-md dark:shadow-lg dark:shadow-blue-500/5 transition-transform hover:-translate-y-1 duration-300 cursor-pointer group" : "px-4"
+        "relative h-full flex items-start space-x-5",
+        isPrimary ? "p-4 rounded-xl bg-white dark:bg-blue-500/5 border border-gray-200 dark:border-blue-500/20 shadow-sm hover:shadow-lg dark:hover:shadow-[0_4px_20px_rgba(59,130,246,0.15)] transition-transform hover:-translate-y-1 duration-300 cursor-pointer" : "px-4"
     ].filter(Boolean).join(" ");
 
     const iconWrapperClasses = [
@@ -51,7 +49,7 @@ export default function ContactInfoCard({
         "shadow-md"
     ].filter(Boolean).join(" ");
 
-    return (
+    const cardContent = (
         <div className={wrapperClasses}>
             <div className={iconWrapperClasses}>
                 <Icon className="text-2xl" />
@@ -65,6 +63,18 @@ export default function ContactInfoCard({
             </div>
         </div>
     );
+
+    if (isPrimary) {
+        return (
+            <div className="relative group w-full">
+                {/* Subtle glow effect behind the card */}
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-accent-dark/20 to-accent-dark/20 dark:from-primary-blue/30 dark:to-teal-400/30 rounded-xl blur opacity-0 group-hover:opacity-40 transition duration-1000 group-hover:duration-300"></div>
+                {cardContent}
+            </div>
+        );
+    }
+
+    return cardContent;
 }
 
 ContactInfoCard.propTypes = {
