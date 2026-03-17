@@ -7,6 +7,8 @@
 
 > **A modern, high-performance frontend developer portfolio built to showcase technical proficiency and creative design.**
 
+> 💡 **New!** Looking to enhance your GitHub profile? Check out the [GitHub Profile README](./GITHUB_PROFILE_README.md) and [Setup Guide](./PROFILE_SETUP_GUIDE.md) included in this repository!
+
 ---
 
 ## 🚀 Live Demo
@@ -23,7 +25,8 @@
 - [Project Structure](#-project-structure)
 - [Getting Started](#-getting-started)
 - [Deployment](#-deployment)
-- [Performance & Accessibility](#-performance-&-accessibility)
+- [Performance & Accessibility](#-performance--accessibility)
+- [GitHub Profile Enhancement](#-github-profile-enhancement)
 - [Contact](#-contact)
 
 ---
@@ -140,6 +143,39 @@ This project is optimized for high performance and accessibility:
 - **Lighthouse Score**: Targeting 90+ on all metrics.
 - **Semantic HTML**: Using `<nav>`, `<main>`, `<section>`, and `<footer>` for better SEO and screen readers.
 - **Lazy Loading**: Assets are optimized and loaded efficiently.
+
+---
+
+## 🎨 GitHub Profile Enhancement
+
+This repository includes a comprehensive GitHub profile README and setup guide to help you create an impressive GitHub profile!
+
+### 📄 What's Included
+
+1. **[GITHUB_PROFILE_README.md](./GITHUB_PROFILE_README.md)** - A complete, ready-to-use GitHub profile README featuring:
+   - 🎯 Animated typing header with dynamic greeting
+   - 📊 Live GitHub stats, streak counters, and contribution graphs
+   - 🏆 GitHub trophies and achievements
+   - 🛠️ Comprehensive tech stack with badges
+   - 🚀 Featured projects showcase
+   - 📫 Contact information and social links
+   - 👀 Profile views counter
+
+2. **[PROFILE_SETUP_GUIDE.md](./PROFILE_SETUP_GUIDE.md)** - Complete setup instructions including:
+   - Step-by-step profile repository creation
+   - Customization options for all components
+   - Troubleshooting common issues
+   - Additional enhancement ideas
+   - Best practices and resources
+
+### 🚀 Quick Start
+
+1. Create a repository named `amar-295` (matching your GitHub username)
+2. Copy the content from [GITHUB_PROFILE_README.md](./GITHUB_PROFILE_README.md)
+3. Paste it into your profile repository's README.md
+4. Visit your profile at `https://github.com/amar-295` to see the enhanced profile!
+
+For detailed instructions and customization options, see the [Setup Guide](./PROFILE_SETUP_GUIDE.md).
 
 ---
 
